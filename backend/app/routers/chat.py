@@ -20,7 +20,7 @@ async def chat(req: ChatRequest):
     """RAG-powered chat over today's transcripts."""
     if os.getenv("STT_PROVIDER", "stub") == "stub":
         return _STUB_RESPONSE
-    from backend.app.services.rag import retrieve
+    from backend.app.services.rag_router import retrieve
     results = await retrieve(req.message)
     citations = [
         Citation(
