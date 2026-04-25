@@ -1,0 +1,43 @@
+{
+  "cli_version": "0.5.6",
+  "checkpoint_id": "3eb359fed244",
+  "session_id": "6a9a7c9f-f66f-4dc4-a015-793a0bc8fb65",
+  "strategy": "manual-commit",
+  "created_at": "2026-04-25T23:27:36.098942853Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "Dockerfile.frontend_react",
+    "Makefile",
+    "docker-compose.kis.yml",
+    "docker-compose.yml",
+    "infra/cloud_run/deploy_kis.sh",
+    "scripts/seed_opensearch.py",
+    "scripts/setup_gcp.sh"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-4-6",
+  "turn_id": "12d88b485283",
+  "token_usage": {
+    "input_tokens": 69,
+    "cache_creation_tokens": 112323,
+    "cache_read_tokens": 4539088,
+    "output_tokens": 55427,
+    "api_call_count": 66
+  },
+  "session_metrics": {
+    "turn_count": 2
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-04-25T23:27:36.071805177Z",
+    "agent_lines": 745,
+    "agent_removed": 13,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 745,
+    "total_lines_changed": 758,
+    "agent_percentage": 100,
+    "metric_version": 2
+  }
+}
