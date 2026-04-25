@@ -1,0 +1,61 @@
+our system called viaticum , so make change and use @claude_code/AURAMED_PLAN.md to create sequlaton of the project and building the building block of the project , always after done , report what done in .md file
+
+---
+
+A
+
+---
+
+B , i need to check and verify with my requirments
+
+---
+
+i add it 2 sample audio data for the Speech to text testing, for pionier i will provide with data kind of pateint doctor conversation to fine tune the smal language model on that specific jargon and lexique that is on german language
+
+---
+
+option A , include gitignore
+
+---
+
+option A , include gitignore
+
+---
+
+seeems good, only that i have a physical omi dev kit : (https://docs.omi.me/doc/developer/backend/transcription#full-documentation) also if you check the mounted usb the omi dev kit is connected via usb, so give me setup and create a .env.sample for api keys
+
+---
+
+seems good
+
+---
+
+continue without commit
+
+---
+
+you can start implement
+
+---
+
+Inlin Excution
+
+---
+
+okay the landing page is nice, avoid to loging m, just show a icon of dr weber and direclty log to the patientorganizer , one thing and its important , i want a thread that track the mouse and whne hover over an verlaufeintrag it will go suggest some info that are located in RAG system , also make like tamagotshic kind of doctor companaign that care about the mental helth of the doctor and try to cheer him up , make it live and cna interact with user on the bottom , can you check an open source project that integrtate this in our system , and make a page to setup the tagamotish and give it a name (hakim, tabib, Sina .. )
+
+---
+
+continue
+
+---
+
+go with option A
+
+---
+
+yes looks good
+
+---
+
+apply
