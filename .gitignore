@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+*_backend.egg-info/
+*_frontend.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Secrets
+.env
+!.env.example
+
+# Runtime
+data/chroma_db/
+backend/logs/*.jsonl
+pioneer/.outputs/
+*.ckpt
+*.pt
+*.bin
+*.safetensors
+nemo_experiments/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+demo/backup_demo.mp4
+.pytest_cache/
+.coverage
+htmlcov/
+
+# tmp 
+tmp/
