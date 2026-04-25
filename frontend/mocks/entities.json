@@ -1,0 +1,11 @@
+{
+  "entities": [
+    {"text": "Brustschmerzen", "type": "symptom", "confidence": 0.99, "start": 40, "end": 54},
+    {"text": "Dyspnoe", "type": "symptom", "confidence": 0.97, "start": 70, "end": 77},
+    {"text": "160/95 mmHg", "type": "vital_sign", "confidence": 0.96, "start": 90, "end": 101},
+    {"text": "Ramipril", "type": "medication", "confidence": 0.98, "start": 110, "end": 118},
+    {"text": "5mg 1-0-0", "type": "dosage", "confidence": 0.94, "start": 119, "end": 128},
+    {"text": "NSTEMI", "type": "diagnosis", "confidence": 0.92, "start": 140, "end": 146}
+  ],
+  "provider": "stub"
+}

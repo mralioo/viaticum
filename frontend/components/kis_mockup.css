@@ -1,0 +1,33 @@
+:root {
+    --clr-primary: #1a73e8;
+    --clr-bg: #f4f6f9;
+    --clr-surface: #ffffff;
+    --clr-danger: #d32f2f;
+    --clr-warn: #f57c00;
+    --clr-ok: #388e3c;
+    --clr-text: #202124;
+    --clr-muted: #5f6368;
+    --clr-border: #dadce0;
+    --clr-hover: #f1f3f4;
+}
+.kis-table th {
+    background: #e8eaf6;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--clr-primary);
+}
+.kis-table tr:hover { background: var(--clr-hover); cursor: pointer; }
+.mts-rot    { color: #c62828; font-weight: bold; }
+.mts-orange { color: #e65100; font-weight: bold; }
+.mts-gelb   { color: #f9a825; font-weight: bold; }
+.mts-gruen  { color: #2e7d32; font-weight: bold; }
+.mts-blau   { color: #1565c0; font-weight: bold; }
+.omni-banner {
+    background: linear-gradient(90deg, #e3f2fd, #bbdefb);
+    border-left: 4px solid var(--clr-primary);
+    padding: 8px 16px;
+    border-radius: 4px;
+}

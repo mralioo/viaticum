@@ -1,0 +1,10 @@
+{
+  "note": {
+    "S": "Patientin berichtet über anhaltende Brustschmerzen seit dem Vorabend, Ausstrahlung in den linken Arm. Begleitend Dyspnoe am Morgen.",
+    "O": "Blutdruck 160/95 mmHg, Puls 88/min, Temperatur 36.8°C, SpO2 97%. EKG ausstehend.",
+    "A": "Verdacht auf akutes Koronarsyndrom (NSTEMI). ICD: I21.4",
+    "P": "12-Kanal-EKG sofort, Troponin I + T, kardiologisches Konsil, Sauerstoffgabe 2L/min."
+  },
+  "provider": "stub",
+  "latency_ms": 0
+}
