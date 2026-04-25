@@ -17,6 +17,7 @@ dependencies = [
     "opensearch-py>=2.4",
     "sentence-transformers>=3",
     "python-dotenv>=1.0",
+    "google-cloud-firestore>=2.16",
 ]
 
 [project.optional-dependencies]
