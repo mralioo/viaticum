@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css"/>
+<link rel="stylesheet" href="companion.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
@@ -27,12 +29,13 @@
 <script type="text/babel" src="screens/or-planning.jsx"></script>
 <script type="text/babel" src="screens/imaging.jsx"></script>
 <script type="text/babel" src="screens/referrals-meds.jsx"></script>
+<script type="text/babel" src="screens/companion.jsx"></script>
 <script type="text/babel" src="screens/modals.jsx"></script>
 <script type="text/babel" src="screens/settings.jsx"></script>
 
 <script type="text/babel">
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "theme": "dark",
+  "theme": "light",
   "density": "comfortable",
   "role": "Pflege",
   "lang": "DE"
@@ -44,9 +47,7 @@ const NAV_GROUPS = [
     items: [
       { id: "dashboard", label: "Tagesübersicht", icon: "dashboard" },
       { id: "patients", label: "Patienten", icon: "patients", badge: 12 },
-      { id: "wards", label: "Stationen", icon: "ward", badge: 8 },
-      { id: "icu", label: "Intensivstation", icon: "icu", badge: 3, alert: true },
-      { id: "or", label: "OP-Planung", icon: "or", badge: 12 },
+      { id: "soap", label: "SOAP-Verlauf", icon: "doc", badge: "✶", alert: false },
     ]
   },
   {
@@ -55,7 +56,6 @@ const NAV_GROUPS = [
       { id: "imaging", label: "Bildgebung", icon: "imaging" },
       { id: "meds", label: "Medikamentenplan", icon: "meds" },
       { id: "referrals", label: "Überweisungen", icon: "ueber" },
-      { id: "soap", label: "SOAP-Verlauf", icon: "doc" },
     ]
   },
   {
@@ -118,36 +118,19 @@ function Topbar({ role, lang }) {
   );
 }
 
-function SoapStandalone({ openPatient }) {
-  // reuse RecordSoap layout but with patient picker
-  const [pid, setPid] = React.useState(PATIENTS[0].id);
-  const p = PATIENTS.find(x => x.id === pid);
-  return (
-    <div className="page">
-      <div className="page-head">
-        <div>
-          <h1 className="page-title">SOAP-Dokumentation</h1>
-          <div className="page-sub">Strukturierte Verlaufseinträge nach SOAP-Schema</div>
-        </div>
-        <div className="page-actions">
-          <select className="select" style={{ width: 280 }} value={pid} onChange={e => setPid(e.target.value)}>
-            {PATIENTS.map(pt => <option key={pt.id} value={pt.id}>{pt.name} — {pt.station} {pt.room}</option>)}
-          </select>
-          <button className="btn primary"><Icon name="check" size={14}/> Signieren</button>
-        </div>
-      </div>
-      <RecordSoap p={p}/>
-    </div>
-  );
-}
+
 
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  const [route, setRoute] = React.useState({ view: "dashboard" });
+  // initial view from URL hash (e.g. #soap forwards from welcome.html)
+  const initial = (window.location.hash || "").replace("#", "") || "soap";
+  const [route, setRoute] = React.useState({ view: initial });
   const [modal, setModal] = React.useState(null);
+  const [companion, setCompanion] = React.useState(window.DEFAULT_COMPANION);
 
   const goto = (view, extra = {}) => setRoute({ view, ...extra });
   const openPatient = (id) => setRoute({ view: "patient", id });
+  const openSoapForPatient = (id) => setRoute({ view: "soap", patientId: id });
   const openModal = (kind, patient) => setModal({ kind, patient });
 
   React.useEffect(() => {
@@ -163,16 +146,13 @@ function App() {
       <Topbar role={t.role} lang={t.lang}/>
       <Sidebar active={activeNav} goto={goto}/>
       <main className="main">
-        {route.view === "dashboard" && <Dashboard goto={goto} openPatient={openPatient}/>}
-        {route.view === "patients" && <PatientList openPatient={openPatient}/>}
+        {route.view === "dashboard" && <Dashboard goto={goto} openPatient={openSoapForPatient}/>}
+        {route.view === "patients" && <PatientList openPatient={openSoapForPatient}/>}
         {route.view === "patient" && <PatientRecord patientId={route.id} goBack={() => goto("patients")} openModal={openModal}/>}
-        {route.view === "wards" && <Wards openPatient={openPatient}/>}
-        {route.view === "icu" && <ICU openPatient={openPatient}/>}
-        {route.view === "or" && <ORPlanning openPatient={openPatient}/>}
         {route.view === "imaging" && <Imaging/>}
-        {route.view === "meds" && <MedicationPlan openPatient={openPatient}/>}
+        {route.view === "meds" && <MedicationPlan openPatient={openSoapForPatient}/>}
         {route.view === "referrals" && <Referrals/>}
-        {route.view === "soap" && <SoapStandalone openPatient={openPatient}/>}
+        {route.view === "soap" && <SoapWithCompanion companion={companion} setCompanion={setCompanion} patientId={route.patientId}/>}
         {route.view === "settings" && <Settings/>}
       </main>
 

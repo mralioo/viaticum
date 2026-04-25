@@ -1,0 +1,664 @@
+/* ── Companion (Tamagotchi-style avatar) ────────────────────────────── */
+
+/* ── Floating dock (always visible) ───────────────────────────── */
+.compa-dock {
+  position: fixed;
+  right: 22px; bottom: 22px;
+  z-index: 80;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.compa-pet {
+  width: 84px; height: 84px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  background: radial-gradient(circle at 35% 30%, var(--pet-l, #66d4d4), var(--pet-d, #0d8a8a) 65%, #064848 100%);
+  box-shadow:
+    0 0 0 4px rgba(56,189,189,.10),
+    0 0 0 10px rgba(56,189,189,.05),
+    0 14px 36px rgba(13,138,138,.36);
+  animation: pet-float 3.4s ease-in-out infinite;
+  transition: transform .2s;
+}
+.compa-pet:hover { transform: translateY(-2px) scale(1.04); }
+.compa-pet.thinking { animation: pet-think 1.4s ease-in-out infinite; }
+
+.compa-pet::before, .compa-pet::after {
+  content: ""; position: absolute;
+  width: 10px; height: 14px; border-radius: 50%;
+  background: #0a1418; top: 40%;
+  animation: blink 4.2s infinite;
+}
+.compa-pet::before { left: 28%; }
+.compa-pet::after  { right: 28%; }
+.compa-pet.mood-happy::before, .compa-pet.mood-happy::after {
+  border-radius: 50% 50% 0 0;
+  height: 8px;
+  top: 44%;
+}
+.compa-pet.mood-listening::before, .compa-pet.mood-listening::after {
+  background: #66d4d4;
+  box-shadow: 0 0 6px #66d4d4;
+}
+
+.compa-pet .mouth {
+  position: absolute;
+  left: 50%; bottom: 28%;
+  transform: translateX(-50%);
+  width: 18px; height: 9px;
+  border-bottom: 2px solid #0a1418;
+  border-radius: 0 0 18px 18px;
+  opacity: .85;
+}
+.compa-pet.mood-listening .mouth {
+  width: 10px; height: 10px;
+  border: 2px solid #0a1418;
+  border-radius: 50%;
+  bottom: 26%;
+  opacity: 1;
+}
+
+.compa-pet .halo {
+  /* small accent rings */
+  position: absolute; inset: -8px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(102, 212, 212, 0.35);
+  animation: halo-spin 18s linear infinite;
+  pointer-events: none;
+}
+.compa-pet .halo-2 {
+  position: absolute; inset: -16px;
+  border-radius: 50%;
+  border: 1px dashed rgba(102, 212, 212, 0.18);
+  animation: halo-spin 26s linear infinite reverse;
+  pointer-events: none;
+}
+
+.compa-pet .hat {
+  /* small turban-like cap to evoke scholar */
+  position: absolute;
+  top: -8px; left: 50%; transform: translateX(-50%);
+  width: 56px; height: 24px;
+  background:
+    radial-gradient(ellipse at 50% 100%, #1a2a3c 0 60%, transparent 65%),
+    linear-gradient(180deg, #243648, #1a2a3c);
+  border-radius: 30px 30px 12px 12px;
+  pointer-events: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,.3);
+}
+.compa-pet .hat::after {
+  /* small jewel */
+  content: ""; position: absolute;
+  left: 50%; top: 6px; transform: translateX(-50%);
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #f0c168;
+  box-shadow: 0 0 6px #f0c168;
+}
+
+@keyframes pet-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes pet-think {
+  0%, 100% { transform: translateY(-2px) rotate(-2deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.05); }
+}
+@keyframes halo-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* speech bubble that follows the pet */
+.compa-speech {
+  max-width: 320px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 14px 14px 4px 14px;
+  padding: 12px 14px;
+  box-shadow: var(--shadow-md);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink);
+  position: relative;
+  animation: bubble-in .25s ease-out;
+}
+.compa-speech .who {
+  font-size: 10.5px; font-weight: 600;
+  color: var(--teal-2);
+  text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: 4px;
+}
+.compa-speech .actions {
+  margin-top: 10px;
+  display: flex; gap: 6px;
+  flex-wrap: wrap;
+}
+.compa-speech .actions button {
+  border: 0;
+  background: var(--bg-sunken);
+  color: var(--ink);
+  padding: 5px 10px;
+  border-radius: 6px;
+  font: inherit; font-size: 11.5px; font-weight: 500;
+  cursor: pointer;
+}
+.compa-speech .actions button:hover { background: var(--line); }
+.compa-speech .actions button.primary { background: var(--teal); color: #fff; }
+.compa-speech .actions button.primary:hover { background: var(--teal-2); }
+
+@keyframes bubble-in {
+  from { opacity: 0; transform: translateY(6px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* small status pill on top of pet */
+.compa-status {
+  position: absolute;
+  bottom: -6px; right: -6px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 10.5px; font-weight: 600;
+  color: var(--ink-2);
+  display: inline-flex; align-items: center; gap: 5px;
+  box-shadow: var(--shadow-sm);
+}
+.compa-status .mic-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--red);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(.7); }
+}
+
+/* mood indicator stats */
+.compa-stats {
+  position: absolute;
+  top: -8px; left: -10px;
+  display: flex; gap: 4px;
+}
+.compa-stats .stat {
+  width: 14px; height: 14px;
+  border-radius: 4px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  display: grid; place-items: center;
+  font-size: 9px;
+  color: var(--ink-3);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Suggestion popover (over a SOAP field) ─────────────────── */
+.compa-suggest {
+  position: absolute;
+  z-index: 70;
+  width: 380px;
+  background: var(--bg-elev);
+  border: 1px solid var(--teal-soft);
+  border-left: 3px solid var(--teal);
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+  padding: 14px 16px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  animation: bubble-in .18s ease-out;
+}
+.compa-suggest .head {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 8px;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .06em;
+  color: var(--teal-2);
+}
+.compa-suggest .head .src {
+  margin-left: auto;
+  background: var(--teal-tint);
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 10px;
+  color: var(--teal-2);
+  letter-spacing: .04em;
+}
+.compa-suggest pre {
+  margin: 0;
+  font-family: var(--font-sans);
+  white-space: pre-wrap;
+  color: var(--ink);
+  background: var(--bg-sunken);
+  padding: 10px 12px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+.compa-suggest .footer {
+  display: flex; gap: 6px;
+  margin-top: 10px;
+  align-items: center;
+}
+.compa-suggest .footer .meta {
+  font-size: 10.5px;
+  color: var(--ink-3);
+  margin-right: auto;
+  display: flex; align-items: center; gap: 5px;
+}
+.compa-suggest .footer .meta::before {
+  content: ""; width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-soft);
+}
+
+/* SOAP field highlight when companion is over it */
+.soap-field {
+  position: relative;
+  border-radius: 10px;
+  padding: 14px 16px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  transition: border-color .18s, background .18s;
+}
+.soap-field.is-hovered {
+  border-color: var(--teal);
+  background: var(--teal-tint);
+}
+.soap-field .label-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+.soap-field .badge {
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  background: var(--teal);
+  color: #fff;
+  font-weight: 700;
+  display: grid; place-items: center;
+  font-size: 13px;
+}
+.soap-field .label {
+  font-weight: 600; font-size: 13.5px;
+  letter-spacing: -0.005em;
+}
+.soap-field .label small { color: var(--ink-3); font-size: 11.5px; font-weight: 500; margin-left: 6px; }
+.soap-field .companion-hint {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--teal-2);
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--teal-soft);
+  padding: 3px 8px;
+  border-radius: 999px;
+  opacity: 0;
+  transition: opacity .18s;
+}
+.soap-field.is-hovered .companion-hint { opacity: 1; }
+.soap-field .companion-hint::before {
+  content: ""; width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--teal-2);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+.soap-field textarea {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  resize: vertical;
+  outline: none;
+  font: inherit; font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink);
+  min-height: 110px;
+}
+
+/* ── Chat panel ─────────────────────────────────────────────── */
+.compa-chat-shade {
+  position: fixed; inset: 0;
+  background: rgba(15,22,32,.32);
+  z-index: 95;
+  backdrop-filter: blur(3px);
+}
+.compa-chat {
+  position: fixed;
+  right: 22px; bottom: 22px;
+  width: 420px; height: 560px;
+  z-index: 96;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  animation: chat-in .22s ease-out;
+}
+@keyframes chat-in {
+  from { opacity: 0; transform: translateY(10px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.compa-chat-head {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: 12px;
+}
+.compa-chat-head .mini-pet {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--pet-l, #66d4d4), var(--pet-d, #0d8a8a) 70%);
+  position: relative;
+  flex-shrink: 0;
+}
+.compa-chat-head .mini-pet::before, .compa-chat-head .mini-pet::after {
+  content: ""; position: absolute;
+  width: 4px; height: 5px; border-radius: 50%;
+  background: #0a1418; top: 42%;
+}
+.compa-chat-head .mini-pet::before { left: 28%; }
+.compa-chat-head .mini-pet::after  { right: 28%; }
+.compa-chat-head .name { font-weight: 600; font-size: 14px; }
+.compa-chat-head .sub { font-size: 11.5px; color: var(--ink-3); }
+.compa-chat-head .sub .live { color: var(--green); font-weight: 600; }
+.compa-chat-head .sub .live::before {
+  content: ""; display: inline-block; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--green);
+  margin-right: 4px; vertical-align: 1px;
+  box-shadow: 0 0 0 3px var(--green-soft);
+}
+.compa-chat-head .head-actions {
+  margin-left: auto; display: flex; gap: 4px;
+}
+.compa-chat-head .head-actions button {
+  width: 28px; height: 28px;
+  border: 0; background: transparent;
+  border-radius: 6px;
+  color: var(--ink-3);
+  cursor: pointer;
+  display: grid; place-items: center;
+}
+.compa-chat-head .head-actions button:hover { background: var(--bg-sunken); color: var(--ink); }
+
+.compa-chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 12px;
+  background: var(--bg);
+}
+
+.msg {
+  display: flex; gap: 8px;
+  max-width: 88%;
+}
+.msg .bubble {
+  padding: 9px 12px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+}
+.msg.bot .bubble { border-radius: 14px 14px 14px 4px; }
+.msg.me { align-self: flex-end; }
+.msg.me .bubble {
+  background: var(--teal);
+  color: #fff;
+  border-color: var(--teal);
+  border-radius: 14px 14px 4px 14px;
+}
+.msg .meta {
+  font-size: 10px; color: var(--ink-3);
+  margin-top: 3px;
+}
+
+.msg.bot .quick {
+  margin-top: 8px;
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.msg.bot .quick button {
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  color: var(--teal-2);
+  padding: 5px 10px;
+  border-radius: 999px;
+  font: inherit; font-size: 11.5px; font-weight: 500;
+  cursor: pointer;
+}
+.msg.bot .quick button:hover { background: var(--teal-tint); }
+
+.compa-chat-input {
+  padding: 12px;
+  border-top: 1px solid var(--line);
+  background: var(--bg-elev);
+  display: flex; align-items: center; gap: 8px;
+}
+.compa-chat-input input {
+  flex: 1; height: 36px;
+  border: 1px solid var(--line);
+  background: var(--bg-sunken);
+  border-radius: 9px;
+  padding: 0 12px;
+  font: inherit; font-size: 13px;
+  color: var(--ink);
+  outline: none;
+}
+.compa-chat-input input:focus { border-color: var(--teal); background: var(--bg-elev); }
+.compa-chat-input .icon-btn {
+  width: 36px; height: 36px;
+  border: 1px solid var(--line);
+  background: var(--bg-sunken);
+  border-radius: 9px;
+  cursor: pointer;
+  display: grid; place-items: center;
+  color: var(--ink-2);
+}
+.compa-chat-input .icon-btn:hover { color: var(--teal-2); border-color: var(--teal); }
+.compa-chat-input .icon-btn.send {
+  background: var(--teal); color: #fff; border-color: var(--teal);
+}
+.compa-chat-input .icon-btn.send:hover { background: var(--teal-2); }
+.compa-chat-input .icon-btn.rec.on {
+  background: var(--red); color: #fff; border-color: var(--red);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+/* ── Companion config (Tamagotchi-style) ────────────────────── */
+.compa-config-shade {
+  position: fixed; inset: 0;
+  background: rgba(15,22,32,.42);
+  z-index: 100;
+  backdrop-filter: blur(4px);
+  display: grid; place-items: center;
+  padding: 36px;
+}
+.compa-config {
+  background: var(--bg-elev);
+  border-radius: 18px;
+  width: 100%; max-width: 880px;
+  max-height: 88vh;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  grid-template-columns: 320px 1fr;
+}
+.compa-config .left {
+  background: linear-gradient(180deg, #0c1e1e 0%, #0a1418 100%);
+  color: #e7edf3;
+  padding: 28px 24px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+}
+.compa-config .left .preview-pet {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--pet-l, #66d4d4), var(--pet-d, #0d8a8a) 65%, #064848 100%);
+  position: relative;
+  margin-bottom: 22px;
+  box-shadow:
+    0 0 0 6px rgba(56,189,189,.14),
+    0 0 0 14px rgba(56,189,189,.07),
+    0 24px 60px rgba(13,138,138,.45);
+  animation: pet-float 3.4s ease-in-out infinite;
+}
+.compa-config .left .preview-pet::before, .compa-config .left .preview-pet::after {
+  content: ""; position: absolute; width: 14px; height: 18px; border-radius: 50%;
+  background: #0a1418; top: 42%;
+  animation: blink 4.2s infinite;
+}
+.compa-config .left .preview-pet::before { left: 30%; }
+.compa-config .left .preview-pet::after { right: 30%; }
+.compa-config .left .preview-pet .mouth {
+  position: absolute; left: 50%; bottom: 28%; transform: translateX(-50%);
+  width: 22px; height: 11px;
+  border-bottom: 2.5px solid #0a1418;
+  border-radius: 0 0 22px 22px;
+}
+.compa-config .left .preview-name {
+  font-family: "Amiri", serif;
+  font-size: 26px;
+  margin: 0 0 4px;
+}
+.compa-config .left .preview-trait {
+  font-size: 11.5px; color: #7c8a9c;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.compa-config .left .level-bar {
+  margin-top: 22px;
+  width: 100%;
+}
+.compa-config .left .level-bar .row {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: #7c8a9c;
+  margin-bottom: 4px;
+}
+.compa-config .left .level-bar .track {
+  height: 6px; border-radius: 3px;
+  background: rgba(102,212,212,.15);
+  overflow: hidden;
+}
+.compa-config .left .level-bar .track > i {
+  display: block; height: 100%;
+  background: linear-gradient(90deg, #38bdbd, #66d4d4);
+}
+
+.compa-config .right {
+  padding: 28px 32px;
+  overflow-y: auto;
+}
+.compa-config .right h2 {
+  margin: 0 0 4px;
+  font-size: 20px; font-weight: 600; letter-spacing: -0.015em;
+}
+.compa-config .right .hint {
+  color: var(--ink-3); font-size: 12.5px; margin-bottom: 22px;
+}
+.cfg-section {
+  margin-bottom: 22px;
+}
+.cfg-section .h {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-3); margin-bottom: 10px;
+}
+.name-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+}
+.name-pick {
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  text-align: left;
+  font: inherit; color: inherit;
+}
+.name-pick:hover { border-color: var(--line-strong); }
+.name-pick.active {
+  border-color: var(--teal);
+  background: var(--teal-tint);
+  box-shadow: 0 0 0 3px var(--teal-soft);
+}
+.name-pick .n {
+  font-family: "Amiri", serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--ink);
+}
+.name-pick .ar {
+  font-family: "Amiri", serif;
+  font-size: 14px;
+  color: var(--teal-2);
+  margin-top: 2px;
+}
+.name-pick .meaning {
+  font-size: 11px; color: var(--ink-3);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.character-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+}
+.char-pick {
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  text-align: left;
+  font: inherit; color: inherit;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.char-pick:hover { border-color: var(--line-strong); }
+.char-pick.active {
+  border-color: var(--teal);
+  background: var(--teal-tint);
+}
+.char-pick .glyph {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--bg-sunken);
+  color: var(--teal-2);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.char-pick.active .glyph { background: var(--teal); color: #fff; }
+.char-pick .lbl { font-size: 13px; font-weight: 600; }
+.char-pick .desc { font-size: 11.5px; color: var(--ink-3); margin-top: 2px; line-height: 1.4; }
+
+.color-row {
+  display: flex; gap: 8px;
+}
+.color-row .swatch {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  position: relative;
+}
+.color-row .swatch.active { border-color: var(--ink); box-shadow: 0 0 0 3px var(--bg-sunken); }
+
+.task-list { display: flex; flex-direction: column; gap: 6px; }
+.task-list label {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12.5px;
+}
+.task-list label input { accent-color: var(--teal); }
+.task-list label .desc { color: var(--ink-3); font-size: 11.5px; margin-left: auto; }
+
+.compa-config .footer {
+  grid-column: 1 / -1;
+  padding: 14px 32px;
+  border-top: 1px solid var(--line);
+  background: var(--bg-sunken);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.compa-config .footer .left-text { font-size: 12px; color: var(--ink-3); }
+.compa-config .footer .actions { display: flex; gap: 8px; }

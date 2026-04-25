@@ -241,6 +241,67 @@ const PATIENTS = [
     aufnahmeart: "Elektiv",
     vitals: { hr: 72, sys: 116, dia: 70, spo2: 99, temp: 36.6, rr: 14 },
   },
+  // ── Amnesie-Patienten ────────────────────────────────────────────────────
+  {
+    id: "P-104833",
+    name: "Baumann, Ernst",
+    geb: "14.11.1957",
+    age: 68,
+    sex: "m",
+    insurance: { type: "GKV", name: "AOK Bayern", number: "A881920174", egk: true },
+    station: "NEU", room: "501", bed: "B",
+    admit: "25.04.2026 16:40",
+    los: 1,
+    primary: "R41.3 — Transiente globale Amnesie (TGA)",
+    secondary: ["I10.90 — Arterielle Hypertonie"],
+    allergies: ["Keine bekannt"],
+    attending: "Dr. Richter",
+    nurse: "Pfleger Jonas",
+    severity: "watch",
+    dnr: false,
+    aufnahmeart: "Notfall",
+    vitals: { hr: 72, sys: 136, dia: 82, spo2: 99, temp: 36.6, rr: 14 },
+    anamnese: {
+      vorerkrankungen: ["Arterielle Hypertonie seit 10 J.", "Keine Epilepsie, kein Schlaganfall"],
+      medikamente: ["Ramipril 5mg 1-0-0", "HCT 12,5mg 1-0-0"],
+      sozial: "Rentner, verheiratet, lebt selbstständig. Ex-Raucher (15 py, sistiert vor 8 J.).",
+      auslöser: "Intensives körperliches Training (Laufen, 10 km) heute Morgen.",
+      verlauf: "Plötzlicher Beginn gegen 14:00 Uhr. Wiederholtes Stellen identischer Fragen über ca. 4-5 Stunden. Keine Bewusstlosigkeit, kein Sturz, keine Zungenbisse, kein Erbrechen. Jetzt vollständig erholt, aber lückenhafte Erinnerung an Ereignis.",
+      famAnamnese: "Vater: Herzinfarkt mit 72 J. Keine Epilepsie in Familie.",
+    },
+  },
+  {
+    id: "P-104834",
+    name: "Vogel, Karl-Heinz",
+    geb: "03.07.1963",
+    age: 62,
+    sex: "m",
+    insurance: { type: "GKV", name: "DAK-Gesundheit", number: "D882031174", egk: true },
+    station: "NEU", room: "504", bed: "A",
+    admit: "22.04.2026 09:15",
+    los: 4,
+    primary: "F10.6 — Alkohol-bedingtes Korsakoff-Syndrom",
+    secondary: ["K70.30 — Alkoholische Leberzirrhose Child A", "E51.2 — Wernicke-Enzephalopathie (Anamnese)"],
+    allergies: ["Keine bekannt"],
+    attending: "Dr. Richter",
+    nurse: "Pfleger Jonas",
+    severity: "watch",
+    dnr: false,
+    aufnahmeart: "Verlegung Psychiatrie",
+    vitals: { hr: 84, sys: 128, dia: 78, spo2: 97, temp: 36.9, rr: 16 },
+    anamnese: {
+      vorerkrankungen: [
+        "Chronischer Alkoholabusus >25 J. (>100g/d)",
+        "Wernicke-Enzephalopathie-Episode 2023 (Klinik Süd)",
+        "Alkoholische Leberzirrhose Child A (diagnostiziert 2024)",
+        "Z.n. stationärer Entgiftung 3× (zuletzt Akutpsychiatrie)",
+      ],
+      medikamente: ["Thiamin 300mg i.v. (aktuell)", "Folsäure 5mg 1-0-0", "Lactulose 3×15ml"],
+      sozial: "Frührentner. Lebt alleine. Tochter in München (Hauptansprechpartnerin). Führerschein bereits entzogen (DUI 2022). Betreuer: Frau Richter, Betreuungsgericht München.",
+      verlauf: "Nach stationärer Entgiftung persistierende schwere Gedächtnisstörungen: anterograde Amnesie (kann neue Inhalte nicht behalten), retrograde Amnesie für die letzten ~18 Monate, ausgeprägte Konfabulationen. MRT: Korsakoff-typische Veränderungen Corpora mammillaria + Thalami bds.",
+      famAnamnese: "Mutter: Alkoholabhängigkeit. Keine sonstigen neurolog. Erkrankungen bekannt.",
+    },
+  },
 ];
 
 // OR / OP-Plan
@@ -383,7 +444,114 @@ const REFERRALS = [
   { id: "Ü-2026-0244", date: "24.04.2026", patient: "Fischer, Renate", to: "Geriatrische Reha — Klinik Sonnenhof", reason: "AHB nach Hirninfarkt", urgency: "hoch", status: "in Bearbeitung" },
 ];
 
+// SOAP / Verlaufsdokumentation — matches backend data/patients/soap_history.jsonl
+const SOAP_HISTORY = [
+  // ── Müller, Hannelore (P-104821) ──────────────────────────────────────────
+  {
+    id: "SH-001", patient: "P-104821", date: "23.04.2026", time: "12:30", author: "Dr. Weber",
+    type: "Aufnahme",
+    S: "Patientin, 78 J., stellt sich mit progredienter Belastungsdyspnoe seit 4 Tagen vor. Orthopnoe mit 2 Kissen, Gewichtszunahme +2,8 kg in 7 Tagen, Unterschenkelödeme beidseits zunehmend.",
+    O: "RR 158/96 mmHg, HF 96/min (unregelmäßig), SpO₂ 92% RA. Stauungszeichen: JVD+, feinblasige RGs basal bds., S3-Galopp. UEX: prätibiale Ödeme ++. EKG: VHF 96/min. Rö-Thorax: Herzverbreiterung, Kerley-B-Linien, Pleuraergüsse bds.",
+    A: "Dekompensierte Herzinsuffizienz NYHA III (I50.13) bei DCM (I42.0). VHF (I48.0) bekannt. Niereninsuffizienz Grad 3a (N18.31) — DD prärenale Komponente. DM Typ 2 (E11.9) und aHT (I10.90) stabil.",
+    P: "Furosemid 80mg i.v. Bolus, dann 40mg p.o. 2×/d. Bilanzierung Ziel -500ml/24h. Bettruhe, O₂ bei SpO₂<94%. Krea + Elektrolyte 6-stündlich. Echo morgen. Antikoagulation: Apixaban weiter. Konsil Kardiologie angemeldet.",
+  },
+  {
+    id: "SH-002", patient: "P-104821", date: "24.04.2026", time: "08:15", author: "Dr. Weber",
+    type: "Verlauf",
+    S: "Leichte Besserung der Dyspnoe. Schläft mit 1 Kissen. Ödeme subjektiv rückläufig. Urinausscheidung laut Bilanz: +680 ml Negativbilanz gestern.",
+    O: "RR 132/84 mmHg, HF 78/min, SpO₂ 96% RA. RGs basal deutlich abnehmend. UEX: prätibiale Ödeme +/+ (rückläufig). Gewicht -1,4 kg. Krea 1,42 mg/dl ↑ (prärenal?), K+ 4,2, NT-proBNP 3240 pg/ml. Echo: EF 35%, globale Hypokinesie.",
+    A: "Klinisch deutlich gebesserte HI unter Diuretikatherapie. Kreatininanstieg unter Furosemid — DD prärenal. Troponin-T 18 ng/l grenzwertig, kein NSTEMI-Muster.",
+    P: "Furosemid auf 40mg 1×/d reduzieren. Krea + E'lyte morgen. TTE ambulant in 6 Wo. Sozialdienst: AHB-Antrag initiiert. Patientenedukation Gewichtsprotokoll. Entlassung voraussichtlich 26.04.",
+  },
+  // ── Fischer, Renate — Amnesie nach Hirninfarkt (P-104826) ─────────────────
+  {
+    id: "SH-010", patient: "P-104826", date: "20.04.2026", time: "13:45", author: "Dr. Weber",
+    type: "Aufnahme",
+    S: "Patientin, 84 J., aus Seniorenheim eingeliefert nach Sturz + Bewusstseinsstörung ca. 5 Min. Gesichtsschiefe li. beobachtet. Sprachstörung. Seit Vortag zunehmend verwirrt. Vorbekannt: VHF (Apixaban), Demenz F03 (Stufe 1-2).",
+    O: "RR 172/98 mmHg, HF 88/min (arrhythmisch), SpO₂ 95%. Neurologisch: Bewusstsein getrübt (GCS E3V4M6), ausgeprägte anterograde + retrograde Amnesie. NIHSS 4. MRT: frischer ischämischer Infarkt Mediastromgebiet rechts (DWI+, ADC↓). Keine Blutung.",
+    A: "Frischer zerebraler Infarkt (I63.9) im rechten Mediastromgebiet, vermutlich kardioembolisch bei VHF (I48.0). Schwere Amnesie als Leitsymptom. Vorschaden durch Demenz (F03). DNR-Wunsch in Patientenverfügung.",
+    P: "Lyse-KI (Zeitfenster, Demenz). Apixaban weiter (ASS als KI). RR-Ziel 140-160. Neurolog. Monitoring. Schluckscreening. Physio + Ergo Konsil. Palliativmedizin-Konsil. Angehörigengespräch heute 14:00. Geriatrische Reha vorbereiten.",
+  },
+  {
+    id: "SH-011", patient: "P-104826", date: "22.04.2026", time: "09:00", author: "Dr. Weber",
+    type: "Verlauf",
+    S: "Patientin erkennt Tochter heute, nennt Namen korrekt. Fragt wiederholt: 'Wann gehe ich nach Hause?' — keine Erinnerung an Vortag. Schlucken gebessert, nimmt breiige Kost. Keine Schmerzen.",
+    O: "RR 148/88 mmHg. Neurologisch: MMSE 12/30 (vs. 18/30 vor 3 Mo., Heim-Dokumentation). Orientierung zu Person erhalten, zu Zeit + Ort stark eingeschränkt. Keine neue Hemiparese. Schluck: sicher bei Brei.",
+    A: "Subakuter Verlauf nach Infarkt. Amnesie partiell rückläufig für Ferngedächtnis, Kurzzeitgedächtnis weiterhin schwer beeinträchtigt. Prognose für vollständige Erholung ungünstig bei Demenz-Vorschaden.",
+    P: "Apixaban fortführen. Physio täglich. Neuropsychologie-Konsil angemeldet. Angehörigengespräch: Ziel geriatrische Reha besprochen + akzeptiert. AHB-Antrag Klinik Sonnenhof eingereicht.",
+  },
+  // ── Baumann, Ernst — TGA (P-104833) ──────────────────────────────────────
+  {
+    id: "SH-020", patient: "P-104833", date: "25.04.2026", time: "17:20", author: "Dr. Richter",
+    type: "Aufnahme",
+    S: "Patient, 68 J., wird von Ehefrau vorgestellt. Plötzlicher Beginn gegen 14:00 Uhr: repetitive Fragen ('Was machen wir heute?', 'Wo sind wir?') über ca. 4-5 Stunden ohne Memoration der Antworten. Jetzt vollständig erholt, komplette Amnesie für den Zeitraum. Auslöser: körperliche Belastung (10 km Lauf). Kein Trauma, keine Hemiparese, kein Erbrechen, kein Zungenbiss.",
+    O: "Vollständig orientiert. MMSE 29/30. Anterograde Amnesie für 4-5 h (der Vorfall selbst). Keine fokal-neurol. Zeichen. MRT (DWI): kein Infarkt. EEG: unauffällig. CK 280 U/l (nach Sport, erwartet). Troponin negativ.",
+    A: "Transiente globale Amnesie (TGA) (R41.3) — klassisches Bild. Ausschluss TIA (MRT neg.) und epileptischer Anfall (EEG neg.). Rezidivrisiko 5-8% jährlich. Exzellente Prognose.",
+    P: "Stationäre Beobachtung 24h. Keine spezifische Therapie. Patientenedukation: gutartige Prognose, >95% Vollrestitution. Körperliche Extrembelastung 4 Wochen meiden. Neurol. Ambulanz in 6 Wochen. Fahreignung: temporär einschränken bis Follow-up.",
+  },
+  // ── Vogel, Karl-Heinz — Korsakoff-Syndrom (P-104834) ─────────────────────
+  {
+    id: "SH-030", patient: "P-104834", date: "22.04.2026", time: "10:30", author: "Dr. Richter",
+    type: "Aufnahme",
+    S: "Patient, 62 J., Verlegung aus Akutpsychiatrie nach Entgiftung. Chronischer Alkoholabusus >25 J. (>100g/d). Nach Entgiftung: persistierende schwere Gedächtnisstörungen. Anterograde Amnesie (kann keine neuen Informationen speichern). Retrograde Amnesie letzte ~18 Monate. Ausgeprägte Konfabulationen. Vorbekannte Wernicke-Enzephalopathie-Episode 2023.",
+    O: "Wach, kooperativ, orientiert zu Person, desorientiert zu Zeit + Ort. MMSE 18/30. 3-Wörter-Test nach 5 Min.: 0/3. Konfabulation: erzählt überzeugend von 'gestriger Reise nach Hamburg'. MRT: T2-Hyperintensitäten Corpora mammillaria + Thalami bds. — Korsakoff-Muster.",
+    A: "Alkoholisches Korsakoff-Syndrom (F10.6) auf Boden Wernicke-Enzephalopathie. Schwere anterograde + retrograde Amnesie + Konfabulation. Prognose: ~25% Teilbesserung bei Abstinenz, selten Vollrestitution.",
+    P: "Thiamin 300mg i.v. 1×/d × 5 Tage, dann p.o. dauerhaft. Absolute Abstinenz. Neuropsychol. Diagnostik + Reha. Heimplatz-Anfrage initiiert (alleinstehend, nicht mehr selbstständig). Angehörige informiert. Verlaufskontrolle MRT in 3 Monaten.",
+  },
+  // ── Krause, Mehmet — Leberzirrhose / Entzug (P-104827) ──────────────────
+  {
+    id: "SH-040", patient: "P-104827", date: "23.04.2026", time: "21:00", author: "Dr. Weber",
+    type: "Aufnahme",
+    S: "Patient, 57 J., Alkoholabusus >30 J. (0,7-1,0 L Schnaps/d). Jetzt: Oberbauchschmerzen re., Übelkeit/Erbrechen, Ikterus. Letzter Alkohol gestern Abend. Entzugszeichen: Tremor ++, Schwitzen, innere Unruhe.",
+    O: "RR 138/88 mmHg, HF 108/min, Temp 37,8°C, SpO₂ 94%. Sklerenikterus ++. Abdomen: gespannt, Druckschmerz re. OB, Hepatomegalie 4 QF. CIWA-Ar: 14. Labor: Bili 4,8 mg/dl, GGT 382 U/l, AST 156, INR 1,7. Sono: Leberparenchymveränderungen, Aszites gering.",
+    A: "Akut-auf-chron. Leberversagen (K72.00) bei alkohol. Leberzirrhose (K70.30) Child-Pugh B. Alkohol-Entzugssyndrom CIWA 14 (F10.231).",
+    P: "Diazepam nach CIWA-Ar-Schema. Thiamin 300mg i.v. 1×/d. Multivitamine. Propranolol 40mg 2×/d. Lactulose 3×15ml. Sono-Kontrolle 48h. Suchtmedizin-Konsil morgen. Entlassung nach Entgiftung → MVZ Süd.",
+  },
+  // ── Hartmann, Ingo — NSTEMI post-PCI (P-104829) ──────────────────────────
+  {
+    id: "SH-050", patient: "P-104829", date: "22.04.2026", time: "07:30", author: "Dr. Hofmann",
+    type: "Aufnahme",
+    S: "Patient, 71 J., wacht 04:30 mit retrosternalen Druckschmerzen auf, Ausstrahlung li. Arm + Kiefer, Kaltschweißigkeit, Übelkeit. Bekannte KHK (Stent LAD 2019), aHT, Hypercholesterinämie. Aktuelle Medikation: ASS 100, Bisoprolol 5mg, Atorvastatin 40mg.",
+    O: "RR 148/92 mmHg, HF 84/min, SpO₂ 97%. EKG: ST-Hebungen V1-V3. Troponin T hs 1840 ng/l (Norm <14). LHK sofort: RIVA prox. 90% De-novo-Stenose. PCI mit DES (Xience 3.5×24mm) erfolgreich, TIMI-3-Fluss. Echo: EF 48%, anteriore Hypokinesie.",
+    A: "STEMI Vorderwand (I21.4) bei KHK-Progression. Erfolgreiche Primär-PCI. Dual-Plättchenhemmung initiiert.",
+    P: "Ticagrelor 180mg Loading → 90mg 2×/d × 12 Monate. ASS 100mg dauerhaft. Atorvastatin auf 80mg hochdosiert. Betablocker weiter. Heparin i.v. bis morgen. ITS-Monitoring 48h. Kardiolog. Reha anmelden. Rauchstopp-Beratung.",
+  },
+];
+
+// Neuropsychology / cognitive test results
+const NEURO_PSYCH = [
+  {
+    patient: "P-104826", date: "22.04.2026", examiner: "Dr. Neuner (Neuropsychologie)",
+    tests: [
+      { name: "MMSE", score: "12/30", norm: "≥24 unauffällig", interpretation: "Schwere kognitive Einschränkung" },
+      { name: "Uhrentest", score: "2/6", norm: "5-6 unauffällig", interpretation: "Planung + Exekutivfunktion gestört" },
+      { name: "Wortliste (3 Wörter nach 5 Min)", score: "0/3", norm: "3/3", interpretation: "Schwere Neugedächtnissstörung" },
+    ],
+    conclusion: "Ausgeprägte anterograde Amnesie und Orientierungsstörung. Deutliche Verschlechterung zu Vorbefund (MMSE 18/30, Nov. 2025). Vereinbar mit Infarktfolge überlagert auf vorbestehende Demenz.",
+  },
+  {
+    patient: "P-104833", date: "25.04.2026", examiner: "Dr. Richter (Neurologie)",
+    tests: [
+      { name: "MMSE", score: "29/30", norm: "≥24 unauffällig", interpretation: "Unauffällig" },
+      { name: "Wortliste (3 Wörter nach 5 Min)", score: "3/3", norm: "3/3", interpretation: "Normal" },
+      { name: "Orientierung (Zeit, Ort, Person)", score: "10/10", norm: "10/10", interpretation: "Vollständig orientiert" },
+    ],
+    conclusion: "Vollständige kognitive Erholung nach TGA-Episode. Amnesie auf Vorfall selbst beschränkt (normale retrograde + anterograde Funktion jetzt).",
+  },
+  {
+    patient: "P-104834", date: "23.04.2026", examiner: "Dr. Neuner (Neuropsychologie)",
+    tests: [
+      { name: "MMSE", score: "18/30", norm: "≥24 unauffällig", interpretation: "Moderate Einschränkung" },
+      { name: "Wortliste (3 Wörter nach 5 Min)", score: "0/3", norm: "3/3", interpretation: "Schwere anterograde Amnesie" },
+      { name: "Rivermead Behavioural Memory Test", score: "4/24", norm: "≥17", interpretation: "Schwere Alltagsgedächtnisbeeinträchtigung" },
+      { name: "Konfabulations-Screening", score: "Positiv (spontan + provoziert)", norm: "Negativ", interpretation: "Ausgeprägte Konfabulation" },
+    ],
+    conclusion: "Vollbild Korsakoff-Syndrom. Schwere anterograde Amnesie, signifikante retrograde Amnesie, Konfabulation. Alltagskompetenz erheblich eingeschränkt — betreutes Wohnen / Heimversorgung notwendig.",
+  },
+];
+
 Object.assign(window, {
   PATIENTS, OP_ROOMS, OP_PROCEDURES, ICU_VITALS, ICU_PATIENTS_EXTRA,
   MEDICATION, LAB_RESULTS, STATIONS, IMAGING, AGENDA, TASKS, REFERRALS,
+  SOAP_HISTORY, NEURO_PSYCH,
 });
