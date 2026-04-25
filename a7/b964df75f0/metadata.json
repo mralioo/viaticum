@@ -1,0 +1,54 @@
+{
+  "cli_version": "0.5.6",
+  "checkpoint_id": "a7b964df75f0",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "backend/app/main.py",
+    "backend/app/models/chat.py",
+    "backend/app/models/entities.py",
+    "backend/app/models/omi.py",
+    "backend/app/models/soap.py",
+    "backend/app/models/stt.py",
+    "backend/app/prompts/chat_de.txt",
+    "backend/app/prompts/soap_de.txt",
+    "backend/app/routers/chat.py",
+    "backend/app/routers/entities.py",
+    "backend/app/routers/ingest.py",
+    "backend/app/routers/omi.py",
+    "backend/app/routers/soap.py",
+    "backend/app/routers/transcribe.py",
+    "backend/app/services/ai_router.py",
+    "backend/app/services/gliner_extractor.py",
+    "backend/app/services/omi_mcp_client.py",
+    "backend/app/services/rag.py",
+    "backend/app/services/soap_structurer.py",
+    "backend/app/services/stt_gradium.py",
+    "backend/app/services/stt_parakeet.py",
+    "backend/pyproject.toml",
+    "backend/tests/conftest.py",
+    "backend/tests/test_chat.py",
+    "backend/tests/test_entities.py",
+    "backend/tests/test_health.py",
+    "backend/tests/test_omi.py",
+    "backend/tests/test_soap.py",
+    "backend/tests/test_transcribe.py",
+    "demo/script.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/a7/b964df75f0/0/metadata.json",
+      "transcript": "/a7/b964df75f0/0/full.jsonl",
+      "content_hash": "/a7/b964df75f0/0/content_hash.txt",
+      "prompt": "/a7/b964df75f0/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 218,
+    "cache_creation_tokens": 521403,
+    "cache_read_tokens": 13603396,
+    "output_tokens": 153450,
+    "api_call_count": 159
+  }
+}
