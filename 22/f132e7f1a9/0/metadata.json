@@ -1,0 +1,37 @@
+{
+  "cli_version": "0.5.6",
+  "checkpoint_id": "22f132e7f1a9",
+  "session_id": "3b3ff4f8-3a31-4a92-af4a-f75b65fe150e",
+  "strategy": "manual-commit",
+  "created_at": "2026-04-25T20:42:12.128938696Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "infra/cloud_run/deploy.sh"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-4-6",
+  "turn_id": "d77f030ff367",
+  "token_usage": {
+    "input_tokens": 218,
+    "cache_creation_tokens": 521403,
+    "cache_read_tokens": 13603396,
+    "output_tokens": 153450,
+    "api_call_count": 159
+  },
+  "session_metrics": {
+    "turn_count": 2
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-04-25T20:42:12.092163099Z",
+    "agent_lines": 36,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 36,
+    "total_lines_changed": 36,
+    "agent_percentage": 100,
+    "metric_version": 2
+  }
+}
