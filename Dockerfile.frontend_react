@@ -1,0 +1,15 @@
+FROM nginx:1.27-alpine
+
+# Remove default nginx site config
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy KIS static assets
+COPY frontend_react/ /usr/share/nginx/html/
+
+# Override nginx site config
+COPY frontend_react/nginx.conf /etc/nginx/conf.d/kis.conf
+
+EXPOSE 80
+
+HEALTHCHECK --interval=20s --timeout=5s --retries=3 \
+    CMD wget -qO- http://localhost/healthz || exit 1

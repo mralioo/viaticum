@@ -1,8 +1,11 @@
 version: "3.9"
-# Medion KIS — local development stack
-# Equivalent to docker-compose.kis.yml. Use `make up` for convenience.
+
+# Medion KIS — static React frontend + FastAPI backend + OpenSearch vector DB
+# Usage:  make up   /   docker compose -f docker-compose.kis.yml up -d
 
 services:
+
+  # ─── Vector database (OpenSearch) ────────────────────────────────────────
   opensearch:
     image: opensearchproject/opensearch:2.14.0
     container_name: kis-opensearch
@@ -12,7 +15,9 @@ services:
       - plugins.security.disabled=false
       - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
     ulimits:
-      memlock: { soft: -1, hard: -1 }
+      memlock:
+        soft: -1
+        hard: -1
     ports:
       - "9200:9200"
     volumes:
@@ -26,6 +31,23 @@ services:
       retries: 5
       start_period: 60s
 
+  # Optional: OpenSearch Dashboards — comment out in production
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:2.14.0
+    container_name: kis-opensearch-dashboards
+    ports:
+      - "5601:5601"
+    environment:
+      - OPENSEARCH_HOSTS=["https://opensearch:9200"]
+      - OPENSEARCH_USERNAME=admin
+      - OPENSEARCH_PASSWORD=${OPENSEARCH_ADMIN_PASSWORD:-Medion!KIS2026}
+    depends_on:
+      opensearch:
+        condition: service_healthy
+    profiles:
+      - debug   # only starts with: make up-debug
+
+  # ─── FastAPI backend (Pioneer SLM + RAG) ─────────────────────────────────
   backend:
     build:
       context: .
@@ -34,11 +56,15 @@ services:
     ports:
       - "8000:8000"
     environment:
+      # Toggle between ChromaDB (dev) and OpenSearch (prod)
       - VECTOR_STORE=${VECTOR_STORE:-opensearch}
       - OPENSEARCH_URL=https://opensearch:9200
       - OPENSEARCH_USER=admin
       - OPENSEARCH_PASSWORD=${OPENSEARCH_ADMIN_PASSWORD:-Medion!KIS2026}
       - OPENSEARCH_INDEX=${OPENSEARCH_INDEX:-viaticum-transcripts}
+      # Pioneer SLM (set in .env)
+      - PIONEER_SOAP_MODEL_ID=${PIONEER_SOAP_MODEL_ID:-}
+      - PIONEER_NER_MODEL_ID=${PIONEER_NER_MODEL_ID:-}
       - STT_PROVIDER=${STT_PROVIDER:-stub}
     volumes:
       - ./data:/app/data
@@ -53,6 +79,7 @@ services:
       retries: 3
       start_period: 20s
 
+  # ─── Medion KIS static frontend (nginx) ──────────────────────────────────
   frontend_react:
     build:
       context: .
