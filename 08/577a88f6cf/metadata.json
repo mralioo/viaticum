@@ -1,0 +1,27 @@
+{
+  "cli_version": "0.5.6",
+  "checkpoint_id": "08577a88f6cf",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "frontend/pages/1_Patientenorganizer.py",
+    "frontend/pages/2_ZNA_Triage.py",
+    "frontend/pages/3_Live_Consultation.py"
+  ],
+  "sessions": [
+    {
+      "metadata": "/08/577a88f6cf/0/metadata.json",
+      "transcript": "/08/577a88f6cf/0/full.jsonl",
+      "content_hash": "/08/577a88f6cf/0/content_hash.txt",
+      "prompt": "/08/577a88f6cf/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 197,
+    "cache_creation_tokens": 514380,
+    "cache_read_tokens": 11624916,
+    "output_tokens": 148336,
+    "api_call_count": 138
+  }
+}
