@@ -1,0 +1,66 @@
+{
+  "cli_version": "0.5.6",
+  "checkpoint_id": "2860f03dc87f",
+  "session_id": "6a9a7c9f-f66f-4dc4-a015-793a0bc8fb65",
+  "strategy": "manual-commit",
+  "created_at": "2026-04-25T23:24:04.878808098Z",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "frontend_react/Medion KIS.html",
+    "frontend_react/data.js",
+    "frontend_react/icons.jsx",
+    "frontend_react/nginx.conf"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-4-6",
+  "turn_id": "12d88b485283",
+  "token_usage": {
+    "input_tokens": 69,
+    "cache_creation_tokens": 112323,
+    "cache_read_tokens": 4539088,
+    "output_tokens": 55427,
+    "api_call_count": 66
+  },
+  "session_metrics": {
+    "turn_count": 2
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-04-25T23:24:04.853081011Z",
+    "agent_lines": 186,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 35,
+    "total_committed": 186,
+    "total_lines_changed": 221,
+    "agent_percentage": 84.16289592760181,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 1715,
+      "user_lines_removed": 35,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "frontend_react/Medion KIS.html": 15,
+        "frontend_react/companion.css": 664,
+        "frontend_react/icons.jsx": 3,
+        "frontend_react/screens/companion.jsx": 562,
+        "frontend_react/welcome.html": 471
+      },
+      "user_removed_per_file": {
+        "frontend_react/Medion KIS.html": 35
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 3059,
+      "agent_lines_removed": 35
+    }
+  ]
+}

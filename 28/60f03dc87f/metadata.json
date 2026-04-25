@@ -1,0 +1,28 @@
+{
+  "cli_version": "0.5.6",
+  "checkpoint_id": "2860f03dc87f",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "frontend_react/Medion KIS.html",
+    "frontend_react/data.js",
+    "frontend_react/icons.jsx",
+    "frontend_react/nginx.conf"
+  ],
+  "sessions": [
+    {
+      "metadata": "/28/60f03dc87f/0/metadata.json",
+      "transcript": "/28/60f03dc87f/0/full.jsonl",
+      "content_hash": "/28/60f03dc87f/0/content_hash.txt",
+      "prompt": "/28/60f03dc87f/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 69,
+    "cache_creation_tokens": 112323,
+    "cache_read_tokens": 4539088,
+    "output_tokens": 55427,
+    "api_call_count": 66
+  }
+}
