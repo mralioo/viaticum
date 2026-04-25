@@ -39,3 +39,10 @@ htmlcov/
 
 # tmp 
 tmp/
+
+# Misc
+*.log
+.claude
+.cursor
+.entire
+.gemini
