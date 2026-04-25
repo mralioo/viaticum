@@ -1,7 +1,0 @@
-{
-  "answer": "Die Patientin berichtete um 00:04 über starke Brustschmerzen seit dem Vorabend mit Ausstrahlung in den linken Arm. [00:12, Patientin: \"Ja, in den linken Arm. Und ich war sehr kurzatmig heute Morgen.\"]",
-  "citations": [
-    {"timestamp": "00:04", "speaker": "Patientin", "text": "Ich habe seit gestern Abend starke Brustschmerzen."},
-    {"timestamp": "00:12", "speaker": "Patientin", "text": "Ja, in den linken Arm. Und ich war sehr kurzatmig heute Morgen."}
-  ]
-}
