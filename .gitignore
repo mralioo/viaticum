@@ -16,6 +16,9 @@ venv/
 
 # Runtime
 data/chroma_db/
+data/sample_recording_data/
+*.wav
+*.mp3
 backend/logs/*.jsonl
 pioneer/.outputs/
 *.ckpt
