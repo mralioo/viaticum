@@ -1,0 +1,32 @@
+{
+  "cli_version": "0.5.6",
+  "checkpoint_id": "38d30356f577",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "frontend/api_client.py",
+    "frontend/components/kis_mockup.css",
+    "frontend/components/omni_assistant.py",
+    "frontend/mocks/chat.json",
+    "frontend/mocks/entities.json",
+    "frontend/mocks/soap.json",
+    "frontend/mocks/transcript.json",
+    "frontend/pyproject.toml"
+  ],
+  "sessions": [
+    {
+      "metadata": "/38/d30356f577/0/metadata.json",
+      "transcript": "/38/d30356f577/0/full.jsonl",
+      "content_hash": "/38/d30356f577/0/content_hash.txt",
+      "prompt": "/38/d30356f577/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 218,
+    "cache_creation_tokens": 521403,
+    "cache_read_tokens": 13603396,
+    "output_tokens": 153450,
+    "api_call_count": 159
+  }
+}
