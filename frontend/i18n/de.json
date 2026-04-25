@@ -1,0 +1,71 @@
+{
+  "app_title": "Viaticum",
+  "login": {
+    "title": "Viaticum — Anmelden",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "button": "Anmelden",
+    "error": "Ungültige Anmeldedaten"
+  },
+  "omni": {
+    "greeting": "Guten Morgen! Ich bin OMNI, Ihr KI-Dokumentationsassistent.",
+    "draft_ready": "Ich habe einen Entwurf für den Verlaufseintrag vorbereitet. Anzeigen?",
+    "insert_btn": "Einfügen",
+    "show_btn": "Anzeigen",
+    "discard_btn": "Verwerfen",
+    "chat_placeholder": "Frage zu heutigen Gesprächen stellen..."
+  },
+  "patientenorganizer": {
+    "title": "Patientenorganizer",
+    "col_zimmer": "Zimmer",
+    "col_bett": "Bett",
+    "col_patient": "Patient",
+    "col_qs_status": "QS",
+    "col_drg": "DRG-Hauptdiagnose",
+    "col_ews": "EWS",
+    "tab_vitals": "Vitalzeichen",
+    "tab_medication": "Medikation",
+    "tab_verlauf": "Verlaufseintrag",
+    "tab_labor": "Labor",
+    "omni_draft_banner": "OMNI hat einen Entwurf für den Verlaufseintrag."
+  },
+  "zna": {
+    "title": "ZNA Triage",
+    "col_zeit": "Zeit",
+    "col_triage": "MTS Ersttriage",
+    "col_raum": "Beh.Raum",
+    "col_diagnose": "Diagnose",
+    "col_behandler": "Behandler/in"
+  },
+  "live_consultation": {
+    "title": "Live-Konsultation",
+    "upload_label": "Audio-Datei hochladen (.wav, .mp3)",
+    "use_sample": "Beispiel verwenden",
+    "transcribe_btn": "Transkribieren",
+    "soap_btn": "SOAP-Notiz erstellen",
+    "insert_btn": "In Verlaufseintrag einfügen",
+    "subjektiv": "Subjektiv",
+    "objektiv": "Objektiv",
+    "beurteilung": "Beurteilung",
+    "plan": "Plan",
+    "entities_title": "Erkannte medizinische Entitäten",
+    "disclaimer": "Demo. Keine medizinische Beratung. Keine echten Patientendaten."
+  },
+  "companion": {
+    "setup_title": "Begleiter einrichten",
+    "name_label": "Name deines Begleiters",
+    "personality_label": "Persönlichkeit",
+    "personality_warm": "Fürsorglich & warmherzig",
+    "personality_fun": "Witzig & locker",
+    "personality_calm": "Professionell & ruhig",
+    "checkin_label": "Erinnerungen",
+    "checkin_never": "Nie",
+    "checkin_30": "Alle 30 Minuten",
+    "checkin_60": "Jede Stunde",
+    "save_btn": "Einstellungen speichern",
+    "saved_msg": "Gespeichert! Dein Begleiter heißt jetzt",
+    "preview_title": "Vorschau",
+    "custom_name_label": "Eigenen Namen eingeben",
+    "chat_placeholder": "Wie geht es dir?"
+  }
+}
