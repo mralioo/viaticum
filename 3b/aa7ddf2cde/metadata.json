@@ -1,0 +1,30 @@
+{
+  "cli_version": "0.5.6",
+  "checkpoint_id": "3baa7ddf2cde",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "pioneer/01_generate_synthetic_data.py",
+    "pioneer/02_finetune_gemma.py",
+    "pioneer/03_finetune_gliner.py",
+    "pioneer/04_evaluate.py",
+    "pioneer/README.md",
+    "pioneer/pyproject.toml"
+  ],
+  "sessions": [
+    {
+      "metadata": "/3b/aa7ddf2cde/0/metadata.json",
+      "transcript": "/3b/aa7ddf2cde/0/full.jsonl",
+      "content_hash": "/3b/aa7ddf2cde/0/content_hash.txt",
+      "prompt": "/3b/aa7ddf2cde/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 218,
+    "cache_creation_tokens": 521403,
+    "cache_read_tokens": 13603396,
+    "output_tokens": 153450,
+    "api_call_count": 159
+  }
+}
