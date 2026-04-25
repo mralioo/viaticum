@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<title>Medion KIS</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="data.js"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="icons.jsx"></script>
+<script type="text/babel" src="ui.jsx"></script>
+<script type="text/babel" src="screens/dashboard.jsx"></script>
+<script type="text/babel" src="screens/patient-list.jsx"></script>
+<script type="text/babel" src="screens/patient-record.jsx"></script>
+<script type="text/babel" src="screens/wards.jsx"></script>
+<script type="text/babel" src="screens/icu.jsx"></script>
+<script type="text/babel" src="screens/or-planning.jsx"></script>
+<script type="text/babel" src="screens/imaging.jsx"></script>
+<script type="text/babel" src="screens/referrals-meds.jsx"></script>
+<script type="text/babel" src="screens/modals.jsx"></script>
+<script type="text/babel" src="screens/settings.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "theme": "dark",
+  "density": "comfortable",
+  "role": "Pflege",
+  "lang": "DE"
+}/*EDITMODE-END*/;
+
+const NAV_GROUPS = [
+  {
+    label: "Klinik",
+    items: [
+      { id: "dashboard", label: "Tagesübersicht", icon: "dashboard" },
+      { id: "patients", label: "Patienten", icon: "patients", badge: 12 },
+      { id: "wards", label: "Stationen", icon: "ward", badge: 8 },
+      { id: "icu", label: "Intensivstation", icon: "icu", badge: 3, alert: true },
+      { id: "or", label: "OP-Planung", icon: "or", badge: 12 },
+    ]
+  },
+  {
+    label: "Arbeit",
+    items: [
+      { id: "imaging", label: "Bildgebung", icon: "imaging" },
+      { id: "meds", label: "Medikamentenplan", icon: "meds" },
+      { id: "referrals", label: "Überweisungen", icon: "ueber" },
+      { id: "soap", label: "SOAP-Verlauf", icon: "doc" },
+    ]
+  },
+  {
+    label: "System",
+    items: [
+      { id: "settings", label: "Einstellungen", icon: "settings" },
+    ]
+  }
+];
+
+function Sidebar({ active, goto }) {
+  return (
+    <aside className="sidebar">
+      {NAV_GROUPS.map(g => (
+        <React.Fragment key={g.label}>
+          <div className="nav-section">{g.label}</div>
+          {g.items.map(it => (
+            <div key={it.id} className={"nav-item " + (active === it.id ? "active" : "")} onClick={() => goto(it.id)}>
+              <Icon name={it.icon} size={16}/>
+              <span>{it.label}</span>
+              {it.badge && <span className={"badge " + (it.alert ? "alert" : "")}>{it.badge}</span>}
+            </div>
+          ))}
+        </React.Fragment>
+      ))}
+      <div className="sidebar-footer">
+        <div className="ti-status">TI Online · KIM aktiv</div>
+        <div>Konnektor PT-3 · v5.4.7</div>
+        <div>Klinikum München · 5. Stock</div>
+      </div>
+    </aside>
+  );
+}
+
+function Topbar({ role, lang }) {
+  return (
+    <div className="topbar">
+      <div className="brand">
+        <div className="brand-logo">M</div>
+        <div className="brand-name">Medion <em>KIS</em></div>
+      </div>
+      <div className="topbar-search">
+        <Icon name="search" size={14} style={{ color: "var(--ink-3)" }}/>
+        <input placeholder="Patient, Fallnummer, ICD-10, Medikament suchen…"/>
+        <kbd>⌘ K</kbd>
+      </div>
+      <div className="topbar-actions">
+        <button className="icon-btn"><Icon name="egk" size={17}/></button>
+        <button className="icon-btn"><Icon name="msg" size={17}/><span className="dot"/></button>
+        <button className="icon-btn"><Icon name="bell" size={17}/><span className="dot"/></button>
+        <div className="user-pill">
+          <div>
+            <div className="name">Dr. M. Weber</div>
+            <div className="role">{role} · {lang}</div>
+          </div>
+          <div className="avatar">MW</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SoapStandalone({ openPatient }) {
+  // reuse RecordSoap layout but with patient picker
+  const [pid, setPid] = React.useState(PATIENTS[0].id);
+  const p = PATIENTS.find(x => x.id === pid);
+  return (
+    <div className="page">
+      <div className="page-head">
+        <div>
+          <h1 className="page-title">SOAP-Dokumentation</h1>
+          <div className="page-sub">Strukturierte Verlaufseinträge nach SOAP-Schema</div>
+        </div>
+        <div className="page-actions">
+          <select className="select" style={{ width: 280 }} value={pid} onChange={e => setPid(e.target.value)}>
+            {PATIENTS.map(pt => <option key={pt.id} value={pt.id}>{pt.name} — {pt.station} {pt.room}</option>)}
+          </select>
+          <button className="btn primary"><Icon name="check" size={14}/> Signieren</button>
+        </div>
+      </div>
+      <RecordSoap p={p}/>
+    </div>
+  );
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const [route, setRoute] = React.useState({ view: "dashboard" });
+  const [modal, setModal] = React.useState(null);
+
+  const goto = (view, extra = {}) => setRoute({ view, ...extra });
+  const openPatient = (id) => setRoute({ view: "patient", id });
+  const openModal = (kind, patient) => setModal({ kind, patient });
+
+  React.useEffect(() => {
+    document.documentElement.dataset.theme = t.theme;
+    document.documentElement.dataset.density = t.density;
+  }, [t.theme, t.density]);
+
+  // active nav item: map "patient" → "patients"
+  const activeNav = route.view === "patient" ? "patients" : route.view;
+
+  return (
+    <div className="app">
+      <Topbar role={t.role} lang={t.lang}/>
+      <Sidebar active={activeNav} goto={goto}/>
+      <main className="main">
+        {route.view === "dashboard" && <Dashboard goto={goto} openPatient={openPatient}/>}
+        {route.view === "patients" && <PatientList openPatient={openPatient}/>}
+        {route.view === "patient" && <PatientRecord patientId={route.id} goBack={() => goto("patients")} openModal={openModal}/>}
+        {route.view === "wards" && <Wards openPatient={openPatient}/>}
+        {route.view === "icu" && <ICU openPatient={openPatient}/>}
+        {route.view === "or" && <ORPlanning openPatient={openPatient}/>}
+        {route.view === "imaging" && <Imaging/>}
+        {route.view === "meds" && <MedicationPlan openPatient={openPatient}/>}
+        {route.view === "referrals" && <Referrals/>}
+        {route.view === "soap" && <SoapStandalone openPatient={openPatient}/>}
+        {route.view === "settings" && <Settings/>}
+      </main>
+
+      {modal?.kind === "rezept" && <RezeptModal patient={modal.patient} onClose={() => setModal(null)}/>}
+      {modal?.kind === "ueber" && <UeberweisungModal patient={modal.patient} onClose={() => setModal(null)}/>}
+
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Darstellung"/>
+        <TweakRadio label="Theme" value={t.theme} options={[{value:"light",label:"Hell"},{value:"dark",label:"Dunkel"}]} onChange={v => setTweak("theme", v)}/>
+        <TweakRadio label="Dichte" value={t.density} options={[{value:"comfortable",label:"Komfortabel"},{value:"compact",label:"Kompakt"}]} onChange={v => setTweak("density", v)}/>
+        <TweakSection label="Benutzer"/>
+        <TweakRadio label="Rolle" value={t.role} options={["Arzt","MFA","Pflege"]} onChange={v => setTweak("role", v)}/>
+        <TweakRadio label="Sprache" value={t.lang} options={["DE","EN"]} onChange={v => setTweak("lang", v)}/>
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
