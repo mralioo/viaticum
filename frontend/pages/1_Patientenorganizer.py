@@ -1,4 +1,5 @@
 import json
+import os as _os
 from pathlib import Path
 
 import streamlit as st
@@ -7,6 +8,7 @@ from frontend.components.omni_assistant import render_omni
 from frontend.components.companion import render_companion
 
 i18n = json.loads((Path(__file__).parent.parent / "i18n" / "de.json").read_text())
+_BACKEND_URL = _os.environ.get("BACKEND_URL", "http://localhost:8000")
 
 if not st.session_state.get("logged_in"):
     st.switch_page("streamlit_app.py")
@@ -94,6 +96,98 @@ else:
             height=200,
             key="verlauf_ta",
         )
+        if st.session_state.selected_patient:
+            _p = st.session_state.selected_patient
+            _rag_js = f"""
+<script>
+(function(){{
+  var BU="{_BACKEND_URL}",PN="{_p['patient']}",DRG="{_p['drg']}";
+  var pd=window.parent.document;
+  var panel=pd.getElementById('vc-rag-panel');
+  if(!panel){{
+    panel=pd.createElement('div');
+    panel.id='vc-rag-panel';
+    panel.style.cssText='position:fixed;background:white;border:1px solid #e0e0e0;'
+      +'border-radius:8px;padding:12px 16px;box-shadow:0 4px 20px rgba(0,0,0,.15);'
+      +'max-width:320px;font-size:13px;z-index:10000;display:none;';
+    pd.body.appendChild(panel);
+  }}
+  var hideT=null;
+  function showP(rect){{
+    panel.style.display='block';
+    var top=rect.top-panel.offsetHeight-10;
+    if(top<10) top=rect.bottom+10;
+    panel.style.top=top+'px';
+    panel.style.left=rect.left+'px';
+  }}
+  function hideP(){{ panel.style.display='none'; }}
+  panel.addEventListener('mouseenter',function(){{ clearTimeout(hideT); }});
+  panel.addEventListener('mouseleave',function(){{ hideT=setTimeout(hideP,800); }});
+  async function fetchSug(rect){{
+    panel.innerHTML='<span style="color:#888">⭐ Lade Vorschläge...</span>';
+    showP(rect);
+    try{{
+      var r=await fetch(BU+'/chat',{{
+        method:'POST',
+        headers:{{'Content-Type':'application/json'}},
+        body:JSON.stringify({{
+          message:'Schlage relevante klinische Informationen vor',
+          patient_name:PN,drg:DRG,mode:'rag_suggest'
+        }})
+      }});
+      var d=await r.json();
+      var lines=(d.answer||'').split('\\n').filter(function(l){{return l.trim();}}).slice(0,3);
+      if(!lines.length){{ hideP(); return; }}
+      panel.innerHTML='<div style="font-weight:600;margin-bottom:6px;color:#1a73e8">'
+        +'💡 RAG-Vorschläge</div>'
+        +lines.map(function(b){{
+          return '<div style="padding:4px 0;cursor:pointer;border-bottom:1px solid #f0f0f0" class="rb">▸ '+b+'</div>';
+        }}).join('');
+      panel.querySelectorAll('.rb').forEach(function(el){{
+        el.addEventListener('click',function(){{
+          var wps=pd.querySelectorAll('.stTextArea');
+          for(var i=0;i<wps.length;i++){{
+            var lbl=wps[i].querySelector('label');
+            if(lbl&&lbl.textContent.includes('Verlaufseintrag')){{
+              var ta=wps[i].querySelector('textarea');
+              if(ta){{
+                var niv=Object.getOwnPropertyDescriptor(
+                  window.parent.HTMLTextAreaElement.prototype,'value').set;
+                niv.call(ta,(ta.value?(ta.value+'\\n'):'')+el.textContent.replace('▸ ',''));
+                ta.dispatchEvent(new Event('input',{{bubbles:true}}));
+              }}
+              break;
+            }}
+          }}
+          hideP();
+        }});
+      }});
+    }}catch(e){{ hideP(); }}
+  }}
+  function findTA(){{
+    var wps=pd.querySelectorAll('.stTextArea');
+    for(var i=0;i<wps.length;i++){{
+      var lbl=wps[i].querySelector('label');
+      if(lbl&&lbl.textContent.includes('Verlaufseintrag'))
+        return wps[i].querySelector('textarea');
+    }}
+    return null;
+  }}
+  function attach(ta){{
+    if(ta._ragOK) return; ta._ragOK=true;
+    ta.addEventListener('mouseenter',function(){{
+      clearTimeout(hideT); fetchSug(ta.getBoundingClientRect());
+    }});
+    ta.addEventListener('mouseleave',function(){{
+      hideT=setTimeout(hideP,1000);
+    }});
+  }}
+  var obs=new MutationObserver(function(){{ var t=findTA(); if(t) attach(t); }});
+  obs.observe(pd.body,{{childList:true,subtree:true}});
+  var t=findTA(); if(t) attach(t);
+}})();
+</script>"""
+            st.components.v1.html(_rag_js, height=0, scrolling=False)
 
     with t4:
         st.table([
