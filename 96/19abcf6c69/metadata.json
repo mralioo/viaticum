@@ -1,0 +1,32 @@
+{
+  "cli_version": "0.5.6",
+  "checkpoint_id": "9619abcf6c69",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "claude_code/AGENTS.md",
+    "claude_code/AURAMED_PLAN.md",
+    "claude_code/backend_agent.md",
+    "claude_code/frontend_agent.md",
+    "claude_code/integration_agent.md",
+    "claude_code/omi_agent.md",
+    "claude_code/pioneer_agent.md",
+    "claude_code/runbook.md"
+  ],
+  "sessions": [
+    {
+      "metadata": "/96/19abcf6c69/0/metadata.json",
+      "transcript": "/96/19abcf6c69/0/full.jsonl",
+      "content_hash": "/96/19abcf6c69/0/content_hash.txt",
+      "prompt": "/96/19abcf6c69/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 69,
+    "cache_creation_tokens": 112323,
+    "cache_read_tokens": 4539088,
+    "output_tokens": 55427,
+    "api_call_count": 66
+  }
+}

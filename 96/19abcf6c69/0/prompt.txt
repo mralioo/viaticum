@@ -1,0 +1,27 @@
+write a Make file to run the frontend_react that is a Medion KIS — clinical & calm German hospital information system.
+
+12 screens, click-through navigation:
+
+Tagesübersicht (KPIs, agenda, critical patients, tasks, station strip)
+Patientenliste (filter, search, sort)
+Patientenakte (8 tabs: Übersicht, Diagnosen ICD-10, SOAP-Verlauf, Medikation, Labor, Bildgebung, Dokumente, DRG-Abrechnung)
+Stationsübersicht (bed-grid for 8 wards)
+Intensivstation (live monitor, ventilator, perfusoren, scores, bilanz)
+OP-Planung (4-room Gantt with now-line)
+Bildgebung (DICOM-style 4-pane viewer with findings)
+Medikamentenplan (BMP layout with QR)
+Überweisungen
+SOAP-Dokumentation
+Einstellungen (Profil, TI, Audit, DSGVO)
+Modals: e-Rezept (HBA signing), Überweisung (KIM)
+German specifics included: eGK, ICD-10-GM, OPS, DRG-Grouping, eAU/eRezept/ePA/KIM/VSDM TI status, HBA-Signatur, BMP §31a, LANR/BSNR, §301 Übermittlung, DSGVO/VVT.
+
+Tweaks: Light/Dark · Komfortabel/Kompakt · Arzt/MFA/Pflege · DE/EN. , for sake of simplicity and to test the backend and demo , i need only a welcome page that welcome the dr as soon he/she log to the KIS system , and directly foraward to the SOAP veraluf that the doctor need to fill his part of report , we will later include other functionality and backend
+
+---
+
+create a make file to run and deploy the @/frontend_react and connect to the backend, use docker container and docker compose to run the frontend  and backend , the frontend is a minimal to show case how the AI avatar will assit the doctor to fill the SOAP verlauf from the bkackend designate SLM that will be called from pionier and vector database opensearch
+
+---
+
+create dummy patient data , like amnesie , hsitory that match the frontend react. Also setup the RAG system in the gcp service , i will rpovide all the key in .env and also prpare a sh script that setup gcp cli . remove the old streamlit UI and check the @claude_code/ .md as refernce ,there are not updated , need to be upadted

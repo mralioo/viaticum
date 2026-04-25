@@ -1,0 +1,44 @@
+{
+  "cli_version": "0.5.6",
+  "checkpoint_id": "9619abcf6c69",
+  "session_id": "6a9a7c9f-f66f-4dc4-a015-793a0bc8fb65",
+  "strategy": "manual-commit",
+  "created_at": "2026-04-25T23:28:40.692883375Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "claude_code/AGENTS.md",
+    "claude_code/AURAMED_PLAN.md",
+    "claude_code/backend_agent.md",
+    "claude_code/frontend_agent.md",
+    "claude_code/integration_agent.md",
+    "claude_code/omi_agent.md",
+    "claude_code/pioneer_agent.md",
+    "claude_code/runbook.md"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-4-6",
+  "turn_id": "12d88b485283",
+  "token_usage": {
+    "input_tokens": 69,
+    "cache_creation_tokens": 112323,
+    "cache_read_tokens": 4539088,
+    "output_tokens": 55427,
+    "api_call_count": 66
+  },
+  "session_metrics": {
+    "turn_count": 2
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-04-25T23:28:40.66761814Z",
+    "agent_lines": 1110,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 1110,
+    "total_lines_changed": 1110,
+    "agent_percentage": 100,
+    "metric_version": 2
+  }
+}
