@@ -5,8 +5,33 @@ function PatientList({ openPatient }) {
   const [station, setStation] = React.useState("alle");
   const [severity, setSeverity] = React.useState("alle");
   const [sortBy, setSortBy] = React.useState("name");
+  const [patients, setPatients] = React.useState(typeof PATIENTS !== "undefined" ? PATIENTS : []);
+  const [loading, setLoading] = React.useState(true);
 
-  const filtered = PATIENTS.filter(p => {
+  React.useEffect(() => {
+    fetch("/api/patients")
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) setPatients(data);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  // Normalise field names (DB uses snake_case, mock uses camelCase)
+  const normalise = p => ({
+    ...p,
+    primary: p.primary || p.primary_dx,
+    geb: p.geb || (p.dob ? p.dob.slice(0, 10) : ""),
+    admit: p.admit || (p.admit_at ? p.admit_at.slice(0, 16).replace("T", " ") : ""),
+    los: p.los !== undefined ? p.los : (p.los_days || 0),
+    insurance: p.insurance || {},
+    allergies: p.allergies || [],
+    secondary: p.secondary || p.secondary_dx || [],
+    vitals: p.vitals || {},
+  });
+
+  const filtered = patients.map(normalise).filter(p => {
     if (q) {
       const s = q.toLowerCase();
       if (!p.name.toLowerCase().includes(s) && !p.id.toLowerCase().includes(s) && !(p.primary || "").toLowerCase().includes(s)) return false;
@@ -29,7 +54,7 @@ function PatientList({ openPatient }) {
       <div className="page-head">
         <div>
           <h1 className="page-title">Patienten</h1>
-          <div className="page-sub">{filtered.length} von {PATIENTS.length} aktiven Patientenakten</div>
+          <div className="page-sub">{loading ? "Laden…" : `${filtered.length} von ${patients.length} aktiven Patientenakten`}</div>
         </div>
         <div className="page-actions">
           <button className="btn"><Icon name="egk" size={14}/> eGK einlesen</button>
@@ -105,9 +130,11 @@ function PatientList({ openPatient }) {
                     <Avatar name={p.name} size="sm"/>
                     <div>
                       <div style={{ fontWeight: 600 }}>{p.name}</div>
-                      <div style={{ fontSize: 11, color: "var(--ink-3)" }}>
-                        {p.sex === "w" ? "♀" : "♂"} · {p.allergies[0] !== "Keine bekannt" && <span style={{ color: "var(--red)", fontWeight: 600 }}>⚠ Allergien</span>}
-                        {p.dnr && <span style={{ marginLeft: 6, color: "var(--ink-3)", fontWeight: 600 }}>DNR</span>}
+                      <div style={{ fontSize: 11, color: "var(--ink-3)", display: "flex", gap: 6, alignItems: "center" }}>
+                        {p.sex === "w" ? "♀" : "♂"}
+                        {(p.allergies || []).length > 0 && (p.allergies[0] !== "Keine bekannt") && <span style={{ color: "var(--red)", fontWeight: 600 }}>⚠ Allergien</span>}
+                        {p.dnr && <span style={{ color: "var(--ink-3)", fontWeight: 600 }}>DNR</span>}
+                        {p.has_consultation && <span style={{ color: "var(--teal-2)", fontWeight: 600 }}>● KI-Akte</span>}
                       </div>
                     </div>
                   </div>

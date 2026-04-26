@@ -10,7 +10,8 @@ class Segment(BaseModel):
 
 
 class TranscribeResponse(BaseModel):
-    """Example: {"segments": [...], "duration_s": 45.3, "provider": "stub"}"""
+    """Example: {"segments": [...], "dialogue": "Arzt: ...", "duration_s": 45.3, "provider": "gradium"}"""
     segments: list[Segment]
+    dialogue: str = ""
     duration_s: float = 0.0
     provider: str = "stub"

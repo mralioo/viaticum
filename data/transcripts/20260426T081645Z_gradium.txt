@@ -1,0 +1,184 @@
+Arzt: Guten Tag.
+Arzt: Mein Name ist Dr. Ziegler.
+Arzt: Ich bin heute als Assistenzarzt auf der Station tätig.
+Arzt: Ich würde gerne ein Anamnese-Gespräch mit Ihnen führen.
+Arzt: Falls Sie etwas nicht richtig verstanden haben oder Fragen haben, lassen Sie es mich bitte wissen.
+Arzt: Zunächst benötige ich einige persönliche Informationen, danach können wir fortfahren.
+Arzt: Wie heißen Sie?
+Patient: Ich heiße Ivana Slivovitz.
+Patient: Habe ich Ihren Namen richtig geschrieben?
+Arzt: Ivana Slivovitz?
+Patient: Ja, das stimmt so.
+Patient: Ach so, danke für die Korrektur.
+Patient: Zuallererst möchte ich gern in Erfahrung bringen, ob Sie die Schmerzen bzw. Beschwerden als erträglich empfinden.
+Patient: Die Schmerzen bestehen seit mehreren Monaten.
+Patient: Ich halte es jetzt noch bis zum Ende des Gesprächs aus.
+Patient: Alles klar, wie alt sind Sie, Frau Slivovitz?
+Arzt: Ich bin 34 Jahre alt.
+Arzt: Wann genau sind Sie geboren?
+Patient: Ich habe am 9.
+Patient: Dezember 1989 Geburtstag.
+Patient: Wie groß sind Sie?
+Arzt: Ich bin 1,69 groß.
+Arzt: Wie viel wiegen Sie?
+Patient: Ich wiege ungefähr 70 Kilogramm.
+Patient: Wie heißt Ihr Hausarzt bzw. Ihre Hausärztin?
+Arzt: Meine Hausärztin heißt Dr. Carla Scholz.
+Arzt: Könnten Sie mir genauer sagen, wo es weh tut?
+Patient: Ich habe an mehreren Körperstellen Schmerzen, also zum Beispiel im Nacken, in den Schultern, im Rücken und auch in den Beinen.
+Patient: Ich bin aber heute gekommen, weil es in den letzten vier bis sechs Wochen deutlich schlimmer geworden ist.
+Patient: Wann haben die Schmerzen genau begonnen?
+Arzt: Seit etwa sechs Monaten.
+Arzt: Sind die Schmerzen eher einseitig oder auf beiden Seiten?
+Patient: Und betreffen Sie eher den Oberkörper, den Unterkörper oder beides?
+Arzt: Eigentlich auf beiden Seiten.
+Arzt: Es tut mir im Nacken und in den Schultern weh, aber auch im Rücken, in den Hüften und in den Beinen.
+Arzt: Es fühlt sich an, als wäre der ganze Körper betroffen.
+Arzt: Strahlen die Schmerzen irgendwo hin aus, zum Beispiel in die Arme?
+Patient: Nein, nicht richtig.
+Patient: Wie empfinden Sie die Schmerzen?
+Arzt: Sind Sie eher dumpf, stechend oder ziehend?
+Patient: Meistens sind es dumpfe, ziehende Schmerzen.
+Patient: Aber zusätzlich habe ich auch Bauchschmerzen. Die kommen eher in Wellen.
+Patient: Verstehe.
+Patient: Gibt es etwas, das die Schmerzen verbessert oder verschlechtert, zum Beispiel Bewegung, Duschen, Anstrengung oder Medikamente?
+Arzt: Ja, ein bisschen helfen mir leichte Bewegung und warmes Duschen.
+Arzt: Ich habe auch ein paar Mal Ibuprofen 400 ausprobiert, aber das hat nichts Besonderes gebracht.
+Arzt: Sind die schmerzhaften Stellen auch empfindlich, wenn man sie leicht berührt oder drückt?
+Patient: Ja, manchmal tut schon leichter Druck weh.
+Patient: Können Sie mir bitte genauer von den Bauchschmerzen erzählen?
+Arzt: Gibt es dabei Begleitsymptome wie zum Beispiel Durchfall oder Verstopfung?
+Patient: Ich bekomme eher diffuse, krampfartige Bauchschmerzen.
+Patient: Meist wird es nach dem Stuhlgang besser.
+Patient: Außerdem wechselt es bei mir häufig zwischen Verstopfung und Durchfall.
+Patient: Wie lange dauert jeweils so eine Phase?
+Arzt: Und wie oft müssen Sie bei Durchfall zur Toilette gehen?
+Patient: So eine Phase dauert meistens ein paar Tage, manchmal auch ein bis zwei Wochen.
+Patient: Wenn ich Durchfall habe, muss ich oft vier bis sechs Mal am Tag zur Toilette.
+Patient: Haben Sie Blut im Stuhl bemerkt oder schwarzen, teerartigen Stuhl?
+Arzt: Nein, gar nicht.
+Arzt: Wie fühlen Sie sich in der Regel?
+Patient: Ich bin oft müde und fühle mich schnell erschöpft.
+Patient: Wie beeinflussen die Schmerzen Ihren Schlaf und Ihren Alltag?
+Arzt: Abends und nachts ist es ein bisschen anders.
+Arzt: Ich habe so einen starken Drang in den Beinen.
+Arzt: Ich muss sie ständig bewegen, sonst wird dieses unangenehme Gefühl immer schlimmer.
+Arzt: Deshalb fällt mir das Einschlafen sehr schwer.
+Arzt: Tagsüber kann ich dann nicht mehr so leistungsfähig sein wie früher.
+Arzt: Sind Sie morgens eher steif oder brauchen Sie eine Weile, bis Sie in Gang kommen?
+Patient: Ja, morgens fühle ich mich oft wie eingerostet. Das dauert eine Zeit, bis es besser wird.
+Patient: Haben Sie Probleme wie Konzentrationsstörungen, Sehstörungen oder ungewöhnliche Wahrnehmungen?
+Arzt: Ja, ich kann mich bei der
+Arzt: richtig konzentrieren.
+Arzt: Und es ist schon vorgekommen, dass ich einige Dinge falsch gemacht habe.
+Arzt: Manchmal habe ich das Gefühl, vor allem in den Beinen, als würden tausende Ameisen über meine Haut laufen.
+Arzt: Sehstörungen habe ich aber nicht.
+Arzt: Machen Ihnen Aktivitäten noch Freude?
+Patient: Haben Sie Interesse an Ihren Hobbys oder an Dingen, die Ihnen sonst Spaß machen?
+Arzt: Wenn Sie damit so etwas wie eine Depression meinen.
+Arzt: Nein, so ist es nicht.
+Arzt: Ich habe grundsätzlich noch Interesse, aber durch die Beschwerden fehlt mir oft die Energie.
+Arzt: Haben Sie irgendwelche Symptome wie Kraftlosigkeit oder Muskelschwäche?
+Patient: Nein, so etwas habe ich nicht.
+Patient: Haben Sie den Eindruck, dass Ihre Belastbarkeit nachgelassen hat?
+Arzt: Ja, ich bin schneller erschöpft als früher, aber nicht so, dass mir die Kraft fehlt.
+Arzt: Es ist eher diese dauernde Müdigkeit.
+Arzt: Haben Sie Symptome wie blasse Haut, Luftnot, Herzrasen oder Husten?
+Patient: Im Moment habe ich so etwas nicht.
+Patient: Aber manchmal bekomme ich einen Angstanfall und dabei habe ich Herzklopfen, ein enge Gefühl in der Brust und das Gefühl, nicht richtig Luft zu bekommen.
+Patient: Wie lange dauert so ein Anfall?
+Arzt: Schwitzen Sie dabei auch stark?
+Patient: Meistens dauert das so 10 bis 20 Minuten.
+Patient: Dabei schwitze ich schon stark und fühle mich sehr unruhig.
+Patient: Kennen Sie dafür einen bestimmten Auslöser?
+Arzt: Einen ganz bestimmten Auslöser kann ich nicht nennen.
+Arzt: Manchmal passiert es in stressigen Situationen, manchmal aber auch ganz plötzlich ohne klaren Grund.
+Arzt: Was meinen Sie genau mit stressigen Situationen?
+Patient: Zum Beispiel bei viel Druck auf der Arbeit, wenn ich mich überfordert fühle oder wenn ich merke, dass die Schmerzen wieder stärker werden.
+Patient: Dann werde ich innerlich sehr unruhig und manchmal entwickelt sich daraus so ein Anfall.
+Patient: Haben Sie Fieber, Nachtschweiß oder Schüttelfrost?
+Arzt: Nein, ich habe keins dieser Symptome bemerkt.
+Arzt: Haben Sie Probleme in anderen Bereichen, zum Beispiel beim Wasserlassen oder in Bezug auf Ihre Frauengesundheit?
+Patient: Nein, da habe ich keine Probleme.
+Patient: Haben Sie in letzter Zeit bestimmte Medikamente eingenommen?
+Arzt: Nein, nichts Besonderes.
+Arzt: Auf Empfehlung meines Nachbarn habe ich Baldrian aus der Drogerie gekauft, aber das hat mir nicht geholfen.
+Arzt: Haben Sie deswegen bisher andere Ärztinnen oder Ärzte aufgesucht?
+Patient: Ja, in letzter Zeit wurde bei mir eine Darmspiegelung gemacht.
+Patient: Außerdem hatte ich mehrere Laboruntersuchungen und auch eine Abklärung bei einem Herzspezialisten.
+Patient: Dabei war alles unauffällig.
+Patient: Wie sind Sie ins Krankenhaus gekommen?
+Arzt: Mein Bruder hat mich mit dem Auto hergebracht.
+Arzt: Wie ist Ihr Appetit?
+Patient: Mein Appetit ist eigentlich normal.
+Patient: Manchmal esse ich aber etwas weniger, wenn die Bauchschmerzen stärker sind.
+Patient: Haben Sie in letzter Zeit ungewollt abgenommen oder zugenommen?
+Arzt: Wie viel und in welchem Zeitraum?
+Patient: Nein, mir ist in letzter Zeit nichts Auffälliges an meinem Gewicht aufgefallen.
+Patient: Leiden Sie an irgendwelchen chronischen Erkrankungen, also an einer bestimmten Diagnose oder befinden Sie sich deswegen in Behandlung?
+Arzt: Nein, so etwas habe ich nicht.
+Arzt: Als ich etwa zwölf Jahre alt war, waren meine Mandeln stark vergrößert und ich hatte dadurch häufig Halsentzündungen und Probleme mit der Atmung, vor allem nachts.
+Arzt: Deshalb wurde damals eine Mandeloperation durchgeführt.
+Arzt: Wie lange waren Sie damals im Krankenhaus?
+Patient: Etwa drei Tage.
+Patient: Gibt es noch etwas, das Sie erwähnen möchten?
+Arzt: Ja, außerdem hatte ich vor etwa zehn Jahren mal eine leichtere depressive Phase.
+Arzt: Damals ging es mir psychisch nicht so gut.
+Arzt: Ich war viel niedergeschlagen und hatte Schlafprobleme.
+Arzt: Medikamente brauchte ich aber nicht.
+Arzt: Das hat sich mit der Zeit wieder eingependelt.
+Arzt: Hatten Sie schon einmal einen Unfall?
+Patient: Nein, keinen Unfall.
+Patient: Ich möchte Ihnen auch ein paar Fragen zur Frauengesundheit stellen.
+Patient: Wann hatten Sie zuletzt Ihre Periode?
+Arzt: Vor fünf Tagen.
+Arzt: Nehmen Sie derzeit Verhütungsmittel ein?
+Patient: Im Moment nicht.
+Patient: Vor etwa sechs Jahren habe ich ungefähr ein Jahr lang die Pillejas eingenommen.
+Patient: Waren Sie schon einmal schwanger?
+Arzt: Nein, bisher nicht.
+Arzt: Nehmen Sie noch andere Medikamente?
+Patient: Nur bei Bedarf nehme ich Paracetamol.
+Patient: Sind Sie vollständig geimpft, also haben Sie alle Impf seit Ihrer Kind
+Patient: Ich habe keine genaue Ahnung, aber gegen Covid und FS-Me bin ich geimpft.
+Patient: Haben Sie bekannte Allergien und Unverträglichkeiten, zum Beispiel gegen Lebensmittel, Medikamente, Tiere oder andere Substanzen?
+Arzt: Ja, gegen Novalgin und Penicillin.
+Arzt: Das wurde damals bei meiner Mandeloperation festgestellt.
+Arzt: Wie äußern Sie sich?
+Patient: Bei Novalgin habe ich einen juckenden Hautausschlag bekommen.
+Patient: Nach Penicillin hatte ich Luftnot und Schwinde.
+Patient: Können Sie sich erinnern, welches Antibiotikum Sie anschließend bekommen haben?
+Arzt: Leider kann ich mich im Moment nicht genau daran erinnern. Ich kann mich gerade nicht so gut konzentrieren.
+Arzt: Rauchen Sie?
+Patient: Nein, seit zwei Jahren nicht mehr.
+Patient: Wie viele Zigaretten haben Sie früher täglich geraucht und seit wann?
+Arzt: Davor habe ich etwa fünf Jahre lang täglich ungefähr eine halbe Schachtel geraucht.
+Arzt: Interessant.
+Arzt: Können Sie mir sagen, was Ihre Motivation war, aufzuhören?
+Patient: Ehrlich gesagt vor allem aus finanziellen Gründen.
+Patient: Zigaretten sind einfach teuer.
+Patient: Trinken Sie Alkohol?
+Arzt: Wenn ja, wie oft und wie viel?
+Patient: Gelegentlich meist am Wochenende.
+Patient: Dann trinke ich ein Glas Bier oder Wein.
+Patient: Darf ich Sie fragen, ob Sie schon einmal Drogen konsumiert haben?
+Arzt: Früher habe ich, als ich jünger war, ein paar Mal Haschisch geraucht.
+Arzt: Treiben Sie regelmäßig Sport?
+Patient: Welche Art und wie häufig?
+Arzt: Ich betreibe nicht allzu viel Sport.
+Arzt: Gibt es in Ihrer Familie wichtige Erkrankungen, zum Beispiel bei Ihren Eltern oder nahen Verwandten?
+Patient: Ja.
+Patient: Meine Mutter hatte mit 75 Jahren einen Schlaganfall und ist vor etwa zehn Jahren daran gestorben.
+Patient: Mein Vater hat Krebs an der Vorsterdrüse und hatte auch schon einen Schlaganfall. Er ist jetzt 88 Jahre alt.
+Patient: Das tut mir leid wegen Ihrer Mutter.
+Patient: Haben Sie Haustiere?
+Arzt: Nein, keine.
+Arzt: Wir sind mit der Anamnese fertig.
+Arzt: Haben Sie noch Fragen?
+Patient: Ja, ich frage mich, was ich eigentlich habe.
+Patient: Und warum sind denn alle Untersuchungen bisher unauffällig?
+Arzt: Das ist eine sehr verständliche Frage.
+Arzt: Nach dem, was Sie mir geschildert haben und da alle bisherigen Untersuchungen unauffällig waren, spricht vieles für eine sogenannte funktionelle Erkrankung.
+Arzt: Das bedeutet, dass die Beschwerden real sind und sie stark belasten, man aber in den üblichen Untersuchungen keine organische Ursache findet.
+Arzt: Das ist nichts Gefährliches, kann aber sehr belastend sein.
+Arzt: Wichtig ist, dass wir jetzt gemeinsam schauen, wie wir Ihre Beschwerden Schritt für Schritt lindern und Ihren Alltag wieder verbessern können.

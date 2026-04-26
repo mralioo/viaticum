@@ -1,0 +1,1111 @@
+{
+  "segments": [
+    {
+      "speaker": "Arzt",
+      "text": "Guten Tag.",
+      "start": 8.4,
+      "end": 9.36
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Mein Name ist Dr. Ziegler.",
+      "start": 9.44,
+      "end": 11.52
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ich bin heute als Assistenzarzt auf der Station tätig.",
+      "start": 11.6,
+      "end": 14.88
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ich würde gerne ein Anamnese-Gespräch mit Ihnen führen.",
+      "start": 14.96,
+      "end": 18.08
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Falls Sie etwas nicht richtig verstanden haben oder Fragen haben, lassen Sie es mich bitte wissen.",
+      "start": 18.16,
+      "end": 23.04
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Zunächst benötige ich einige persönliche Informationen, danach können wir fortfahren.",
+      "start": 23.12,
+      "end": 28.08
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Wie heißen Sie?",
+      "start": 28.16,
+      "end": 29.36
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ich heiße Ivana Slivovitz.",
+      "start": 29.44,
+      "end": 31.52
+    },
+    {
+      "speaker": "Patient",
+      "text": "Habe ich Ihren Namen richtig geschrieben?",
+      "start": 31.6,
+      "end": 34.0
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ivana Slivovitz?",
+      "start": 34.08,
+      "end": 35.44
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ja, das stimmt so.",
+      "start": 35.52,
+      "end": 37.28
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ach so, danke für die Korrektur.",
+      "start": 37.36,
+      "end": 40.32
+    },
+    {
+      "speaker": "Patient",
+      "text": "Zuallererst möchte ich gern in Erfahrung bringen, ob Sie die Schmerzen bzw. Beschwerden als erträglich empfinden.",
+      "start": 40.4,
+      "end": 46.64
+    },
+    {
+      "speaker": "Patient",
+      "text": "Die Schmerzen bestehen seit mehreren Monaten.",
+      "start": 46.72,
+      "end": 49.52
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ich halte es jetzt noch bis zum Ende des Gesprächs aus.",
+      "start": 49.6,
+      "end": 52.72
+    },
+    {
+      "speaker": "Patient",
+      "text": "Alles klar, wie alt sind Sie, Frau Slivovitz?",
+      "start": 52.8,
+      "end": 55.84
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ich bin 34 Jahre alt.",
+      "start": 55.92,
+      "end": 58.4
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Wann genau sind Sie geboren?",
+      "start": 58.48,
+      "end": 60.16
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ich habe am 9.",
+      "start": 60.24,
+      "end": 61.36
+    },
+    {
+      "speaker": "Patient",
+      "text": "Dezember 1989 Geburtstag.",
+      "start": 61.44,
+      "end": 64.4
+    },
+    {
+      "speaker": "Patient",
+      "text": "Wie groß sind Sie?",
+      "start": 64.48,
+      "end": 65.92
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ich bin 1,69 groß.",
+      "start": 66.0,
+      "end": 68.24
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Wie viel wiegen Sie?",
+      "start": 68.32,
+      "end": 69.68
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ich wiege ungefähr 70 Kilogramm.",
+      "start": 69.76,
+      "end": 72.08
+    },
+    {
+      "speaker": "Patient",
+      "text": "Wie heißt Ihr Hausarzt bzw. Ihre Hausärztin?",
+      "start": 72.16,
+      "end": 75.6
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Meine Hausärztin heißt Dr. Carla Scholz.",
+      "start": 75.68,
+      "end": 78.72
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Könnten Sie mir genauer sagen, wo es weh tut?",
+      "start": 78.8,
+      "end": 81.12
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ich habe an mehreren Körperstellen Schmerzen, also zum Beispiel im Nacken, in den Schultern, im Rücken und auch in den Beinen.",
+      "start": 81.2,
+      "end": 88.24
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ich bin aber heute gekommen, weil es in den letzten vier bis sechs Wochen deutlich schlimmer geworden ist.",
+      "start": 88.32,
+      "end": 93.68
+    },
+    {
+      "speaker": "Patient",
+      "text": "Wann haben die Schmerzen genau begonnen?",
+      "start": 93.76,
+      "end": 95.92
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Seit etwa sechs Monaten.",
+      "start": 96.0,
+      "end": 97.68
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Sind die Schmerzen eher einseitig oder auf beiden Seiten?",
+      "start": 97.76,
+      "end": 101.12
+    },
+    {
+      "speaker": "Patient",
+      "text": "Und betreffen Sie eher den Oberkörper, den Unterkörper oder beides?",
+      "start": 101.2,
+      "end": 105.92
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Eigentlich auf beiden Seiten.",
+      "start": 106.0,
+      "end": 107.6
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Es tut mir im Nacken und in den Schultern weh, aber auch im Rücken, in den Hüften und in den Beinen.",
+      "start": 107.68,
+      "end": 113.52
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Es fühlt sich an, als wäre der ganze Körper betroffen.",
+      "start": 113.6,
+      "end": 117.12
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Strahlen die Schmerzen irgendwo hin aus, zum Beispiel in die Arme?",
+      "start": 117.2,
+      "end": 121.04
+    },
+    {
+      "speaker": "Patient",
+      "text": "Nein, nicht richtig.",
+      "start": 121.12,
+      "end": 122.72
+    },
+    {
+      "speaker": "Patient",
+      "text": "Wie empfinden Sie die Schmerzen?",
+      "start": 122.8,
+      "end": 124.96
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Sind Sie eher dumpf, stechend oder ziehend?",
+      "start": 125.04,
+      "end": 128.24
+    },
+    {
+      "speaker": "Patient",
+      "text": "Meistens sind es dumpfe, ziehende Schmerzen.",
+      "start": 128.32,
+      "end": 130.8
+    },
+    {
+      "speaker": "Patient",
+      "text": "Aber zusätzlich habe ich auch Bauchschmerzen. Die kommen eher in Wellen.",
+      "start": 130.88,
+      "end": 135.36
+    },
+    {
+      "speaker": "Patient",
+      "text": "Verstehe.",
+      "start": 135.44,
+      "end": 136.08
+    },
+    {
+      "speaker": "Patient",
+      "text": "Gibt es etwas, das die Schmerzen verbessert oder verschlechtert, zum Beispiel Bewegung, Duschen, Anstrengung oder Medikamente?",
+      "start": 136.16,
+      "end": 143.36
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ja, ein bisschen helfen mir leichte Bewegung und warmes Duschen.",
+      "start": 143.44,
+      "end": 147.2
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ich habe auch ein paar Mal Ibuprofen 400 ausprobiert, aber das hat nichts Besonderes gebracht.",
+      "start": 147.28,
+      "end": 152.96
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Sind die schmerzhaften Stellen auch empfindlich, wenn man sie leicht berührt oder drückt?",
+      "start": 153.04,
+      "end": 157.68
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ja, manchmal tut schon leichter Druck weh.",
+      "start": 157.76,
+      "end": 160.48
+    },
+    {
+      "speaker": "Patient",
+      "text": "Können Sie mir bitte genauer von den Bauchschmerzen erzählen?",
+      "start": 160.56,
+      "end": 163.84
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Gibt es dabei Begleitsymptome wie zum Beispiel Durchfall oder Verstopfung?",
+      "start": 163.92,
+      "end": 168.0
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ich bekomme eher diffuse, krampfartige Bauchschmerzen.",
+      "start": 168.08,
+      "end": 171.6
+    },
+    {
+      "speaker": "Patient",
+      "text": "Meist wird es nach dem Stuhlgang besser.",
+      "start": 171.68,
+      "end": 173.76
+    },
+    {
+      "speaker": "Patient",
+      "text": "Außerdem wechselt es bei mir häufig zwischen Verstopfung und Durchfall.",
+      "start": 173.84,
+      "end": 177.76
+    },
+    {
+      "speaker": "Patient",
+      "text": "Wie lange dauert jeweils so eine Phase?",
+      "start": 177.84,
+      "end": 180.4
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Und wie oft müssen Sie bei Durchfall zur Toilette gehen?",
+      "start": 180.48,
+      "end": 183.28
+    },
+    {
+      "speaker": "Patient",
+      "text": "So eine Phase dauert meistens ein paar Tage, manchmal auch ein bis zwei Wochen.",
+      "start": 183.36,
+      "end": 187.76
+    },
+    {
+      "speaker": "Patient",
+      "text": "Wenn ich Durchfall habe, muss ich oft vier bis sechs Mal am Tag zur Toilette.",
+      "start": 187.84,
+      "end": 192.16
+    },
+    {
+      "speaker": "Patient",
+      "text": "Haben Sie Blut im Stuhl bemerkt oder schwarzen, teerartigen Stuhl?",
+      "start": 192.24,
+      "end": 196.32
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Nein, gar nicht.",
+      "start": 196.4,
+      "end": 197.84
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Wie fühlen Sie sich in der Regel?",
+      "start": 197.92,
+      "end": 199.84
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ich bin oft müde und fühle mich schnell erschöpft.",
+      "start": 199.92,
+      "end": 202.72
+    },
+    {
+      "speaker": "Patient",
+      "text": "Wie beeinflussen die Schmerzen Ihren Schlaf und Ihren Alltag?",
+      "start": 202.8,
+      "end": 206.8
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Abends und nachts ist es ein bisschen anders.",
+      "start": 206.88,
+      "end": 209.52
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ich habe so einen starken Drang in den Beinen.",
+      "start": 209.6,
+      "end": 211.92
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ich muss sie ständig bewegen, sonst wird dieses unangenehme Gefühl immer schlimmer.",
+      "start": 212.0,
+      "end": 216.88
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Deshalb fällt mir das Einschlafen sehr schwer.",
+      "start": 216.96,
+      "end": 219.84
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Tagsüber kann ich dann nicht mehr so leistungsfähig sein wie früher.",
+      "start": 219.92,
+      "end": 223.04
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Sind Sie morgens eher steif oder brauchen Sie eine Weile, bis Sie in Gang kommen?",
+      "start": 223.12,
+      "end": 227.36
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ja, morgens fühle ich mich oft wie eingerostet. Das dauert eine Zeit, bis es besser wird.",
+      "start": 227.44,
+      "end": 232.72
+    },
+    {
+      "speaker": "Patient",
+      "text": "Haben Sie Probleme wie Konzentrationsstörungen, Sehstörungen oder ungewöhnliche Wahrnehmungen?",
+      "start": 232.8,
+      "end": 238.64
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ja, ich kann mich bei der",
+      "start": 238.72,
+      "end": 239.6
+    },
+    {
+      "speaker": "Arzt",
+      "text": "richtig konzentrieren.",
+      "start": 240.72,
+      "end": 241.84
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Und es ist schon vorgekommen, dass ich einige Dinge falsch gemacht habe.",
+      "start": 241.92,
+      "end": 246.0
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Manchmal habe ich das Gefühl, vor allem in den Beinen, als würden tausende Ameisen über meine Haut laufen.",
+      "start": 246.08,
+      "end": 252.24
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Sehstörungen habe ich aber nicht.",
+      "start": 252.32,
+      "end": 253.92
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Machen Ihnen Aktivitäten noch Freude?",
+      "start": 254.0,
+      "end": 256.24
+    },
+    {
+      "speaker": "Patient",
+      "text": "Haben Sie Interesse an Ihren Hobbys oder an Dingen, die Ihnen sonst Spaß machen?",
+      "start": 256.32,
+      "end": 260.32
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Wenn Sie damit so etwas wie eine Depression meinen.",
+      "start": 260.4,
+      "end": 263.04
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Nein, so ist es nicht.",
+      "start": 263.12,
+      "end": 264.88
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ich habe grundsätzlich noch Interesse, aber durch die Beschwerden fehlt mir oft die Energie.",
+      "start": 264.96,
+      "end": 269.76
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Haben Sie irgendwelche Symptome wie Kraftlosigkeit oder Muskelschwäche?",
+      "start": 269.84,
+      "end": 274.32
+    },
+    {
+      "speaker": "Patient",
+      "text": "Nein, so etwas habe ich nicht.",
+      "start": 274.4,
+      "end": 276.88
+    },
+    {
+      "speaker": "Patient",
+      "text": "Haben Sie den Eindruck, dass Ihre Belastbarkeit nachgelassen hat?",
+      "start": 276.96,
+      "end": 280.56
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ja, ich bin schneller erschöpft als früher, aber nicht so, dass mir die Kraft fehlt.",
+      "start": 280.64,
+      "end": 285.12
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Es ist eher diese dauernde Müdigkeit.",
+      "start": 285.2,
+      "end": 287.6
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Haben Sie Symptome wie blasse Haut, Luftnot, Herzrasen oder Husten?",
+      "start": 287.68,
+      "end": 292.08
+    },
+    {
+      "speaker": "Patient",
+      "text": "Im Moment habe ich so etwas nicht.",
+      "start": 292.16,
+      "end": 294.24
+    },
+    {
+      "speaker": "Patient",
+      "text": "Aber manchmal bekomme ich einen Angstanfall und dabei habe ich Herzklopfen, ein enge Gefühl in der Brust und das Gefühl, nicht richtig Luft zu bekommen.",
+      "start": 294.32,
+      "end": 302.72
+    },
+    {
+      "speaker": "Patient",
+      "text": "Wie lange dauert so ein Anfall?",
+      "start": 302.8,
+      "end": 305.12
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Schwitzen Sie dabei auch stark?",
+      "start": 305.2,
+      "end": 307.12
+    },
+    {
+      "speaker": "Patient",
+      "text": "Meistens dauert das so 10 bis 20 Minuten.",
+      "start": 307.2,
+      "end": 310.08
+    },
+    {
+      "speaker": "Patient",
+      "text": "Dabei schwitze ich schon stark und fühle mich sehr unruhig.",
+      "start": 310.16,
+      "end": 313.52
+    },
+    {
+      "speaker": "Patient",
+      "text": "Kennen Sie dafür einen bestimmten Auslöser?",
+      "start": 313.6,
+      "end": 315.92
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Einen ganz bestimmten Auslöser kann ich nicht nennen.",
+      "start": 316.0,
+      "end": 319.2
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Manchmal passiert es in stressigen Situationen, manchmal aber auch ganz plötzlich ohne klaren Grund.",
+      "start": 319.28,
+      "end": 324.88
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Was meinen Sie genau mit stressigen Situationen?",
+      "start": 324.96,
+      "end": 327.84
+    },
+    {
+      "speaker": "Patient",
+      "text": "Zum Beispiel bei viel Druck auf der Arbeit, wenn ich mich überfordert fühle oder wenn ich merke, dass die Schmerzen wieder stärker werden.",
+      "start": 327.92,
+      "end": 335.04
+    },
+    {
+      "speaker": "Patient",
+      "text": "Dann werde ich innerlich sehr unruhig und manchmal entwickelt sich daraus so ein Anfall.",
+      "start": 335.12,
+      "end": 340.08
+    },
+    {
+      "speaker": "Patient",
+      "text": "Haben Sie Fieber, Nachtschweiß oder Schüttelfrost?",
+      "start": 340.16,
+      "end": 342.88
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Nein, ich habe keins dieser Symptome bemerkt.",
+      "start": 342.96,
+      "end": 346.0
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Haben Sie Probleme in anderen Bereichen, zum Beispiel beim Wasserlassen oder in Bezug auf Ihre Frauengesundheit?",
+      "start": 346.08,
+      "end": 351.76
+    },
+    {
+      "speaker": "Patient",
+      "text": "Nein, da habe ich keine Probleme.",
+      "start": 351.84,
+      "end": 354.0
+    },
+    {
+      "speaker": "Patient",
+      "text": "Haben Sie in letzter Zeit bestimmte Medikamente eingenommen?",
+      "start": 354.08,
+      "end": 357.36
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Nein, nichts Besonderes.",
+      "start": 357.44,
+      "end": 359.36
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Auf Empfehlung meines Nachbarn habe ich Baldrian aus der Drogerie gekauft, aber das hat mir nicht geholfen.",
+      "start": 359.44,
+      "end": 365.2
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Haben Sie deswegen bisher andere Ärztinnen oder Ärzte aufgesucht?",
+      "start": 365.28,
+      "end": 369.2
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ja, in letzter Zeit wurde bei mir eine Darmspiegelung gemacht.",
+      "start": 369.28,
+      "end": 373.2
+    },
+    {
+      "speaker": "Patient",
+      "text": "Außerdem hatte ich mehrere Laboruntersuchungen und auch eine Abklärung bei einem Herzspezialisten.",
+      "start": 373.28,
+      "end": 378.72
+    },
+    {
+      "speaker": "Patient",
+      "text": "Dabei war alles unauffällig.",
+      "start": 378.8,
+      "end": 380.64
+    },
+    {
+      "speaker": "Patient",
+      "text": "Wie sind Sie ins Krankenhaus gekommen?",
+      "start": 380.72,
+      "end": 383.04
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Mein Bruder hat mich mit dem Auto hergebracht.",
+      "start": 383.12,
+      "end": 385.6
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Wie ist Ihr Appetit?",
+      "start": 385.68,
+      "end": 387.2
+    },
+    {
+      "speaker": "Patient",
+      "text": "Mein Appetit ist eigentlich normal.",
+      "start": 387.28,
+      "end": 389.68
+    },
+    {
+      "speaker": "Patient",
+      "text": "Manchmal esse ich aber etwas weniger, wenn die Bauchschmerzen stärker sind.",
+      "start": 389.76,
+      "end": 393.68
+    },
+    {
+      "speaker": "Patient",
+      "text": "Haben Sie in letzter Zeit ungewollt abgenommen oder zugenommen?",
+      "start": 393.76,
+      "end": 397.44
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Wie viel und in welchem Zeitraum?",
+      "start": 397.52,
+      "end": 400.0
+    },
+    {
+      "speaker": "Patient",
+      "text": "Nein, mir ist in letzter Zeit nichts Auffälliges an meinem Gewicht aufgefallen.",
+      "start": 400.08,
+      "end": 404.8
+    },
+    {
+      "speaker": "Patient",
+      "text": "Leiden Sie an irgendwelchen chronischen Erkrankungen, also an einer bestimmten Diagnose oder befinden Sie sich deswegen in Behandlung?",
+      "start": 404.88,
+      "end": 411.76
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Nein, so etwas habe ich nicht.",
+      "start": 411.84,
+      "end": 414.16
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Als ich etwa zwölf Jahre alt war, waren meine Mandeln stark vergrößert und ich hatte dadurch häufig Halsentzündungen und Probleme mit der Atmung, vor allem nachts.",
+      "start": 414.24,
+      "end": 423.52
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Deshalb wurde damals eine Mandeloperation durchgeführt.",
+      "start": 423.6,
+      "end": 426.72
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Wie lange waren Sie damals im Krankenhaus?",
+      "start": 426.8,
+      "end": 429.52
+    },
+    {
+      "speaker": "Patient",
+      "text": "Etwa drei Tage.",
+      "start": 429.6,
+      "end": 430.88
+    },
+    {
+      "speaker": "Patient",
+      "text": "Gibt es noch etwas, das Sie erwähnen möchten?",
+      "start": 430.96,
+      "end": 433.36
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ja, außerdem hatte ich vor etwa zehn Jahren mal eine leichtere depressive Phase.",
+      "start": 433.44,
+      "end": 438.48
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Damals ging es mir psychisch nicht so gut.",
+      "start": 438.56,
+      "end": 440.48
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ich war viel niedergeschlagen und hatte Schlafprobleme.",
+      "start": 440.56,
+      "end": 444.16
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Medikamente brauchte ich aber nicht.",
+      "start": 444.24,
+      "end": 445.44
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Das hat sich mit der Zeit wieder eingependelt.",
+      "start": 445.52,
+      "end": 448.16
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Hatten Sie schon einmal einen Unfall?",
+      "start": 448.24,
+      "end": 450.16
+    },
+    {
+      "speaker": "Patient",
+      "text": "Nein, keinen Unfall.",
+      "start": 450.24,
+      "end": 452.0
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ich möchte Ihnen auch ein paar Fragen zur Frauengesundheit stellen.",
+      "start": 452.08,
+      "end": 455.6
+    },
+    {
+      "speaker": "Patient",
+      "text": "Wann hatten Sie zuletzt Ihre Periode?",
+      "start": 455.68,
+      "end": 457.76
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Vor fünf Tagen.",
+      "start": 457.84,
+      "end": 459.36
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Nehmen Sie derzeit Verhütungsmittel ein?",
+      "start": 459.44,
+      "end": 461.68
+    },
+    {
+      "speaker": "Patient",
+      "text": "Im Moment nicht.",
+      "start": 461.76,
+      "end": 463.04
+    },
+    {
+      "speaker": "Patient",
+      "text": "Vor etwa sechs Jahren habe ich ungefähr ein Jahr lang die Pillejas eingenommen.",
+      "start": 463.12,
+      "end": 467.6
+    },
+    {
+      "speaker": "Patient",
+      "text": "Waren Sie schon einmal schwanger?",
+      "start": 467.68,
+      "end": 469.44
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Nein, bisher nicht.",
+      "start": 469.52,
+      "end": 471.36
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Nehmen Sie noch andere Medikamente?",
+      "start": 471.44,
+      "end": 473.44
+    },
+    {
+      "speaker": "Patient",
+      "text": "Nur bei Bedarf nehme ich Paracetamol.",
+      "start": 473.52,
+      "end": 476.0
+    },
+    {
+      "speaker": "Patient",
+      "text": "Sind Sie vollständig geimpft, also haben Sie alle Impf seit Ihrer Kind",
+      "start": 476.08,
+      "end": 479.6
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ich habe keine genaue Ahnung, aber gegen Covid und FS-Me bin ich geimpft.",
+      "start": 480.8,
+      "end": 485.36
+    },
+    {
+      "speaker": "Patient",
+      "text": "Haben Sie bekannte Allergien und Unverträglichkeiten, zum Beispiel gegen Lebensmittel, Medikamente, Tiere oder andere Substanzen?",
+      "start": 485.44,
+      "end": 493.28
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ja, gegen Novalgin und Penicillin.",
+      "start": 493.36,
+      "end": 496.0
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Das wurde damals bei meiner Mandeloperation festgestellt.",
+      "start": 496.08,
+      "end": 499.44
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Wie äußern Sie sich?",
+      "start": 499.52,
+      "end": 501.04
+    },
+    {
+      "speaker": "Patient",
+      "text": "Bei Novalgin habe ich einen juckenden Hautausschlag bekommen.",
+      "start": 501.12,
+      "end": 504.56
+    },
+    {
+      "speaker": "Patient",
+      "text": "Nach Penicillin hatte ich Luftnot und Schwinde.",
+      "start": 504.64,
+      "end": 507.76
+    },
+    {
+      "speaker": "Patient",
+      "text": "Können Sie sich erinnern, welches Antibiotikum Sie anschließend bekommen haben?",
+      "start": 507.84,
+      "end": 512.24
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Leider kann ich mich im Moment nicht genau daran erinnern. Ich kann mich gerade nicht so gut konzentrieren.",
+      "start": 512.32,
+      "end": 517.92
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Rauchen Sie?",
+      "start": 518.0,
+      "end": 518.88
+    },
+    {
+      "speaker": "Patient",
+      "text": "Nein, seit zwei Jahren nicht mehr.",
+      "start": 518.96,
+      "end": 521.28
+    },
+    {
+      "speaker": "Patient",
+      "text": "Wie viele Zigaretten haben Sie früher täglich geraucht und seit wann?",
+      "start": 521.36,
+      "end": 525.2
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Davor habe ich etwa fünf Jahre lang täglich ungefähr eine halbe Schachtel geraucht.",
+      "start": 525.28,
+      "end": 530.48
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Interessant.",
+      "start": 530.56,
+      "end": 531.36
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Können Sie mir sagen, was Ihre Motivation war, aufzuhören?",
+      "start": 531.44,
+      "end": 534.88
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ehrlich gesagt vor allem aus finanziellen Gründen.",
+      "start": 534.96,
+      "end": 537.84
+    },
+    {
+      "speaker": "Patient",
+      "text": "Zigaretten sind einfach teuer.",
+      "start": 537.92,
+      "end": 539.6
+    },
+    {
+      "speaker": "Patient",
+      "text": "Trinken Sie Alkohol?",
+      "start": 539.68,
+      "end": 541.04
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Wenn ja, wie oft und wie viel?",
+      "start": 541.12,
+      "end": 543.76
+    },
+    {
+      "speaker": "Patient",
+      "text": "Gelegentlich meist am Wochenende.",
+      "start": 543.84,
+      "end": 545.76
+    },
+    {
+      "speaker": "Patient",
+      "text": "Dann trinke ich ein Glas Bier oder Wein.",
+      "start": 545.84,
+      "end": 548.48
+    },
+    {
+      "speaker": "Patient",
+      "text": "Darf ich Sie fragen, ob Sie schon einmal Drogen konsumiert haben?",
+      "start": 548.56,
+      "end": 551.84
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Früher habe ich, als ich jünger war, ein paar Mal Haschisch geraucht.",
+      "start": 551.92,
+      "end": 555.36
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Treiben Sie regelmäßig Sport?",
+      "start": 555.44,
+      "end": 557.6
+    },
+    {
+      "speaker": "Patient",
+      "text": "Welche Art und wie häufig?",
+      "start": 557.68,
+      "end": 559.44
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Ich betreibe nicht allzu viel Sport.",
+      "start": 559.52,
+      "end": 561.76
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Gibt es in Ihrer Familie wichtige Erkrankungen, zum Beispiel bei Ihren Eltern oder nahen Verwandten?",
+      "start": 561.84,
+      "end": 567.2
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ja.",
+      "start": 567.28,
+      "end": 568.0
+    },
+    {
+      "speaker": "Patient",
+      "text": "Meine Mutter hatte mit 75 Jahren einen Schlaganfall und ist vor etwa zehn Jahren daran gestorben.",
+      "start": 568.08,
+      "end": 574.32
+    },
+    {
+      "speaker": "Patient",
+      "text": "Mein Vater hat Krebs an der Vorsterdrüse und hatte auch schon einen Schlaganfall. Er ist jetzt 88 Jahre alt.",
+      "start": 574.4,
+      "end": 581.2
+    },
+    {
+      "speaker": "Patient",
+      "text": "Das tut mir leid wegen Ihrer Mutter.",
+      "start": 581.28,
+      "end": 583.36
+    },
+    {
+      "speaker": "Patient",
+      "text": "Haben Sie Haustiere?",
+      "start": 583.44,
+      "end": 584.96
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Nein, keine.",
+      "start": 585.04,
+      "end": 586.4
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Wir sind mit der Anamnese fertig.",
+      "start": 586.48,
+      "end": 588.8
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Haben Sie noch Fragen?",
+      "start": 588.88,
+      "end": 590.24
+    },
+    {
+      "speaker": "Patient",
+      "text": "Ja, ich frage mich, was ich eigentlich habe.",
+      "start": 590.32,
+      "end": 593.04
+    },
+    {
+      "speaker": "Patient",
+      "text": "Und warum sind denn alle Untersuchungen bisher unauffällig?",
+      "start": 593.12,
+      "end": 596.64
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Das ist eine sehr verständliche Frage.",
+      "start": 596.72,
+      "end": 599.12
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Nach dem, was Sie mir geschildert haben und da alle bisherigen Untersuchungen unauffällig waren, spricht vieles für eine sogenannte funktionelle Erkrankung.",
+      "start": 599.2,
+      "end": 607.68
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Das bedeutet, dass die Beschwerden real sind und sie stark belasten, man aber in den üblichen Untersuchungen keine organische Ursache findet.",
+      "start": 607.76,
+      "end": 615.36
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Das ist nichts Gefährliches, kann aber sehr belastend sein.",
+      "start": 615.44,
+      "end": 619.2
+    },
+    {
+      "speaker": "Arzt",
+      "text": "Wichtig ist, dass wir jetzt gemeinsam schauen, wie wir Ihre Beschwerden Schritt für Schritt lindern und Ihren Alltag wieder verbessern können.",
+      "start": 619.28,
+      "end": 625.12
+    }
+  ],
+  "dialogue": "Arzt: Guten Tag.\nArzt: Mein Name ist Dr. Ziegler.\nArzt: Ich bin heute als Assistenzarzt auf der Station tätig.\nArzt: Ich würde gerne ein Anamnese-Gespräch mit Ihnen führen.\nArzt: Falls Sie etwas nicht richtig verstanden haben oder Fragen haben, lassen Sie es mich bitte wissen.\nArzt: Zunächst benötige ich einige persönliche Informationen, danach können wir fortfahren.\nArzt: Wie heißen Sie?\nPatient: Ich heiße Ivana Slivovitz.\nPatient: Habe ich Ihren Namen richtig geschrieben?\nArzt: Ivana Slivovitz?\nPatient: Ja, das stimmt so.\nPatient: Ach so, danke für die Korrektur.\nPatient: Zuallererst möchte ich gern in Erfahrung bringen, ob Sie die Schmerzen bzw. Beschwerden als erträglich empfinden.\nPatient: Die Schmerzen bestehen seit mehreren Monaten.\nPatient: Ich halte es jetzt noch bis zum Ende des Gesprächs aus.\nPatient: Alles klar, wie alt sind Sie, Frau Slivovitz?\nArzt: Ich bin 34 Jahre alt.\nArzt: Wann genau sind Sie geboren?\nPatient: Ich habe am 9.\nPatient: Dezember 1989 Geburtstag.\nPatient: Wie groß sind Sie?\nArzt: Ich bin 1,69 groß.\nArzt: Wie viel wiegen Sie?\nPatient: Ich wiege ungefähr 70 Kilogramm.\nPatient: Wie heißt Ihr Hausarzt bzw. Ihre Hausärztin?\nArzt: Meine Hausärztin heißt Dr. Carla Scholz.\nArzt: Könnten Sie mir genauer sagen, wo es weh tut?\nPatient: Ich habe an mehreren Körperstellen Schmerzen, also zum Beispiel im Nacken, in den Schultern, im Rücken und auch in den Beinen.\nPatient: Ich bin aber heute gekommen, weil es in den letzten vier bis sechs Wochen deutlich schlimmer geworden ist.\nPatient: Wann haben die Schmerzen genau begonnen?\nArzt: Seit etwa sechs Monaten.\nArzt: Sind die Schmerzen eher einseitig oder auf beiden Seiten?\nPatient: Und betreffen Sie eher den Oberkörper, den Unterkörper oder beides?\nArzt: Eigentlich auf beiden Seiten.\nArzt: Es tut mir im Nacken und in den Schultern weh, aber auch im Rücken, in den Hüften und in den Beinen.\nArzt: Es fühlt sich an, als wäre der ganze Körper betroffen.\nArzt: Strahlen die Schmerzen irgendwo hin aus, zum Beispiel in die Arme?\nPatient: Nein, nicht richtig.\nPatient: Wie empfinden Sie die Schmerzen?\nArzt: Sind Sie eher dumpf, stechend oder ziehend?\nPatient: Meistens sind es dumpfe, ziehende Schmerzen.\nPatient: Aber zusätzlich habe ich auch Bauchschmerzen. Die kommen eher in Wellen.\nPatient: Verstehe.\nPatient: Gibt es etwas, das die Schmerzen verbessert oder verschlechtert, zum Beispiel Bewegung, Duschen, Anstrengung oder Medikamente?\nArzt: Ja, ein bisschen helfen mir leichte Bewegung und warmes Duschen.\nArzt: Ich habe auch ein paar Mal Ibuprofen 400 ausprobiert, aber das hat nichts Besonderes gebracht.\nArzt: Sind die schmerzhaften Stellen auch empfindlich, wenn man sie leicht berührt oder drückt?\nPatient: Ja, manchmal tut schon leichter Druck weh.\nPatient: Können Sie mir bitte genauer von den Bauchschmerzen erzählen?\nArzt: Gibt es dabei Begleitsymptome wie zum Beispiel Durchfall oder Verstopfung?\nPatient: Ich bekomme eher diffuse, krampfartige Bauchschmerzen.\nPatient: Meist wird es nach dem Stuhlgang besser.\nPatient: Außerdem wechselt es bei mir häufig zwischen Verstopfung und Durchfall.\nPatient: Wie lange dauert jeweils so eine Phase?\nArzt: Und wie oft müssen Sie bei Durchfall zur Toilette gehen?\nPatient: So eine Phase dauert meistens ein paar Tage, manchmal auch ein bis zwei Wochen.\nPatient: Wenn ich Durchfall habe, muss ich oft vier bis sechs Mal am Tag zur Toilette.\nPatient: Haben Sie Blut im Stuhl bemerkt oder schwarzen, teerartigen Stuhl?\nArzt: Nein, gar nicht.\nArzt: Wie fühlen Sie sich in der Regel?\nPatient: Ich bin oft müde und fühle mich schnell erschöpft.\nPatient: Wie beeinflussen die Schmerzen Ihren Schlaf und Ihren Alltag?\nArzt: Abends und nachts ist es ein bisschen anders.\nArzt: Ich habe so einen starken Drang in den Beinen.\nArzt: Ich muss sie ständig bewegen, sonst wird dieses unangenehme Gefühl immer schlimmer.\nArzt: Deshalb fällt mir das Einschlafen sehr schwer.\nArzt: Tagsüber kann ich dann nicht mehr so leistungsfähig sein wie früher.\nArzt: Sind Sie morgens eher steif oder brauchen Sie eine Weile, bis Sie in Gang kommen?\nPatient: Ja, morgens fühle ich mich oft wie eingerostet. Das dauert eine Zeit, bis es besser wird.\nPatient: Haben Sie Probleme wie Konzentrationsstörungen, Sehstörungen oder ungewöhnliche Wahrnehmungen?\nArzt: Ja, ich kann mich bei der\nArzt: richtig konzentrieren.\nArzt: Und es ist schon vorgekommen, dass ich einige Dinge falsch gemacht habe.\nArzt: Manchmal habe ich das Gefühl, vor allem in den Beinen, als würden tausende Ameisen über meine Haut laufen.\nArzt: Sehstörungen habe ich aber nicht.\nArzt: Machen Ihnen Aktivitäten noch Freude?\nPatient: Haben Sie Interesse an Ihren Hobbys oder an Dingen, die Ihnen sonst Spaß machen?\nArzt: Wenn Sie damit so etwas wie eine Depression meinen.\nArzt: Nein, so ist es nicht.\nArzt: Ich habe grundsätzlich noch Interesse, aber durch die Beschwerden fehlt mir oft die Energie.\nArzt: Haben Sie irgendwelche Symptome wie Kraftlosigkeit oder Muskelschwäche?\nPatient: Nein, so etwas habe ich nicht.\nPatient: Haben Sie den Eindruck, dass Ihre Belastbarkeit nachgelassen hat?\nArzt: Ja, ich bin schneller erschöpft als früher, aber nicht so, dass mir die Kraft fehlt.\nArzt: Es ist eher diese dauernde Müdigkeit.\nArzt: Haben Sie Symptome wie blasse Haut, Luftnot, Herzrasen oder Husten?\nPatient: Im Moment habe ich so etwas nicht.\nPatient: Aber manchmal bekomme ich einen Angstanfall und dabei habe ich Herzklopfen, ein enge Gefühl in der Brust und das Gefühl, nicht richtig Luft zu bekommen.\nPatient: Wie lange dauert so ein Anfall?\nArzt: Schwitzen Sie dabei auch stark?\nPatient: Meistens dauert das so 10 bis 20 Minuten.\nPatient: Dabei schwitze ich schon stark und fühle mich sehr unruhig.\nPatient: Kennen Sie dafür einen bestimmten Auslöser?\nArzt: Einen ganz bestimmten Auslöser kann ich nicht nennen.\nArzt: Manchmal passiert es in stressigen Situationen, manchmal aber auch ganz plötzlich ohne klaren Grund.\nArzt: Was meinen Sie genau mit stressigen Situationen?\nPatient: Zum Beispiel bei viel Druck auf der Arbeit, wenn ich mich überfordert fühle oder wenn ich merke, dass die Schmerzen wieder stärker werden.\nPatient: Dann werde ich innerlich sehr unruhig und manchmal entwickelt sich daraus so ein Anfall.\nPatient: Haben Sie Fieber, Nachtschweiß oder Schüttelfrost?\nArzt: Nein, ich habe keins dieser Symptome bemerkt.\nArzt: Haben Sie Probleme in anderen Bereichen, zum Beispiel beim Wasserlassen oder in Bezug auf Ihre Frauengesundheit?\nPatient: Nein, da habe ich keine Probleme.\nPatient: Haben Sie in letzter Zeit bestimmte Medikamente eingenommen?\nArzt: Nein, nichts Besonderes.\nArzt: Auf Empfehlung meines Nachbarn habe ich Baldrian aus der Drogerie gekauft, aber das hat mir nicht geholfen.\nArzt: Haben Sie deswegen bisher andere Ärztinnen oder Ärzte aufgesucht?\nPatient: Ja, in letzter Zeit wurde bei mir eine Darmspiegelung gemacht.\nPatient: Außerdem hatte ich mehrere Laboruntersuchungen und auch eine Abklärung bei einem Herzspezialisten.\nPatient: Dabei war alles unauffällig.\nPatient: Wie sind Sie ins Krankenhaus gekommen?\nArzt: Mein Bruder hat mich mit dem Auto hergebracht.\nArzt: Wie ist Ihr Appetit?\nPatient: Mein Appetit ist eigentlich normal.\nPatient: Manchmal esse ich aber etwas weniger, wenn die Bauchschmerzen stärker sind.\nPatient: Haben Sie in letzter Zeit ungewollt abgenommen oder zugenommen?\nArzt: Wie viel und in welchem Zeitraum?\nPatient: Nein, mir ist in letzter Zeit nichts Auffälliges an meinem Gewicht aufgefallen.\nPatient: Leiden Sie an irgendwelchen chronischen Erkrankungen, also an einer bestimmten Diagnose oder befinden Sie sich deswegen in Behandlung?\nArzt: Nein, so etwas habe ich nicht.\nArzt: Als ich etwa zwölf Jahre alt war, waren meine Mandeln stark vergrößert und ich hatte dadurch häufig Halsentzündungen und Probleme mit der Atmung, vor allem nachts.\nArzt: Deshalb wurde damals eine Mandeloperation durchgeführt.\nArzt: Wie lange waren Sie damals im Krankenhaus?\nPatient: Etwa drei Tage.\nPatient: Gibt es noch etwas, das Sie erwähnen möchten?\nArzt: Ja, außerdem hatte ich vor etwa zehn Jahren mal eine leichtere depressive Phase.\nArzt: Damals ging es mir psychisch nicht so gut.\nArzt: Ich war viel niedergeschlagen und hatte Schlafprobleme.\nArzt: Medikamente brauchte ich aber nicht.\nArzt: Das hat sich mit der Zeit wieder eingependelt.\nArzt: Hatten Sie schon einmal einen Unfall?\nPatient: Nein, keinen Unfall.\nPatient: Ich möchte Ihnen auch ein paar Fragen zur Frauengesundheit stellen.\nPatient: Wann hatten Sie zuletzt Ihre Periode?\nArzt: Vor fünf Tagen.\nArzt: Nehmen Sie derzeit Verhütungsmittel ein?\nPatient: Im Moment nicht.\nPatient: Vor etwa sechs Jahren habe ich ungefähr ein Jahr lang die Pillejas eingenommen.\nPatient: Waren Sie schon einmal schwanger?\nArzt: Nein, bisher nicht.\nArzt: Nehmen Sie noch andere Medikamente?\nPatient: Nur bei Bedarf nehme ich Paracetamol.\nPatient: Sind Sie vollständig geimpft, also haben Sie alle Impf seit Ihrer Kind\nPatient: Ich habe keine genaue Ahnung, aber gegen Covid und FS-Me bin ich geimpft.\nPatient: Haben Sie bekannte Allergien und Unverträglichkeiten, zum Beispiel gegen Lebensmittel, Medikamente, Tiere oder andere Substanzen?\nArzt: Ja, gegen Novalgin und Penicillin.\nArzt: Das wurde damals bei meiner Mandeloperation festgestellt.\nArzt: Wie äußern Sie sich?\nPatient: Bei Novalgin habe ich einen juckenden Hautausschlag bekommen.\nPatient: Nach Penicillin hatte ich Luftnot und Schwinde.\nPatient: Können Sie sich erinnern, welches Antibiotikum Sie anschließend bekommen haben?\nArzt: Leider kann ich mich im Moment nicht genau daran erinnern. Ich kann mich gerade nicht so gut konzentrieren.\nArzt: Rauchen Sie?\nPatient: Nein, seit zwei Jahren nicht mehr.\nPatient: Wie viele Zigaretten haben Sie früher täglich geraucht und seit wann?\nArzt: Davor habe ich etwa fünf Jahre lang täglich ungefähr eine halbe Schachtel geraucht.\nArzt: Interessant.\nArzt: Können Sie mir sagen, was Ihre Motivation war, aufzuhören?\nPatient: Ehrlich gesagt vor allem aus finanziellen Gründen.\nPatient: Zigaretten sind einfach teuer.\nPatient: Trinken Sie Alkohol?\nArzt: Wenn ja, wie oft und wie viel?\nPatient: Gelegentlich meist am Wochenende.\nPatient: Dann trinke ich ein Glas Bier oder Wein.\nPatient: Darf ich Sie fragen, ob Sie schon einmal Drogen konsumiert haben?\nArzt: Früher habe ich, als ich jünger war, ein paar Mal Haschisch geraucht.\nArzt: Treiben Sie regelmäßig Sport?\nPatient: Welche Art und wie häufig?\nArzt: Ich betreibe nicht allzu viel Sport.\nArzt: Gibt es in Ihrer Familie wichtige Erkrankungen, zum Beispiel bei Ihren Eltern oder nahen Verwandten?\nPatient: Ja.\nPatient: Meine Mutter hatte mit 75 Jahren einen Schlaganfall und ist vor etwa zehn Jahren daran gestorben.\nPatient: Mein Vater hat Krebs an der Vorsterdrüse und hatte auch schon einen Schlaganfall. Er ist jetzt 88 Jahre alt.\nPatient: Das tut mir leid wegen Ihrer Mutter.\nPatient: Haben Sie Haustiere?\nArzt: Nein, keine.\nArzt: Wir sind mit der Anamnese fertig.\nArzt: Haben Sie noch Fragen?\nPatient: Ja, ich frage mich, was ich eigentlich habe.\nPatient: Und warum sind denn alle Untersuchungen bisher unauffällig?\nArzt: Das ist eine sehr verständliche Frage.\nArzt: Nach dem, was Sie mir geschildert haben und da alle bisherigen Untersuchungen unauffällig waren, spricht vieles für eine sogenannte funktionelle Erkrankung.\nArzt: Das bedeutet, dass die Beschwerden real sind und sie stark belasten, man aber in den üblichen Untersuchungen keine organische Ursache findet.\nArzt: Das ist nichts Gefährliches, kann aber sehr belastend sein.\nArzt: Wichtig ist, dass wir jetzt gemeinsam schauen, wie wir Ihre Beschwerden Schritt für Schritt lindern und Ihren Alltag wieder verbessern können.",
+  "duration_s": 625.12,
+  "provider": "gradium"
+}

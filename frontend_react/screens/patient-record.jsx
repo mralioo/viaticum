@@ -1,7 +1,30 @@
 /* Patientenakte — detail view with tabs */
 
 function PatientRecord({ patientId, goBack, openModal }) {
-  const p = PATIENTS.find(x => x.id === patientId) || PATIENTS[0];
+  const _fallback = (typeof PATIENTS !== "undefined" ? PATIENTS : []).find(x => x.id === patientId) || {};
+  const [rawPatient, setRawPatient] = React.useState(_fallback);
+
+  React.useEffect(() => {
+    if (!patientId) return;
+    fetch(`/api/patients/${patientId}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (data) setRawPatient(data); })
+      .catch(() => {});
+  }, [patientId]);
+
+  const p = {
+    ...rawPatient,
+    primary: rawPatient.primary || rawPatient.primary_dx || "",
+    geb: rawPatient.geb || (rawPatient.dob ? rawPatient.dob.slice(0, 10) : ""),
+    admit: rawPatient.admit || (rawPatient.admit_at ? rawPatient.admit_at.slice(0, 16).replace("T", " ") : ""),
+    los: rawPatient.los !== undefined ? rawPatient.los : (rawPatient.los_days || 0),
+    insurance: rawPatient.insurance || {},
+    allergies: rawPatient.allergies || [],
+    secondary: rawPatient.secondary || rawPatient.secondary_dx || [],
+    vitals: rawPatient.vitals || {},
+    age: rawPatient.age || (rawPatient.dob ? new Date().getFullYear() - parseInt(rawPatient.dob) : "?"),
+  };
+
   const [tab, setTab] = React.useState("uebersicht");
   const meds = MEDICATION.filter(m => m.patient === p.id);
   const labs = LAB_RESULTS.filter(l => l.patient === p.id);

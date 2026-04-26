@@ -18,6 +18,18 @@
 <div id="root"></div>
 
 <script src="data.js"></script>
+<script>
+// Pre-load the latest transcript text from the backend for SOAP/NER demo
+(async function() {
+  try {
+    const r = await fetch("/api/transcribe/latest");
+    if (r.ok) {
+      const d = await r.json();
+      window._lastTranscriptText = d.dialogue || d.text || null;
+    }
+  } catch (_) {}
+})();
+</script>
 <script type="text/babel" src="tweaks-panel.jsx"></script>
 <script type="text/babel" src="icons.jsx"></script>
 <script type="text/babel" src="ui.jsx"></script>

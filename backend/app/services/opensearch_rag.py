@@ -109,6 +109,41 @@ async def ingest(
     return len(segments) - len(errors)
 
 
+async def count_patient_docs(patient_id: str) -> int:
+    """Return number of OpenSearch docs for a given patient_id."""
+    try:
+        client = _get_client()
+        resp = client.count(
+            index=OPENSEARCH_INDEX,
+            body={"query": {"term": {"patient_id": patient_id}}},
+        )
+        return resp.get("count", 0)
+    except Exception:
+        return 0
+
+
+async def migrate_empty_patient_id(patient_id: str) -> int:
+    """Assign *patient_id* to all docs that currently have an empty patient_id field."""
+    try:
+        client = _get_client()
+        resp = client.update_by_query(
+            index=OPENSEARCH_INDEX,
+            body={
+                "query": {"term": {"patient_id": ""}},
+                "script": {
+                    "source": "ctx._source.patient_id = params.pid",
+                    "lang": "painless",
+                    "params": {"pid": patient_id},
+                },
+            },
+            refresh=True,
+        )
+        return resp.get("updated", 0)
+    except Exception as exc:
+        logger.warning("OpenSearch migrate_empty_patient_id failed: %s", exc)
+        return 0
+
+
 async def retrieve(
     query: str,
     n_results: int = 5,

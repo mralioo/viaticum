@@ -98,7 +98,7 @@ opensearch-init: ## Create the transcript index with k-NN mapping in OpenSearch
 	  -u "admin:$$PASS" \
 	  -H 'Content-Type: application/json' \
 	  -k https://localhost:9200/viaticum-transcripts \
-	  -d '{"settings":{"index":{"knn":true,"knn.space_type":"cosinesimil"}},"mappings":{"properties":{"embedding":{"type":"knn_vector","dimension":768},"text":{"type":"text","analyzer":"german"},"speaker":{"type":"keyword"},"start":{"type":"float"},"patient_id":{"type":"keyword"},"timestamp":{"type":"date"}}}}' \
+	  -d '{"settings":{"index":{"knn":true,"knn.space_type":"cosinesimil"}},"mappings":{"properties":{"embedding":{"type":"knn_vector","dimension":1024},"text":{"type":"text","analyzer":"german"},"speaker":{"type":"keyword"},"start":{"type":"float"},"patient_id":{"type":"keyword"},"timestamp":{"type":"date"}}}}' \
 	  2>&1) || { printf "$(BOLD)Error:$(RESET) OpenSearch not reachable — is it running?\n  Start it: docker compose -f docker-compose.kis.yml up opensearch -d\n"; exit 1; }; \
 	printf "$$RESP\n" | python3 -m json.tool
 

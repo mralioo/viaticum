@@ -52,7 +52,7 @@ async def ingest(segments: list[dict], soap_note: dict | None = None) -> int:
     return len(docs)
 
 
-async def retrieve(query: str, n_results: int = 5) -> list[dict[str, Any]]:
+async def retrieve(query: str, n_results: int = 5, patient_id: str | None = None) -> list[dict[str, Any]]:
     """Retrieve top-n segments for query from today's collection."""
     client = _get_client()
     embedder = _get_embedder()

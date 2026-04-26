@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.app.routers import chat, entities, ingest, omi, patients, soap, transcribe
+from backend.app.routers import chat, entities, ingest, omi, patients, search, soap, transcribe
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -14,7 +14,19 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Viaticum backend starting — STT_PROVIDER=%s", os.getenv("STT_PROVIDER", "stub"))
+    try:
+        from backend.app.db.connection import init_pool
+        from backend.app.db.seed import seed_if_empty
+        await init_pool()
+        await seed_if_empty()
+    except Exception as exc:
+        logger.warning("PostgreSQL unavailable (%s) — running without DB", exc)
     yield
+    try:
+        from backend.app.db.connection import close_pool
+        await close_pool()
+    except Exception:
+        pass
     logger.info("Viaticum backend shutting down")
 
 
@@ -27,7 +39,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-for _router in [transcribe.router, soap.router, entities.router, chat.router, ingest.router, omi.router, patients.router]:
+for _router in [transcribe.router, soap.router, entities.router, chat.router, ingest.router, omi.router, patients.router, search.router]:
     app.include_router(_router)
 
 

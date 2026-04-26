@@ -1,13 +1,27 @@
 import json
 import logging
+from pathlib import Path
 
 from fastapi import APIRouter, File, UploadFile, WebSocket, WebSocketDisconnect
+from fastapi.responses import JSONResponse
 
 from backend.app.models.stt import TranscribeResponse
 from backend.app.services.ai_router import route_transcribe
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/transcribe", tags=["transcribe"])
+
+_TRANSCRIPT_DIR = Path(__file__).parent.parent.parent.parent / "data" / "transcripts"
+
+
+@router.get("/latest")
+async def get_latest_transcript():
+    """Return the most recent transcript JSON (for demo pre-loading)."""
+    files = sorted(_TRANSCRIPT_DIR.glob("*.json"), reverse=True)
+    if not files:
+        return JSONResponse({"error": "no transcripts"}, status_code=404)
+    data = json.loads(files[0].read_text(encoding="utf-8"))
+    return data
 
 
 @router.post("", response_model=TranscribeResponse)

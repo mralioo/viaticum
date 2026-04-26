@@ -9,10 +9,11 @@ class Citation(BaseModel):
 
 
 class ChatRequest(BaseModel):
-    """Example: {"message": "Was hat die Patientin gesagt?", "mode": "free_chat", "patient_id": "P001"}"""
+    """Example: {"message": "Was hat die Patientin gesagt?", "patient_id": "patient-001", "session_id": "abc123"}"""
     message: str
     mode: str = "free_chat"
     patient_id: str | None = None
+    session_id: str | None = None
 
 
 class ChatResponse(BaseModel):
