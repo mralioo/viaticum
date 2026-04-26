@@ -231,14 +231,14 @@ gcloud run deploy kis-backend \
   --set-env-vars="VECTOR_STORE=opensearch,\
 OPENSEARCH_URL=${OPENSEARCH_URL_INTERNAL},\
 OPENSEARCH_USER=admin,\
+OPENSEARCH_PASSWORD=${OS_PASSWORD},\
 OPENSEARCH_INDEX=${OS_INDEX},\
 STT_PROVIDER=${STT_PROVIDER:-parakeet},\
 PARAKEET_URL=${STT_URL},\
 GCP_PROJECT_ID=${PROJECT},\
+PIONEER_API_KEY=${PIONEER_API_KEY:-},\
 PIONEER_SOAP_MODEL_ID=${PIONEER_SOAP_MODEL_ID:-},\
-PIONEER_NER_MODEL_ID=${PIONEER_NER_MODEL_ID:-}" \
-  --set-secrets="OPENSEARCH_PASSWORD=kis-opensearch-password:latest,\
-PIONEER_API_KEY=kis-pioneer-api-key:latest"
+PIONEER_NER_MODEL_ID=${PIONEER_NER_MODEL_ID:-}"
 
 BACKEND_URL=$(gcloud run services describe kis-backend \
   --region="$REGION" --format="value(status.url)")
