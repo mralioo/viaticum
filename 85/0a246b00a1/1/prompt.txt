@@ -1,0 +1,233 @@
+fix this ali@ITUCNB0240:~/projects/viaticum-ltd/viaticum$ git status 
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   docs/DIAGRAM_PROMPT.md
+        new file:   docs/PIPELINE_OVERVIEW.md
+
+ali@ITUCNB0240:~/projects/viaticum-ltd/viaticum$ git stash 
+Saved working directory and index state WIP on main: fb1e783 feat: add Parakeet STT VM + Firestore provisioning to setup_gcp.sh
+ali@ITUCNB0240:~/projects/viaticum-ltd/viaticum$ git pull 
+remote: Enumerating objects: 175, done.
+remote: Counting objects: 100% (175/175), done.
+remote: Compressing objects: 100% (60/60), done.
+remote: Total 135 (delta 76), reused 134 (delta 75), pack-reused 0 (from 0)
+Receiving objects: 100% (135/135), 78.60 KiB | 1.21 MiB/s, done.
+Resolving deltas: 100% (76/76), completed with 29 local objects.
+From https://github.com/mralioo/viaticum
+   fb1e783..fe55ef8  main       -> origin/main
+Updating fb1e783..fe55ef8
+Fast-forward
+ .env.example                                   |    6 +
+ Makefile                                       |   26 +--
+ backend/app/db/__init__.py                     |    0
+ backend/app/db/connection.py                   |   52 +++++
+ backend/app/db/schema.sql                      |   49 +++++
+ backend/app/db/seed.py                         |  198 +++++++++++++++++
+ backend/app/main.py                            |   16 +-
+ backend/app/models/chat.py                     |    3 +-
+ backend/app/models/stt.py                      |    3 +-
+ backend/app/prompts/soap_de.txt                |    3 -
+ backend/app/routers/chat.py                    |  102 +++++++--
+ backend/app/routers/patients.py                |  107 ++++++++--
+ backend/app/routers/search.py                  |   82 +++++++
+ backend/app/routers/soap.py                    |   96 ++++++++-
+ backend/app/routers/transcribe.py              |   14 ++
+ backend/app/services/ai_router.py              |   71 ++++++-
+ backend/app/services/gliner_extractor.py       |   33 +--
+ backend/app/services/llm_router.py             |  120 +++++++++++
+ backend/app/services/opensearch_rag.py         |   35 +++
+ backend/app/services/rag.py                    |    2 +-
+ backend/app/services/search_polisher.py        |   89 ++++++++
+ backend/app/services/soap_structurer.py        |   43 ++--
+ backend/app/services/stt_gradium.py            |  144 ++++++++++++-
+ backend/app/services/tavily.py                 |   57 +++++
+ backend/pyproject.toml                         |    4 +
+ data/transcripts/.gitkeep                      |    0
+ data/transcripts/20260426T081645Z_gradium.json | 1111 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ data/transcripts/20260426T081645Z_gradium.txt  |  184 ++++++++++++++++
+ docker-compose.kis.yml                         |   38 ++++
+ docs/demo.md                                   |  229 ++++++++++++++++++++
+ docs/gcp-setup-guide.md                        |  107 ++++++++++
+ docs/local-hybrid-dev.md                       |  326 ++++++++++++++++++++++++++++
+ docs/pipeline.md                               |  306 ++++++++++++++++++++++++++
+ frontend_react/Medion KIS.html                 |   17 +-
+ frontend_react/companion.css                   |  374 +++++++++++++++++++++++++++++++-
+ frontend_react/nginx.conf                      |    3 +
+ frontend_react/screens/companion.jsx           |  525 ++++++++++++++++++++++++++++++++++++++++-----
+ frontend_react/screens/patient-list.jsx        |   37 +++-
+ frontend_react/screens/patient-record.jsx      |   25 ++-
+ scripts/demo.sh                                |  253 ++++++++++++++++++++++
+ scripts/setup_gcp.sh                           |   96 +++------
+ scripts/transcribe_wav.py                      |  186 ++++++++++++++++
+ start.sh                                       |   51 +++++
+ stt_server/Dockerfile                          |   15 +-
+ stt_server/main.py                             |   83 +++++---
+ 45 files changed, 5044 insertions(+), 277 deletions(-)
+ create mode 100644 backend/app/db/__init__.py
+ create mode 100644 backend/app/db/connection.py
+ create mode 100644 backend/app/db/schema.sql
+ create mode 100644 backend/app/db/seed.py
+ create mode 100644 backend/app/routers/search.py
+ create mode 100644 backend/app/services/llm_router.py
+ create mode 100644 backend/app/services/search_polisher.py
+ create mode 100644 backend/app/services/tavily.py
+ create mode 100644 data/transcripts/.gitkeep
+ create mode 100644 data/transcripts/20260426T081645Z_gradium.json
+ create mode 100644 data/transcripts/20260426T081645Z_gradium.txt
+ create mode 100644 docs/demo.md
+ create mode 100644 docs/gcp-setup-guide.md
+ create mode 100644 docs/local-hybrid-dev.md
+ create mode 100644 docs/pipeline.md
+ create mode 100755 scripts/demo.sh
+ create mode 100644 scripts/transcribe_wav.py
+ create mode 100755 start.sh
+ali@ITUCNB0240:~/projects/viaticum-ltd/viaticum$ ./st
+start.sh    stt_server/ 
+ali@ITUCNB0240:~/projects/viaticum-ltd/viaticum$ ./start.sh 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Viaticum KIS — local stack startup
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▶  Building images…
+WARN[0000] /home/ali/projects/viaticum-ltd/viaticum/docker-compose.kis.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+[+] Building 407.2s (24/24) FINISHED                                                                                                                   
+ => [internal] load local bake definitions                                                                                                        0.0s
+ => => reading from stdin 1.04kB                                                                                                                  0.0s
+ => [frontend_react internal] load build definition from Dockerfile.frontend_react                                                                0.0s
+ => => transferring dockerfile: 428B                                                                                                              0.0s
+ => [backend internal] load build definition from Dockerfile.backend                                                                              0.0s
+ => => transferring dockerfile: 472B                                                                                                              0.0s
+ => [backend internal] load metadata for docker.io/library/python:3.11-slim                                                                       1.9s
+ => [frontend_react internal] load metadata for docker.io/library/nginx:1.27-alpine                                                               1.9s
+ => [backend internal] load .dockerignore                                                                                                         0.0s
+ => => transferring context: 2B                                                                                                                   0.0s
+ => [backend 1/8] FROM docker.io/library/python:3.11-slim@sha256:6d85378d88a19cd4d76079817532d62232be95757cb45945a99fec8e8084b9c2                10.2s
+ => => resolve docker.io/library/python:3.11-slim@sha256:6d85378d88a19cd4d76079817532d62232be95757cb45945a99fec8e8084b9c2                         0.0s
+ => => sha256:3531af2bc2a9c8883754652783cf96207d53189db279c9637b7157d034de7ecd 29.78MB / 29.78MB                                                  3.3s
+ => => sha256:91ff8760033c3b9bc9c3a3bcc6ff66c113ec9e13f94fa2f12ae4b221aae996b9 1.29MB / 1.29MB                                                    0.9s
+ => => sha256:f3ba2250c52436e41e9f2f3830af92de466fcacc2d848264e1f9fdc76975d803 14.37MB / 14.37MB                                                  2.8s
+ => => sha256:6d85378d88a19cd4d76079817532d62232be95757cb45945a99fec8e8084b9c2 10.37kB / 10.37kB                                                  0.0s
+ => => sha256:ff71127c215572121f1991bacf17f39ec5fcfd2de1f1c01a595835495bb9adfc 1.75kB / 1.75kB                                                    0.0s
+ => => sha256:1eee6fcc4d866c86dd8e32a4a1a583767ddac0d640b0fe571b2c22d233b60eee 5.48kB / 5.48kB                                                    0.0s
+ => => sha256:7ccd73948dde4b7f1623ac6bf9b58706fb83d0a363d765d7c799d46035ceb563 249B / 249B                                                        1.3s
+ => => extracting sha256:3531af2bc2a9c8883754652783cf96207d53189db279c9637b7157d034de7ecd                                                         3.6s
+ => => extracting sha256:91ff8760033c3b9bc9c3a3bcc6ff66c113ec9e13f94fa2f12ae4b221aae996b9                                                         0.4s
+ => => extracting sha256:f3ba2250c52436e41e9f2f3830af92de466fcacc2d848264e1f9fdc76975d803                                                         2.2s
+ => => extracting sha256:7ccd73948dde4b7f1623ac6bf9b58706fb83d0a363d765d7c799d46035ceb563                                                         0.0s
+ => [backend internal] load build context                                                                                                         0.0s
+ => => transferring context: 158.12kB                                                                                                             0.0s
+ => [frontend_react 1/4] FROM docker.io/library/nginx:1.27-alpine@sha256:65645c7bb6a0661892a8b03b89d0743208a18dd2f3f17a54ef4b76fb8e2f2a10         7.5s
+ => => resolve docker.io/library/nginx:1.27-alpine@sha256:65645c7bb6a0661892a8b03b89d0743208a18dd2f3f17a54ef4b76fb8e2f2a10                        0.0s
+ => => sha256:6769dc3a703c719c1d2756bda113659be28ae16cf0da58dd5fd823d6b9a050ea 10.79kB / 10.79kB                                                  0.0s
+ => => sha256:65645c7bb6a0661892a8b03b89d0743208a18dd2f3f17a54ef4b76fb8e2f2a10 10.33kB / 10.33kB                                                  0.0s
+ => => sha256:62223d644fa234c3a1cc785ee14242ec47a77364226f1c811d2f669f96dc2ac8 2.50kB / 2.50kB                                                    0.0s
+ => => sha256:61ca4f733c802afd9e05a32f0de0361b6d713b8b53292dc15fb093229f648674 1.79MB / 1.79MB                                                    2.8s
+ => => extracting sha256:61ca4f733c802afd9e05a32f0de0361b6d713b8b53292dc15fb093229f648674                                                         0.2s
+ => => sha256:d7e5070240863957ebb0b5a44a5729963c3462666baa2947d00628cb5f2d5773 955B / 955B                                                        3.1s
+ => => sha256:b464cfdf2a6319875aeb27359ec549790ce14d8214fcb16ef915e4530e5ed235 629B / 629B                                                        3.3s
+ => => sha256:81bd8ed7ec6789b0cb7f1b47ee731c522f6dba83201ec73cd6bca1350f582948 402B / 402B                                                        3.4s
+ => => sha256:197eb75867ef4fcecd4724f17b0972ab0489436860a594a9445f8eaff8155053 1.21kB / 1.21kB                                                    3.6s
+ => => sha256:34a64644b756511a2e217f0508e11d1a572085d66cd6dc9a555a082ad49a3102 1.40kB / 1.40kB                                                    3.7s
+ => => sha256:39c2ddfd6010082a4a646e7ca44e95aca9bf3eaebc00f17f7ccc2954004f2a7d 15.52MB / 15.52MB                                                  6.0s
+ => => extracting sha256:b464cfdf2a6319875aeb27359ec549790ce14d8214fcb16ef915e4530e5ed235                                                         0.0s
+ => => extracting sha256:d7e5070240863957ebb0b5a44a5729963c3462666baa2947d00628cb5f2d5773                                                         0.0s
+ => => extracting sha256:81bd8ed7ec6789b0cb7f1b47ee731c522f6dba83201ec73cd6bca1350f582948                                                         0.0s
+ => => extracting sha256:197eb75867ef4fcecd4724f17b0972ab0489436860a594a9445f8eaff8155053                                                         0.0s
+ => => extracting sha256:34a64644b756511a2e217f0508e11d1a572085d66cd6dc9a555a082ad49a3102                                                         0.0s
+ => => extracting sha256:39c2ddfd6010082a4a646e7ca44e95aca9bf3eaebc00f17f7ccc2954004f2a7d                                                         1.0s
+ => [frontend_react internal] load build context                                                                                                  0.0s
+ => => transferring context: 288.87kB                                                                                                             0.0s
+ => [frontend_react 2/4] RUN rm /etc/nginx/conf.d/default.conf                                                                                    0.7s
+ => [frontend_react 3/4] COPY frontend_react/ /usr/share/nginx/html/                                                                              0.1s
+ => [frontend_react 4/4] COPY frontend_react/nginx.conf /etc/nginx/conf.d/kis.conf                                                                0.1s
+ => [frontend_react] exporting to image                                                                                                           0.2s
+ => => exporting layers                                                                                                                           0.1s
+ => => writing image sha256:44c74089b13507818da75cea29126fb3a7cd6adcbd2a86e8d540f77841e2120a                                                      0.0s
+ => => naming to docker.io/library/viaticum-frontend_react                                                                                        0.0s
+ => [frontend_react] resolving provenance for metadata file                                                                                       0.0s
+ => [backend 2/8] WORKDIR /app                                                                                                                    0.1s
+ => [backend 3/8] RUN apt-get update && apt-get install -y --no-install-recommends     curl libsndfile1 ffmpeg     && rm -rf /var/lib/apt/lists  44.9s
+ => [backend 4/8] COPY backend/pyproject.toml backend/                                                                                            0.0s
+ => [backend 5/8] RUN pip install --no-cache-dir -e backend/                                                                                    326.8s
+ => [backend 6/8] COPY backend/ backend/                                                                                                          0.1s
+ => [backend 7/8] COPY data/ data/                                                                                                                0.1s
+ => [backend 8/8] RUN mkdir -p backend/logs data/chroma_db                                                                                        0.5s
+ => [backend] exporting to image                                                                                                                 22.1s
+ => => exporting layers                                                                                                                          22.1s
+ => => writing image sha256:8a9f67686caae918ed3647097f93a8f44fac4ee698c2459f63556f8b769f3d6b                                                      0.0s
+ => => naming to docker.io/library/viaticum-backend                                                                                               0.0s
+ => [backend] resolving provenance for metadata file                                                                                              0.0s
+[+] build 2/2
+ ✔ Image viaticum-frontend_react Built                                                                                                           407.3s
+ ✔ Image viaticum-backend        Built                                                                                                           407.3s
+
+▶  Starting all services…
+WARN[0000] /home/ali/projects/viaticum-ltd/viaticum/docker-compose.kis.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+[+] up 15/15
+ ✔ Image opensearchproject/opensearch:2.14.0 Pulled                                                                                              96.4ss
+ ✔ Network kis-net                           Created                                                                                             0.0ss
+ ✔ Volume viaticum_opensearch-data           Created                                                                                             0.0ss
+ ✔ Volume viaticum_postgres-data             Created                                                                                             0.0ss
+ ✔ Container kis-postgres                    Healthy                                                                                             12.0ss
+ ✔ Container kis-opensearch                  Healthy                                                                                             22.6ss
+ ✘ Container kis-backend                     Error dependency backend failed to start                                                            102.7s
+ ✔ Container kis-frontend                    Created                                                                                             0.1ss
+dependency failed to start: container kis-backend is unhealthy
+ali@ITUCNB0240:~/projects/viaticum-ltd/viaticum$ ./start.sh 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Viaticum KIS — local stack startup
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+▶  Building images…
+WARN[0000] /home/ali/projects/viaticum-ltd/viaticum/docker-compose.kis.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+[+] Building 2.0s (24/24) FINISHED                                                                                                                     
+ => [internal] load local bake definitions                                                                                                        0.0s
+ => => reading from stdin 1.04kB                                                                                                                  0.0s
+ => [backend internal] load build definition from Dockerfile.backend                                                                              0.0s
+ => => transferring dockerfile: 472B                                                                                                              0.0s
+ => [frontend_react internal] load build definition from Dockerfile.frontend_react                                                                0.0s
+ => => transferring dockerfile: 428B                                                                                                              0.0s
+ => [backend internal] load metadata for docker.io/library/python:3.11-slim                                                                       1.3s
+ => [frontend_react internal] load metadata for docker.io/library/nginx:1.27-alpine                                                               1.3s
+ => [backend internal] load .dockerignore                                                                                                         0.0s
+ => => transferring context: 2B                                                                                                                   0.0s
+ => [frontend_react 1/4] FROM docker.io/library/nginx:1.27-alpine@sha256:65645c7bb6a0661892a8b03b89d0743208a18dd2f3f17a54ef4b76fb8e2f2a10         0.0s
+ => [frontend_react internal] load build context                                                                                                  0.0s
+ => => transferring context: 1.11kB                                                                                                               0.0s
+ => [backend 1/8] FROM docker.io/library/python:3.11-slim@sha256:6d85378d88a19cd4d76079817532d62232be95757cb45945a99fec8e8084b9c2                 0.0s
+ => [backend internal] load build context                                                                                                         0.0s
+ => => transferring context: 3.18kB                                                                                                               0.0s
+ => CACHED [frontend_react 2/4] RUN rm /etc/nginx/conf.d/default.conf                                                                             0.0s
+ => CACHED [frontend_react 3/4] COPY frontend_react/ /usr/share/nginx/html/                                                                       0.0s
+ => CACHED [frontend_react 4/4] COPY frontend_react/nginx.conf /etc/nginx/conf.d/kis.conf                                                         0.0s
+ => CACHED [backend 2/8] WORKDIR /app                                                                                                             0.0s
+ => CACHED [backend 3/8] RUN apt-get update && apt-get install -y --no-install-recommends     curl libsndfile1 ffmpeg     && rm -rf /var/lib/apt  0.0s
+ => CACHED [backend 4/8] COPY backend/pyproject.toml backend/                                                                                     0.0s
+ => CACHED [backend 5/8] RUN pip install --no-cache-dir -e backend/                                                                               0.0s
+ => CACHED [backend 6/8] COPY backend/ backend/                                                                                                   0.0s
+ => CACHED [backend 7/8] COPY data/ data/                                                                                                         0.0s
+ => CACHED [backend 8/8] RUN mkdir -p backend/logs data/chroma_db                                                                                 0.0s
+ => [frontend_react] exporting to image                                                                                                           0.0s
+ => => exporting layers                                                                                                                           0.0s
+ => => writing image sha256:44c74089b13507818da75cea29126fb3a7cd6adcbd2a86e8d540f77841e2120a                                                      0.0s
+ => => naming to docker.io/library/viaticum-frontend_react                                                                                        0.0s
+ => [backend] exporting to image                                                                                                                  0.0s
+ => => exporting layers                                                                                                                           0.0s
+ => => writing image sha256:8a9f67686caae918ed3647097f93a8f44fac4ee698c2459f63556f8b769f3d6b                                                      0.0s
+ => => naming to docker.io/library/viaticum-backend                                                                                               0.0s
+ => [frontend_react] resolving provenance for metadata file                                                                                       0.0s
+ => [backend] resolving provenance for metadata file                                                                                              0.0s
+[+] build 2/2
+ ✔ Image viaticum-backend        Built                                                                                                             2.3s
+ ✔ Image viaticum-frontend_react Built                                                                                                             2.3s
+
+▶  Starting all services…
+WARN[0000] /home/ali/projects/viaticum-ltd/viaticum/docker-compose.kis.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+[+] up 3/3
+ ✔ Container kis-opensearch Healthy                                                                                                                0.6s
+ ✔ Container kis-postgres   Healthy                                                                                                                0.6s
+ ✘ Container kis-backend    Error dependency backend failed to start                                                                               1.1s
+dependency failed to start: container kis-backend is unhealthy
