@@ -189,33 +189,36 @@ function CompanionDock({ companion, openChat, openConfig, openSearch, suggestion
         </div>
       )}
 
-      <div style={{ position: "relative" }}>
-        <CompaPet
-          companion={companion}
-          mood={soapLoading ? "thinking" : isListening ? "listening" : "happy"}
-          thinking={soapLoading || !!suggestion}
-          onClick={openChat}
-        />
-        <div className="compa-stats">
-          <div className="stat" title="Bond">♡</div>
-          <div className="stat" title="Energie">⚡</div>
+      {/* Pet + Websuche stacked vertically */}
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+        <div style={{ position: "relative" }}>
+          <CompaPet
+            companion={companion}
+            mood={soapLoading ? "thinking" : isListening ? "listening" : "happy"}
+            thinking={soapLoading || !!suggestion}
+            onClick={openChat}
+          />
+          <div className="compa-stats">
+            <div className="stat" title="Bond">♡</div>
+            <div className="stat" title="Energie">⚡</div>
+          </div>
+          {soapLoading ? (
+            <div className="compa-status processing">
+              <span className="proc-dot"/> KI aktiv
+            </div>
+          ) : isListening && (
+            <div className="compa-status">
+              <span className="mic-dot"/> hört zu
+            </div>
+          )}
         </div>
-        {soapLoading ? (
-          <div className="compa-status processing">
-            <span className="proc-dot"/> KI aktiv
-          </div>
-        ) : isListening && (
-          <div className="compa-status">
-            <span className="mic-dot"/> hört zu
-          </div>
-        )}
-      </div>
 
-      {/* Web search trigger */}
-      <button className="compa-web-btn" onClick={openSearch} title="Medizinische Websuche (Tavily)">
-        <span style={{ fontSize: 13 }}>🌐</span>
-        <span>Websuche</span>
-      </button>
+        {/* Web search trigger — sits below the avatar */}
+        <button className="compa-web-btn" onClick={openSearch} title="Medizinische Websuche (Tavily)">
+          <span style={{ fontSize: 13 }}>🌐</span>
+          <span>Websuche</span>
+        </button>
+      </div>
     </div>
   );
 }

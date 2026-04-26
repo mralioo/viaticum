@@ -136,7 +136,10 @@ function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   // initial view from URL hash (e.g. #soap forwards from welcome.html)
   const initial = (window.location.hash || "").replace("#", "") || "soap";
-  const [route, setRoute] = React.useState({ view: initial });
+  // Default to patient-001 when opening SOAP directly (no patient selected yet)
+  const [route, setRoute] = React.useState(
+    initial === "soap" ? { view: "soap", patientId: "patient-001" } : { view: initial }
+  );
   const [modal, setModal] = React.useState(null);
   const [companion, setCompanion] = React.useState(window.DEFAULT_COMPANION);
 
