@@ -23,5 +23,6 @@ RUN pip install --no-cache-dir "nemo_toolkit[asr]>=1.23" librosa
 
 COPY main.py .
 
-EXPOSE 8001
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"]
+EXPOSE 8080
+# Cloud Run injects PORT env var (default 8080); GCE/local dev falls back to 8001
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8001}"]

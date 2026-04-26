@@ -32,9 +32,7 @@ REPO="kis-docker"
 REGISTRY="${REGION}-docker.pkg.dev/${PROJECT}/${REPO}"
 OS_PASSWORD="${OPENSEARCH_ADMIN_PASSWORD:-Medion!KIS2026}"
 OS_INDEX="${OPENSEARCH_INDEX:-viaticum-transcripts}"
-STT_INSTANCE="${STT_INSTANCE:-parakeet-stt}"
-STT_ZONE="${STT_ZONE:-${REGION}-b}"
-STT_MACHINE="${STT_MACHINE:-n1-standard-4}"
+# STT runs on Cloud Run L4 GPU — no VM variables needed
 
 BOLD='\033[1m'; CYAN='\033[36m'; GREEN='\033[32m'; RESET='\033[0m'
 step() { printf "\n${BOLD}${CYAN}▶ %s${RESET}\n" "$*"; }
@@ -195,63 +193,27 @@ OS_INTERNAL_IP=$(gcloud compute instances describe "$OS_INSTANCE" \
 ok "OpenSearch internal IP: $OS_INTERNAL_IP"
 OPENSEARCH_URL_INTERNAL="https://${OS_INTERNAL_IP}:9200"
 
-# ── 7. Parakeet STT VM ────────────────────────────────────────────────────────
-step "Creating Parakeet STT VM: $STT_INSTANCE (n1-standard-4 + T4, zone $STT_ZONE)"
+# ── 7. Parakeet STT — Cloud Run with L4 GPU ──────────────────────────────────
+# Solution B: serverless GPU. No quota request needed for L4 on Cloud Run.
+# Trade-off: 30-60s cold start after idle; zero cost when not in use.
+step "Deploying Parakeet STT to Cloud Run (L4 GPU, serverless)"
+gcloud run deploy kis-stt \
+  --image="${REGISTRY}/kis-stt:latest" \
+  --region="$REGION" \
+  --gpu=1 \
+  --gpu-type=nvidia-l4 \
+  --cpu=8 \
+  --memory=32Gi \
+  --no-cpu-throttling \
+  --min-instances=0 \
+  --max-instances=1 \
+  --timeout=3600 \
+  --allow-unauthenticated \
+  --set-env-vars="STT_STUB=false"
 
-STT_STARTUP=$(cat <<'STTEOF'
-#!/bin/bash
-set -e
-curl -fsSL https://get.docker.com | sh
-systemctl enable --now docker
-distribution=$(. /etc/os-release; echo $ID$VERSION_ID)
-curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
-curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
-  sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-  tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
-apt-get update -qq
-apt-get install -y nvidia-container-toolkit
-nvidia-ctk runtime configure --runtime=docker
-systemctl restart docker
-STTEOF
-)
-
-if ! gcloud compute instances describe "$STT_INSTANCE" --zone="$STT_ZONE" &>/dev/null; then
-  gcloud compute instances create "$STT_INSTANCE" \
-    --zone="$STT_ZONE" \
-    --machine-type="$STT_MACHINE" \
-    --accelerator="type=nvidia-tesla-t4,count=1" \
-    --maintenance-policy=TERMINATE \
-    --restart-on-failure \
-    --boot-disk-size=50GB \
-    --boot-disk-type=pd-balanced \
-    --image-family=debian-12 \
-    --image-project=debian-cloud \
-    --tags=parakeet-stt \
-    --scopes=cloud-platform \
-    --metadata="startup-script=${STT_STARTUP}"
-  ok "Created STT VM: $STT_INSTANCE"
-
-  if ! gcloud compute firewall-rules describe "allow-parakeet-internal" &>/dev/null; then
-    gcloud compute firewall-rules create "allow-parakeet-internal" \
-      --direction=INGRESS \
-      --action=ALLOW \
-      --rules=tcp:8001 \
-      --target-tags=parakeet-stt \
-      --source-ranges=10.0.0.0/8 \
-      --description="Allow Cloud Run backend to reach Parakeet STT on :8001"
-    ok "Firewall rule created: allow-parakeet-internal"
-  fi
-
-  printf "  Waiting 60s for VM to boot…"
-  sleep 60
-  printf " done\n"
-else
-  ok "STT VM already exists: $STT_INSTANCE"
-fi
-
-STT_INTERNAL_IP=$(gcloud compute instances describe "$STT_INSTANCE" \
-  --zone="$STT_ZONE" --format="value(networkInterfaces[0].networkIP)")
-ok "Parakeet STT internal IP: $STT_INTERNAL_IP"
+STT_URL=$(gcloud run services describe kis-stt \
+  --region="$REGION" --format="value(status.url)")
+ok "Parakeet STT (Cloud Run L4): $STT_URL"
 
 # ── 8. Deploy backend to Cloud Run ────────────────────────────────────────────
 step "Deploying backend to Cloud Run"
@@ -270,7 +232,7 @@ OPENSEARCH_URL=${OPENSEARCH_URL_INTERNAL},\
 OPENSEARCH_USER=admin,\
 OPENSEARCH_INDEX=${OS_INDEX},\
 STT_PROVIDER=${STT_PROVIDER:-parakeet},\
-PARAKEET_URL=http://${STT_INTERNAL_IP}:8001,\
+PARAKEET_URL=${STT_URL},\
 GCP_PROJECT_ID=${PROJECT},\
 PIONEER_SOAP_MODEL_ID=${PIONEER_SOAP_MODEL_ID:-},\
 PIONEER_NER_MODEL_ID=${PIONEER_NER_MODEL_ID:-}" \
@@ -318,6 +280,6 @@ printf "${BOLD}${GREEN}═══════════════════
 printf "  Frontend  : %s\n" "$FRONTEND_URL"
 printf "  Backend   : %s/docs\n" "$BACKEND_URL"
 printf "  OpenSearch: %s  (internal)\n" "$OPENSEARCH_URL_INTERNAL"
-printf "  Parakeet  : http://%s:8001  (internal)\n" "$STT_INTERNAL_IP"
+printf "  Parakeet  : %s  (Cloud Run L4 GPU)\n" "$STT_URL"
 printf "\n  Login: dr.weber / aura2026\n"
 printf "${BOLD}${GREEN}═══════════════════════════════════════${RESET}\n\n"
