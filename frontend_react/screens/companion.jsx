@@ -1,11 +1,11 @@
 /* Companion (Tamagotchi-style avatar) */
 
-// Phase metadata for web search
+// Phase metadata for web research
 const SEARCH_PHASES = {
-  searching: { icon: "🔍", label: "Tavily durchsucht das Web…",  color: "var(--teal-2)" },
-  polishing: { icon: "🤖", label: "KI poliert Ergebnisse…",      color: "#7c3aed" },
-  done:      { icon: "✓",  label: "Fertig",                       color: "var(--green, #059669)" },
-  error:     { icon: "⚠️", label: "Fehler",                       color: "var(--amber, #b45309)" },
+  researching: { icon: "🔬", label: "Tavily Research läuft…",  color: "var(--teal-2)" },
+  summarising: { icon: "🤖", label: "KI kondensiert Bericht…", color: "#7c3aed" },
+  done:        { icon: "✓",  label: "Fertig",                   color: "var(--green, #059669)" },
+  error:       { icon: "⚠️", label: "Fehler",                   color: "var(--amber, #b45309)" },
 };
 
 const SEARCH_SUGGESTIONS = [
@@ -413,7 +413,7 @@ function CompanionSearch({ companion, onClose }) {
     const term = (q || query).trim();
     if (!term || loading) return;
     setLoading(true);
-    setPhase("searching");
+    setPhase("researching");
     setResult(null);
     setError(null);
 
@@ -423,7 +423,7 @@ function CompanionSearch({ companion, onClose }) {
         const evt = JSON.parse(e.data);
         setPhase(evt.phase);
         if (evt.phase === "done") {
-          setResult({ summary: evt.summary, sources: evt.sources || [], provider: evt.provider });
+          setResult({ tldr: evt.tldr, report: evt.report, sources: evt.sources || [], provider: evt.provider });
           setLoading(false);
           es.close();
         } else if (evt.phase === "error") {
@@ -491,14 +491,24 @@ function CompanionSearch({ companion, onClose }) {
         <div className="search-body" ref={bodyRef}>
           {result && (
             <>
-              {/* AI summary */}
+              {/* TL;DR card */}
               <div className="search-summary-card">
                 <div className="search-summary-head">
                   <span>✦ {companion.name}</span>
                   <span className="provider-badge">{providerLabel(result.provider)}</span>
                 </div>
-                <div className="search-summary-text">{result.summary}</div>
+                <div className="search-summary-text">{result.tldr}</div>
               </div>
+
+              {/* Full research report */}
+              {result.report && (
+                <details className="research-report-details">
+                  <summary className="research-report-toggle">
+                    🔬 Vollständiger Forschungsbericht
+                  </summary>
+                  <div className="research-report-body">{result.report}</div>
+                </details>
+              )}
 
               {/* Sources */}
               {result.sources.length > 0 && (
@@ -508,10 +518,7 @@ function CompanionSearch({ companion, onClose }) {
                     <a key={i} className="source-card" href={s.url} target="_blank" rel="noopener noreferrer">
                       <div className="source-title">{s.title}</div>
                       <div className="source-snippet">{s.content}</div>
-                      <div className="source-url">
-                        {s.published_date && <span className="source-date">{s.published_date.slice(0,10)} · </span>}
-                        {s.url.replace(/^https?:\/\//, "").slice(0, 55)}
-                      </div>
+                      <div className="source-url">{s.url.replace(/^https?:\/\//, "").slice(0, 60)}</div>
                     </a>
                   ))}
                 </div>

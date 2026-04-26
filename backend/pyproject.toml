@@ -21,6 +21,7 @@ dependencies = [
     "gradium>=0.1",
     "asyncpg>=0.29",
     "anthropic>=0.40",
+    "tavily-python>=0.5",
 ]
 
 [project.optional-dependencies]
