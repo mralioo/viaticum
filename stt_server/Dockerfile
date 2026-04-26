@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1 \
     && update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
 
+# Ubuntu 22.04 ships pip 22.0.2 which has a resolver bug (AssertionError on complex graphs).
+# Upgrade pip + setuptools before any heavy installs.
+RUN pip install --no-cache-dir "pip>=24" setuptools wheel
+
 WORKDIR /app
 COPY requirements.txt .
 
