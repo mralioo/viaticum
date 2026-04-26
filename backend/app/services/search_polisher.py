@@ -39,7 +39,7 @@ async def _gemini(report: str) -> str:
     prompt = f"{_SYSTEM}\n\nBericht:\n{report[:3000]}\n\nZusammenfassung:"
     url = (
         "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"gemini-2.0-flash:generateContent?key={api_key}"
+        f"gemini-2.5-flash:generateContent?key={api_key}"
     )
     async with httpx.AsyncClient(timeout=20) as client:
         resp = await client.post(url, json={"contents": [{"parts": [{"text": prompt}]}]})

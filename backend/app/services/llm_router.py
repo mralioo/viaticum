@@ -81,7 +81,7 @@ async def _gemini_chat(question: str, segments: list[dict]) -> str:
     # Gemini via AI Studio REST API (no heavy SDK needed)
     url = (
         "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"gemini-2.0-flash:generateContent?key={api_key}"
+        f"gemini-2.5-flash:generateContent?key={api_key}"
     )
     async with httpx.AsyncClient(timeout=30) as client:
         resp = await client.post(
