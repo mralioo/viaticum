@@ -1,8 +1,12 @@
 """
 Parakeet-DE-Med NeMo model server.
-Runs on the GCE T4 VM. Exposes POST /transcribe and GET /health.
-Set STT_STUB=true for CPU dev mode (no model loaded).
+Exposes POST /transcribe and GET /health.
+Set STT_STUB=true for CPU dev mode.
+
+Model loads lazily on the first /transcribe request so the container
+starts instantly and passes Cloud Run's health check without timing out.
 """
+import asyncio
 import logging
 import os
 import tempfile
@@ -14,34 +18,57 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Parakeet-DE-Med STT Server", version="1.0.0")
+
 _model = None
+_model_lock = asyncio.Lock()
+_model_loading = False
 
 
-@app.on_event("startup")
-async def load_model():
-    global _model
-    stub = os.environ.get("STT_STUB", "").lower() in ("1", "true", "yes")
-    if stub:
-        logger.info("STT_STUB=true — model not loaded (CPU dev mode)")
-        return
-    try:
-        import nemo.collections.asr as nemo_asr
-        _model = nemo_asr.models.ASRModel.from_pretrained(
-            "johannhartmann/parakeet_de_med"
-        )
-        logger.info("Parakeet-DE-Med loaded successfully")
-    except Exception as exc:
-        logger.error("Failed to load Parakeet model: %s", exc)
+def _is_stub() -> bool:
+    return os.environ.get("STT_STUB", "").lower() in ("1", "true", "yes")
+
+
+async def _ensure_model():
+    """Load the NeMo model once; concurrent callers wait on the lock."""
+    global _model, _model_loading
+    if _model is not None:
+        return _model
+    async with _model_lock:
+        if _model is not None:
+            return _model
+        _model_loading = True
+        logger.info("Loading Parakeet-DE-Med model (first request)…")
+        try:
+            import nemo.collections.asr as nemo_asr
+            _model = nemo_asr.models.ASRModel.from_pretrained(
+                "johannhartmann/parakeet_de_med"
+            )
+            logger.info("Parakeet-DE-Med loaded successfully")
+        except Exception as exc:
+            logger.error("Failed to load model: %s", exc)
+            raise
+        finally:
+            _model_loading = False
+    return _model
 
 
 @app.get("/health")
 def health():
-    stub = os.environ.get("STT_STUB", "").lower() in ("1", "true", "yes")
     return {
         "status": "ok",
         "model_loaded": _model is not None,
-        "stub_mode": stub,
+        "model_loading": _model_loading,
+        "stub_mode": _is_stub(),
     }
+
+
+@app.post("/warmup")
+async def warmup():
+    """Trigger model load without sending audio. Call once after cold start."""
+    if _is_stub():
+        return {"status": "stub — no model to load"}
+    await _ensure_model()
+    return {"status": "model ready"}
 
 
 @app.post("/transcribe")
@@ -49,8 +76,7 @@ async def transcribe(
     audio: UploadFile = File(...),
     sample_rate: str = Form("16000"),
 ):
-    stub = os.environ.get("STT_STUB", "").lower() in ("1", "true", "yes")
-    if stub:
+    if _is_stub():
         return {
             "segments": [
                 {"text": "Stub: Kein Modell geladen.", "speaker": "SPEAKER_00",
@@ -60,11 +86,10 @@ async def transcribe(
             "provider": "parakeet-stub",
         }
 
-    if _model is None:
-        return JSONResponse(
-            status_code=503,
-            content={"error": "Model not loaded — check startup logs."},
-        )
+    try:
+        model = await _ensure_model()
+    except Exception as exc:
+        return JSONResponse(status_code=503, content={"error": f"Model load failed: {exc}"})
 
     audio_bytes = await audio.read()
 
@@ -82,7 +107,7 @@ async def transcribe(
             data = librosa.resample(data.astype(np.float32), orig_sr=sr, target_sr=16000)
             sf.write(tmp_path, data, 16000)
 
-        texts = _model.transcribe([tmp_path])
+        texts = model.transcribe([tmp_path])
         text = texts[0] if texts else ""
     finally:
         os.unlink(tmp_path)

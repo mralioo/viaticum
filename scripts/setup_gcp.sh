@@ -205,6 +205,7 @@ gcloud run deploy kis-stt \
   --cpu=8 \
   --memory=32Gi \
   --no-cpu-throttling \
+  --startup-cpu-boost \
   --min-instances=0 \
   --max-instances=1 \
   --timeout=3600 \
