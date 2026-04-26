@@ -23,9 +23,10 @@ _STUB_ENTITIES = [
 
 @router.post("", response_model=EntityResponse)
 async def extract_entities(req: EntityRequest):
-    """Extract medical entities from German text using GLiNER2."""
-    if os.getenv("STT_PROVIDER", "stub") == "stub":
+    """Extract medical entities from German text using Pioneer NER."""
+    if not os.getenv("PIONEER_NER_MODEL_ID"):
         return EntityResponse(entities=_STUB_ENTITIES, provider="stub")
     from backend.app.services.gliner_extractor import extract_entities as _extract
     raw = await _extract(req.text)
-    return EntityResponse(entities=[Entity(**e) for e in raw], provider="pioneer")
+    entities = [Entity(**e) for e in raw] if raw else _STUB_ENTITIES
+    return EntityResponse(entities=entities, provider="pioneer")

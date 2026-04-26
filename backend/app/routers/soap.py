@@ -24,7 +24,7 @@ _STUB_NOTE = SOAPNote(
 @router.post("", response_model=SOAPResponse)
 async def create_soap(req: SOAPRequest):
     """Structure a German transcript into a SOAP note."""
-    if os.getenv("STT_PROVIDER", "stub") == "stub":
+    if not os.getenv("PIONEER_SOAP_MODEL_ID"):
         return SOAPResponse(note=_STUB_NOTE, provider="stub")
     from backend.app.services.soap_structurer import structure_soap
     note_dict = await structure_soap(req.transcript, req.entities)
