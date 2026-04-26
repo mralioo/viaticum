@@ -222,6 +222,7 @@ gcloud run deploy kis-backend \
   --image="${REGISTRY}/kis-backend:latest" \
   --region="$REGION" \
   --platform=managed \
+  --clear-secrets \
   --allow-unauthenticated \
   --memory=2Gi \
   --cpu=2 \
