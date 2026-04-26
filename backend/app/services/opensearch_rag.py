@@ -21,7 +21,7 @@ OPENSEARCH_USER = os.getenv("OPENSEARCH_USER", "admin")
 OPENSEARCH_PASSWORD = os.getenv("OPENSEARCH_PASSWORD", "Medion!KIS2026")
 OPENSEARCH_INDEX = os.getenv("OPENSEARCH_INDEX", "viaticum-transcripts")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "BAAI/bge-m3")
-VECTOR_DIM = 768
+VECTOR_DIM = 1024  # bge-m3 output dimension
 
 _client = None
 _embedder = None
