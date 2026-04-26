@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.app.routers import chat, entities, ingest, omi, soap, transcribe
+from backend.app.routers import chat, entities, ingest, omi, patients, soap, transcribe
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -27,7 +27,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-for _router in [transcribe.router, soap.router, entities.router, chat.router, ingest.router, omi.router]:
+for _router in [transcribe.router, soap.router, entities.router, chat.router, ingest.router, omi.router, patients.router]:
     app.include_router(_router)
 
 
