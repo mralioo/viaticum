@@ -69,7 +69,6 @@ const DEFAULT_COMPANION = {
   bond: 84,
   energy: 92,
   tasks: ["transcribe", "summarize", "code", "drug"],
-  greeting: "As-salāmu ʿalaykum",
 };
 
 // SOAP suggestions per field
@@ -127,7 +126,7 @@ function CompanionDock({ companion, openChat, openConfig, openSearch, suggestion
   React.useEffect(() => {
     const t = setTimeout(() => {
       setBubble({
-        text: `${companion.greeting}, Frau Dr. Weber. Das Aufnahmegespräch ist indexiert — klicken Sie auf „Alle Felder vorausfüllen" und ich rufe das Pioneer SOAP-Modell ab.`,
+        text: `Guten Tag, Frau Dr. Weber. Das Aufnahmegespräch ist indexiert — klicken Sie auf „Alle Felder vorausfüllen" und ich rufe das Pioneer SOAP-Modell ab.`,
         showActions: true,
       });
     }, 800);
@@ -267,7 +266,7 @@ function CompanionChat({ companion, onClose, onOpenConfig, patientId, sessionId 
   const now = new Date();
   const nowTime = `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`;
   const [messages, setMessages] = React.useState([
-    { from: "bot", text: `${companion.greeting} Frau Dr. Weber. Das Aufnahmegespräch ist transkribiert und in der Wissensdatenbank gespeichert. Fragen Sie mich direkt über die Patientin!`, time: nowTime },
+    { from: "bot", text: `Guten Tag, Frau Dr. Weber. Das Aufnahmegespräch ist transkribiert und in der Wissensdatenbank gespeichert. Fragen Sie mich direkt über die Patientin!`, time: nowTime },
     { from: "bot", text: "Beispiele:", quick: ["Welche Symptome hat die Patientin?", "Welche Medikamente nimmt sie?", "Hat sie Allergien?", "Welche Diagnosen wurden gestellt?"], time: nowTime },
   ]);
   const [input, setInput] = React.useState("");
