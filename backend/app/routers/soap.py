@@ -1,3 +1,4 @@
+import logging
 import os
 
 from fastapi import APIRouter
@@ -5,6 +6,7 @@ from pydantic import BaseModel
 
 from backend.app.models.soap import SOAPNote, SOAPResponse
 
+logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/soap", tags=["soap"])
 
 
@@ -27,5 +29,9 @@ async def create_soap(req: SOAPRequest):
     if not os.getenv("PIONEER_SOAP_MODEL_ID"):
         return SOAPResponse(note=_STUB_NOTE, provider="stub")
     from backend.app.services.soap_structurer import structure_soap
-    note_dict = await structure_soap(req.transcript, req.entities)
-    return SOAPResponse(note=SOAPNote(**note_dict), provider="pioneer")
+    try:
+        note_dict = await structure_soap(req.transcript, req.entities)
+        return SOAPResponse(note=SOAPNote(**note_dict), provider="pioneer")
+    except Exception as exc:
+        logger.warning("Pioneer SOAP failed (%s) — falling back to stub", exc)
+        return SOAPResponse(note=_STUB_NOTE, provider="stub-fallback")

@@ -3,8 +3,8 @@
 #  Targets:  make help | build | up | down | logs | clean | health | deploy
 # ─────────────────────────────────────────────────────────────────────────────
 
-COMPOSE        := docker-compose -f docker-compose.kis.yml
-COMPOSE_DEBUG  := docker-compose -f docker-compose.kis.yml --profile debug
+COMPOSE        := docker compose -f docker-compose.kis.yml
+COMPOSE_DEBUG  := docker compose -f docker-compose.kis.yml --profile debug
 IMAGE_FRONTEND := kis-frontend
 IMAGE_BACKEND  := kis-backend
 
@@ -94,25 +94,19 @@ health: ## Check health of all running services
 opensearch-init: ## Create the transcript index with k-NN mapping in OpenSearch
 	@printf "$(BOLD)Initialising OpenSearch index…$(RESET)\n"
 	@PASS=$${OPENSEARCH_ADMIN_PASSWORD:-Medion!KIS2026}; \
-	curl -sk -X PUT \
+	RESP=$$(curl -sf -X PUT \
 	  -u "admin:$$PASS" \
 	  -H 'Content-Type: application/json' \
-	  https://localhost:9200/viaticum-transcripts \
-	  -d '{ \
-	    "settings": {"index": {"knn": true, "knn.space_type": "cosinesimil"}}, \
-	    "mappings": {"properties": { \
-	      "embedding":  {"type": "knn_vector", "dimension": 768}, \
-	      "text":       {"type": "text", "analyzer": "german"}, \
-	      "speaker":    {"type": "keyword"}, \
-	      "start":      {"type": "float"}, \
-	      "patient_id": {"type": "keyword"}, \
-	      "timestamp":  {"type": "date"} \
-	    }} \
-	  }' | python3 -m json.tool
+	  -k https://localhost:9200/viaticum-transcripts \
+	  -d '{"settings":{"index":{"knn":true,"knn.space_type":"cosinesimil"}},"mappings":{"properties":{"embedding":{"type":"knn_vector","dimension":768},"text":{"type":"text","analyzer":"german"},"speaker":{"type":"keyword"},"start":{"type":"float"},"patient_id":{"type":"keyword"},"timestamp":{"type":"date"}}}}' \
+	  2>&1) || { printf "$(BOLD)Error:$(RESET) OpenSearch not reachable — is it running?\n  Start it: docker compose -f docker-compose.kis.yml up opensearch -d\n"; exit 1; }; \
+	printf "$$RESP\n" | python3 -m json.tool
 
 opensearch-status: ## Show OpenSearch cluster health
 	@PASS=$${OPENSEARCH_ADMIN_PASSWORD:-Medion!KIS2026}; \
-	curl -sk -u "admin:$$PASS" https://localhost:9200/_cluster/health | python3 -m json.tool
+	curl -sfk -u "admin:$$PASS" https://localhost:9200/_cluster/health \
+	  2>/dev/null | python3 -m json.tool || \
+	  printf "OpenSearch not reachable — run: docker compose -f docker-compose.kis.yml up opensearch -d\n"
 
 # ─── Shell access ────────────────────────────────────────────────────────────
 shell-backend: ## Open a bash shell in the backend container

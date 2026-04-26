@@ -2,6 +2,7 @@
 Medical NER via Pioneer fine-tuned GLiNER2 (205M).
 Env vars: PIONEER_API_KEY, PIONEER_NER_MODEL_ID, PIONEER_BASE_URL
 """
+import json
 import logging
 import os
 from typing import Any
@@ -14,7 +15,6 @@ _ENTITY_LABELS = [
     "medication", "dosage", "symptom", "diagnosis",
     "vital_sign", "anatomy", "procedure",
 ]
-_RELATION_LABELS = ["prescribed_for", "treats", "indicates", "measured_at"]
 
 
 async def extract_entities(text: str) -> list[dict[str, Any]]:
@@ -32,30 +32,37 @@ async def extract_entities(text: str) -> list[dict[str, Any]]:
             f"{base_url}/chat/completions",
             headers={
                 "Content-Type": "application/json",
-                "Authorization": f"Bearer {api_key}",
+                "X-API-Key": api_key,
             },
             json={
                 "model": model_id,
                 "messages": [{"role": "user", "content": text}],
                 "schema": {
                     "entities": _ENTITY_LABELS,
-                    "relations": _RELATION_LABELS,
                     "include_confidence": True,
-                    "include_spans": True,
                 },
             },
         )
     resp.raise_for_status()
     data = resp.json()
 
+    # Pioneer NER returns entities as JSON string in choices[0].message.content
+    # Format: {"entities": {"medication": [{"text": ..., "confidence": ..., "start": ..., "end": ...}], ...}}
+    content = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+    try:
+        parsed = json.loads(content)
+    except (json.JSONDecodeError, TypeError):
+        logger.warning("Pioneer NER: could not parse content as JSON: %s", content)
+        return []
+
     result = []
-    for entity in data.get("entities", []):
-        span = entity.get("span", {})
-        result.append({
-            "text": entity.get("text", ""),
-            "type": entity.get("type", ""),
-            "confidence": float(entity.get("confidence", 0.9)),
-            "start": int(span.get("start", 0)),
-            "end": int(span.get("end", len(entity.get("text", "")))),
-        })
+    for entity_type, entities in parsed.get("entities", {}).items():
+        for entity in entities:
+            result.append({
+                "text": entity.get("text", ""),
+                "type": entity_type,
+                "confidence": float(entity.get("confidence", 0.9)),
+                "start": int(entity.get("start", 0)),
+                "end": int(entity.get("end", len(entity.get("text", "")))),
+            })
     return result

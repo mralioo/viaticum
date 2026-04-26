@@ -25,44 +25,37 @@ async def structure_soap(transcript: str, entities: list[dict] | None = None) ->
     if not api_key or not model_id:
         raise RuntimeError("PIONEER_API_KEY and PIONEER_SOAP_MODEL_ID must be set")
 
-    prompt = _PROMPT_PATH.read_text().replace("{transcript}", transcript)
+    system_prompt = _PROMPT_PATH.read_text().replace("{transcript}", "")
 
     async with httpx.AsyncClient(timeout=60) as client:
         resp = await client.post(
             f"{base_url}/chat/completions",
             headers={
                 "Content-Type": "application/json",
-                "Authorization": f"Bearer {api_key}",
+                "X-API-Key": api_key,
             },
             json={
                 "model": model_id,
-                "messages": [{"role": "user", "content": prompt}],
-                "schema": {
-                    "structures": {
-                        "soap_note": {
-                            "fields": [
-                                {"name": "S", "dtype": "str"},
-                                {"name": "O", "dtype": "str"},
-                                {"name": "A", "dtype": "str"},
-                                {"name": "P", "dtype": "str"},
-                            ]
-                        }
-                    }
-                },
+                "messages": [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": transcript},
+                ],
             },
         )
     resp.raise_for_status()
     data = resp.json()
+    logger.info("Pioneer SOAP raw response: %s", data)
 
-    # Prefer structured output
-    structures = data.get("structures", {})
-    if "soap_note" in structures:
-        note = structures["soap_note"]
-        if all(k in note for k in ("S", "O", "A", "P")):
-            return note
-
-    # Fallback: parse JSON from message content
     content = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+
+    # Strip markdown code fences if present
+    content = content.strip()
+    if content.startswith("```"):
+        content = content.split("```")[1]
+        if content.startswith("json"):
+            content = content[4:]
+        content = content.strip()
+
     try:
         parsed = json.loads(content)
         if all(k in parsed for k in ("S", "O", "A", "P")):
@@ -70,5 +63,5 @@ async def structure_soap(transcript: str, entities: list[dict] | None = None) ->
     except json.JSONDecodeError:
         pass
 
-    logger.warning("Pioneer SOAP response missing expected fields: %s", data)
-    raise ValueError(f"Pioneer SOAP response did not contain S/O/A/P structure: {data}")
+    logger.warning("Pioneer SOAP response missing expected fields. Raw: %s", content)
+    raise ValueError(f"Pioneer SOAP response did not contain S/O/A/P structure: {content}")

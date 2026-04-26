@@ -13,6 +13,3 @@ Regeln:
 - Ausschließlich Deutsch, formeller Arztbrief-Stil
 - Keine Informationen erfinden, die nicht im Gespräch erwähnt wurden
 - JSON muss alle vier Felder S, O, A, P enthalten
-
-Transkript:
-{transcript}

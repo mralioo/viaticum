@@ -65,10 +65,19 @@ services:
       # Pioneer SLM (set in .env)
       - PIONEER_SOAP_MODEL_ID=${PIONEER_SOAP_MODEL_ID:-}
       - PIONEER_NER_MODEL_ID=${PIONEER_NER_MODEL_ID:-}
+      - PIONEER_API_KEY=${PIONEER_API_KEY:-}
+      - PIONEER_BASE_URL=${PIONEER_BASE_URL:-https://api.pioneer.ai/v1}
       - STT_PROVIDER=${STT_PROVIDER:-stub}
+      # Parakeet STT — point to Cloud Run URL for hybrid dev
+      - PARAKEET_URL=${PARAKEET_URL:-}
+      # Firestore — set GCP_PROJECT_ID to enable; ADC from mounted credentials
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID:-}
+      - GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json
     volumes:
       - ./data:/app/data
       - ./backend/logs:/app/backend/logs
+      # Mount local gcloud credentials so Firestore SDK works inside container
+      - ${HOME}/.config/gcloud:/root/.config/gcloud:ro
     depends_on:
       opensearch:
         condition: service_healthy
