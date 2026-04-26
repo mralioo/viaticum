@@ -32,6 +32,9 @@ REPO="kis-docker"
 REGISTRY="${REGION}-docker.pkg.dev/${PROJECT}/${REPO}"
 OS_PASSWORD="${OPENSEARCH_ADMIN_PASSWORD:-Medion!KIS2026}"
 OS_INDEX="${OPENSEARCH_INDEX:-viaticum-transcripts}"
+STT_INSTANCE="${STT_INSTANCE:-parakeet-stt}"
+STT_ZONE="${STT_ZONE:-${REGION}-b}"
+STT_MACHINE="${STT_MACHINE:-n1-standard-4}"
 
 BOLD='\033[1m'; CYAN='\033[36m'; GREEN='\033[32m'; RESET='\033[0m'
 step() { printf "\n${BOLD}${CYAN}▶ %s${RESET}\n" "$*"; }
@@ -53,6 +56,7 @@ gcloud services enable \
   compute.googleapis.com \
   vpcaccess.googleapis.com \
   cloudresourcemanager.googleapis.com \
+  firestore.googleapis.com \
   --quiet
 ok "APIs enabled"
 
@@ -72,15 +76,30 @@ fi
 gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
 ok "Docker configured for $REGION-docker.pkg.dev"
 
-# ── 4. Build and push images ──────────────────────────────────────────────────
+# ── 4. Firestore database ─────────────────────────────────────────────────────
+step "Creating Firestore database (native mode, $REGION)"
+if ! gcloud firestore databases describe --project="$PROJECT" &>/dev/null 2>&1; then
+  gcloud firestore databases create \
+    --project="$PROJECT" \
+    --location="$REGION" \
+    --type=firestore-native \
+    --quiet
+  ok "Firestore database created"
+else
+  ok "Firestore database already exists"
+fi
+
+# ── 4b. Build and push images ─────────────────────────────────────────────────
 step "Building Docker images"
 docker build -t "${REGISTRY}/kis-backend:latest"  -f Dockerfile.backend  .
 docker build -t "${REGISTRY}/kis-frontend:latest" -f Dockerfile.frontend_react .
+docker build -t "${REGISTRY}/kis-stt:latest"      -f stt_server/Dockerfile stt_server/
 ok "Images built"
 
 step "Pushing images to Artifact Registry"
 docker push "${REGISTRY}/kis-backend:latest"
 docker push "${REGISTRY}/kis-frontend:latest"
+docker push "${REGISTRY}/kis-stt:latest"
 ok "Images pushed"
 
 # ── 5. GCP Secret Manager — OpenSearch password ───────────────────────────────
@@ -176,7 +195,65 @@ OS_INTERNAL_IP=$(gcloud compute instances describe "$OS_INSTANCE" \
 ok "OpenSearch internal IP: $OS_INTERNAL_IP"
 OPENSEARCH_URL_INTERNAL="https://${OS_INTERNAL_IP}:9200"
 
-# ── 7. Deploy backend to Cloud Run ────────────────────────────────────────────
+# ── 7. Parakeet STT VM ────────────────────────────────────────────────────────
+step "Creating Parakeet STT VM: $STT_INSTANCE (n1-standard-4 + T4, zone $STT_ZONE)"
+
+STT_STARTUP=$(cat <<'STTEOF'
+#!/bin/bash
+set -e
+curl -fsSL https://get.docker.com | sh
+systemctl enable --now docker
+distribution=$(. /etc/os-release; echo $ID$VERSION_ID)
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
+  sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+  tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+apt-get update -qq
+apt-get install -y nvidia-container-toolkit
+nvidia-ctk runtime configure --runtime=docker
+systemctl restart docker
+STTEOF
+)
+
+if ! gcloud compute instances describe "$STT_INSTANCE" --zone="$STT_ZONE" &>/dev/null; then
+  gcloud compute instances create "$STT_INSTANCE" \
+    --zone="$STT_ZONE" \
+    --machine-type="$STT_MACHINE" \
+    --accelerator="type=nvidia-tesla-t4,count=1" \
+    --maintenance-policy=TERMINATE \
+    --restart-on-failure \
+    --boot-disk-size=50GB \
+    --boot-disk-type=pd-balanced \
+    --image-family=debian-12 \
+    --image-project=debian-cloud \
+    --tags=parakeet-stt \
+    --scopes=cloud-platform \
+    --metadata="startup-script=${STT_STARTUP}"
+  ok "Created STT VM: $STT_INSTANCE"
+
+  if ! gcloud compute firewall-rules describe "allow-parakeet-internal" &>/dev/null; then
+    gcloud compute firewall-rules create "allow-parakeet-internal" \
+      --direction=INGRESS \
+      --action=ALLOW \
+      --rules=tcp:8001 \
+      --target-tags=parakeet-stt \
+      --source-ranges=10.0.0.0/8 \
+      --description="Allow Cloud Run backend to reach Parakeet STT on :8001"
+    ok "Firewall rule created: allow-parakeet-internal"
+  fi
+
+  printf "  Waiting 60s for VM to boot…"
+  sleep 60
+  printf " done\n"
+else
+  ok "STT VM already exists: $STT_INSTANCE"
+fi
+
+STT_INTERNAL_IP=$(gcloud compute instances describe "$STT_INSTANCE" \
+  --zone="$STT_ZONE" --format="value(networkInterfaces[0].networkIP)")
+ok "Parakeet STT internal IP: $STT_INTERNAL_IP"
+
+# ── 8. Deploy backend to Cloud Run ────────────────────────────────────────────
 step "Deploying backend to Cloud Run"
 gcloud run deploy kis-backend \
   --image="${REGISTRY}/kis-backend:latest" \
@@ -192,7 +269,9 @@ gcloud run deploy kis-backend \
 OPENSEARCH_URL=${OPENSEARCH_URL_INTERNAL},\
 OPENSEARCH_USER=admin,\
 OPENSEARCH_INDEX=${OS_INDEX},\
-STT_PROVIDER=${STT_PROVIDER:-stub},\
+STT_PROVIDER=${STT_PROVIDER:-parakeet},\
+PARAKEET_URL=http://${STT_INTERNAL_IP}:8001,\
+GCP_PROJECT_ID=${PROJECT},\
 PIONEER_SOAP_MODEL_ID=${PIONEER_SOAP_MODEL_ID:-},\
 PIONEER_NER_MODEL_ID=${PIONEER_NER_MODEL_ID:-}" \
   --set-secrets="OPENSEARCH_PASSWORD=kis-opensearch-password:latest,\
@@ -239,5 +318,6 @@ printf "${BOLD}${GREEN}═══════════════════
 printf "  Frontend  : %s\n" "$FRONTEND_URL"
 printf "  Backend   : %s/docs\n" "$BACKEND_URL"
 printf "  OpenSearch: %s  (internal)\n" "$OPENSEARCH_URL_INTERNAL"
+printf "  Parakeet  : http://%s:8001  (internal)\n" "$STT_INTERNAL_IP"
 printf "\n  Login: dr.weber / aura2026\n"
 printf "${BOLD}${GREEN}═══════════════════════════════════════${RESET}\n\n"
