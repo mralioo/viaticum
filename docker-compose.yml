@@ -40,6 +40,11 @@ services:
       - OPENSEARCH_PASSWORD=${OPENSEARCH_ADMIN_PASSWORD:-Medion!KIS2026}
       - OPENSEARCH_INDEX=${OPENSEARCH_INDEX:-viaticum-transcripts}
       - STT_PROVIDER=${STT_PROVIDER:-stub}
+      - PARAKEET_URL=http://stt_server:8001
+      - PIONEER_API_KEY=${PIONEER_API_KEY:-}
+      - PIONEER_NER_MODEL_ID=${PIONEER_NER_MODEL_ID:-}
+      - PIONEER_SOAP_MODEL_ID=${PIONEER_SOAP_MODEL_ID:-}
+      - GCP_PROJECT_ID=${GCP_PROJECT_ID:-}
     volumes:
       - ./data:/app/data
       - ./backend/logs:/app/backend/logs
@@ -52,6 +57,22 @@ services:
       timeout: 10s
       retries: 3
       start_period: 20s
+
+  stt_server:
+    build:
+      context: stt_server
+      dockerfile: Dockerfile
+    container_name: kis-stt
+    ports:
+      - "8001:8001"
+    environment:
+      - STT_STUB=true
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8001/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
 
   frontend_react:
     build:
