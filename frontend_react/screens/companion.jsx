@@ -119,7 +119,7 @@ function CompaPet({ companion, mood = "happy", thinking = false, onClick, withHa
   );
 }
 
-function CompanionDock({ companion, openChat, openConfig, openSearch, suggestion, onAcceptAll, soapLoading, soapPhase }) {
+function CompanionDock({ companion, openChat, openConfig, openSearch, suggestion, onAcceptAll, soapLoading, soapPhase, chatNotif, searchNotif, srchLoading }) {
   const [bubble, setBubble] = React.useState(null);
   const isListening = companion.tasks.includes("transcribe");
 
@@ -197,6 +197,7 @@ function CompanionDock({ companion, openChat, openConfig, openSearch, suggestion
             thinking={soapLoading || !!suggestion}
             onClick={openChat}
           />
+          {chatNotif && <span className="notif-badge chat-notif">!</span>}
           <div className="compa-stats">
             <div className="stat" title="Bond">♡</div>
             <div className="stat" title="Energie">⚡</div>
@@ -213,9 +214,14 @@ function CompanionDock({ companion, openChat, openConfig, openSearch, suggestion
         </div>
 
         {/* Web search trigger — sits below the avatar */}
-        <button className="compa-web-btn" onClick={openSearch} title="Medizinische Websuche (Tavily)">
+        <button className="compa-web-btn" onClick={openSearch} title="Medizinische Websuche (Tavily)" style={{ position: "relative" }}>
           <span style={{ fontSize: 13 }}>🌐</span>
           <span>Websuche</span>
+          {(searchNotif || srchLoading) && (
+            <span className={"notif-badge" + (srchLoading ? " pulsing" : "")}>
+              {srchLoading ? "…" : "✓"}
+            </span>
+          )}
         </button>
       </div>
     </div>
@@ -262,7 +268,7 @@ function SoapField({ field, value, onChange, onHover, onLeave, onAccept, suggest
   );
 }
 
-function CompanionChat({ companion, onClose, onOpenConfig, patientId, sessionId }) {
+function CompanionChat({ companion, onClose, onMinimize, minimized, onNotify, onOpenConfig, patientId, sessionId }) {
   const now = new Date();
   const nowTime = `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`;
   const [messages, setMessages] = React.useState([
@@ -273,10 +279,12 @@ function CompanionChat({ companion, onClose, onOpenConfig, patientId, sessionId 
   const [thinking, setThinking] = React.useState(false);
   const [recording, setRecording] = React.useState(false);
   const bodyRef = React.useRef(null);
+  const minimizedRef = React.useRef(minimized);
+  React.useEffect(() => { minimizedRef.current = minimized; }, [minimized]);
 
   React.useEffect(() => {
-    if (bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
-  }, [messages, thinking]);
+    if (!minimized && bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
+  }, [messages, thinking, minimized]);
 
   async function send(text) {
     if (!text.trim() || thinking) return;
@@ -304,17 +312,19 @@ function CompanionChat({ companion, onClose, onOpenConfig, patientId, sessionId 
         provider: data.provider || null,
         time,
       }]);
+      if (minimizedRef.current) onNotify();
     } catch (e) {
       setMessages(m => [...m, { from: "bot", text: `Fehler: ${e.message}`, time }]);
+      if (minimizedRef.current) onNotify();
     } finally {
       setThinking(false);
     }
   }
 
+  if (minimized) return null;
+
   return (
-    <>
-      <div className="compa-chat-shade" onClick={onClose}/>
-      <div className="compa-chat" onClick={e => e.stopPropagation()}>
+    <div className="compa-chat">
         <div className="compa-chat-head">
           <div className="mini-pet" style={{
             "--pet-l": (COLORS.find(c => c.id === companion.color) || COLORS[0]).l,
@@ -328,6 +338,7 @@ function CompanionChat({ companion, onClose, onOpenConfig, patientId, sessionId 
             <button title="Begleiter konfigurieren" onClick={onOpenConfig}>
               <Icon name="settings" size={15}/>
             </button>
+            <button title="Minimieren — Chat läuft im Hintergrund" onClick={onMinimize} style={{ fontSize: 13 }}>─</button>
             <button title="Schließen" onClick={onClose}>
               <Icon name="x" size={15}/>
             </button>
@@ -397,54 +408,23 @@ function CompanionChat({ companion, onClose, onOpenConfig, patientId, sessionId 
   );
 }
 
-function CompanionSearch({ companion, onClose }) {
-  const [query, setQuery]     = React.useState("");
-  const [phase, setPhase]     = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
-  const [result, setResult]   = React.useState(null); // {summary, sources, provider}
-  const [error, setError]     = React.useState(null);
-  const bodyRef               = React.useRef(null);
+function CompanionSearch({ companion, onClose, onMinimize, minimized,
+    query, setQuery, phase, loading, result, error, doSearch }) {
+  const bodyRef = React.useRef(null);
 
   React.useEffect(() => {
-    if (bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
-  }, [result, loading]);
-
-  function doSearch(q) {
-    const term = (q || query).trim();
-    if (!term || loading) return;
-    setLoading(true);
-    setPhase("researching");
-    setResult(null);
-    setError(null);
-
-    const es = new EventSource(`/api/search/web?q=${encodeURIComponent(term)}`);
-    es.onmessage = (e) => {
-      try {
-        const evt = JSON.parse(e.data);
-        setPhase(evt.phase);
-        if (evt.phase === "done") {
-          setResult({ tldr: evt.tldr, report: evt.report, sources: evt.sources || [], provider: evt.provider });
-          setLoading(false);
-          es.close();
-        } else if (evt.phase === "error") {
-          setError(evt.msg);
-          setLoading(false);
-          es.close();
-        }
-      } catch (_) {}
-    };
-    es.onerror = () => { setError("Verbindungsfehler"); setLoading(false); es.close(); };
-  }
+    if (!minimized && bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
+  }, [result, loading, minimized]);
 
   const providerLabel = (p) =>
     p === "claude-mcp"   ? "Claude MCP" :
     p === "gemini"       ? "Gemini"      :
     p === "pioneer-chat" ? "Pioneer"     : "Tavily";
 
+  if (minimized) return null;
+
   return (
-    <>
-      <div className="compa-chat-shade" onClick={onClose}/>
-      <div className="compa-chat compa-search-panel" onClick={e => e.stopPropagation()}>
+    <div className="compa-chat compa-search-panel">
         {/* Header */}
         <div className="compa-chat-head">
           <div style={{ fontSize: 19, lineHeight: 1 }}>🌐</div>
@@ -453,6 +433,7 @@ function CompanionSearch({ companion, onClose }) {
             <div className="sub">Tavily · KI-poliert von {companion.name}</div>
           </div>
           <div className="head-actions">
+            <button title="Minimieren — Suche läuft im Hintergrund" onClick={onMinimize} style={{ fontSize: 13 }}>─</button>
             <button title="Schließen" onClick={onClose}><Icon name="x" size={15}/></button>
           </div>
         </div>
@@ -465,7 +446,6 @@ function CompanionSearch({ companion, onClose }) {
             value={query}
             onChange={e => setQuery(e.target.value)}
             onKeyDown={e => e.key === "Enter" && doSearch()}
-            disabled={loading}
             autoFocus
           />
           <button className="search-go" onClick={() => doSearch()} disabled={loading || !query.trim()}>
@@ -540,7 +520,6 @@ function CompanionSearch({ companion, onClose }) {
           )}
         </div>
       </div>
-    </>
   );
 }
 
@@ -672,9 +651,51 @@ const ENTITY_COLORS = {
 function SoapWithCompanion({ companion, setCompanion, patientId }) {
   const [values, setValues] = React.useState({ S: "", O: "", A: "", P: "" });
   const [hovered, setHovered] = React.useState(null);
-  const [chatOpen, setChatOpen]     = React.useState(false);
-  const [configOpen, setConfigOpen] = React.useState(false);
-  const [searchOpen, setSearchOpen] = React.useState(false);
+  const [chatOpen, setChatOpen]         = React.useState(false);
+  const [chatMinimized, setChatMinimized] = React.useState(false);
+  const [chatNotif, setChatNotif]       = React.useState(false);
+  const [configOpen, setConfigOpen]     = React.useState(false);
+  const [searchOpen, setSearchOpen]     = React.useState(false);
+  const [searchMinimized, setSearchMinimized] = React.useState(false);
+  const [searchNotif, setSearchNotif]   = React.useState(false);
+  // Lifted search state — survives panel open/close
+  const [srchQuery, setSrchQuery]   = React.useState("");
+  const [srchPhase, setSrchPhase]   = React.useState(null);
+  const [srchLoading, setSrchLoading] = React.useState(false);
+  const [srchResult, setSrchResult] = React.useState(null);
+  const [srchError, setSrchError]   = React.useState(null);
+  const searchVisibleRef = React.useRef(false);
+  React.useEffect(() => {
+    searchVisibleRef.current = searchOpen && !searchMinimized;
+  }, [searchOpen, searchMinimized]);
+
+  function doSearch(q) {
+    const term = (q !== undefined ? q : srchQuery).trim();
+    if (!term || srchLoading) return;
+    setSrchLoading(true);
+    setSrchPhase("researching");
+    setSrchResult(null);
+    setSrchError(null);
+    const es = new EventSource(`/api/search/web?q=${encodeURIComponent(term)}`);
+    es.onmessage = (e) => {
+      try {
+        const evt = JSON.parse(e.data);
+        setSrchPhase(evt.phase);
+        if (evt.phase === "done") {
+          setSrchResult({ tldr: evt.tldr, report: evt.report, sources: evt.sources || [], provider: evt.provider });
+          setSrchLoading(false);
+          es.close();
+          if (!searchVisibleRef.current) setSearchNotif(true);
+        } else if (evt.phase === "error") {
+          setSrchError(evt.msg);
+          setSrchLoading(false);
+          es.close();
+          if (!searchVisibleRef.current) setSearchNotif(true);
+        }
+      } catch (_) {}
+    };
+    es.onerror = () => { setSrchError("Verbindungsfehler"); setSrchLoading(false); es.close(); };
+  }
   const [entities, setEntities] = React.useState(null);
   const [loadingEntities, setLoadingEntities] = React.useState(false);
   const [soapLoading, setSoapLoading] = React.useState(false);
@@ -934,19 +955,25 @@ function SoapWithCompanion({ companion, setCompanion, patientId }) {
 
       <CompanionDock
         companion={companion}
-        openChat={() => setChatOpen(true)}
+        openChat={() => { setChatOpen(true); setChatMinimized(false); setChatNotif(false); }}
         openConfig={() => setConfigOpen(true)}
-        openSearch={() => setSearchOpen(true)}
+        openSearch={() => { setSearchOpen(true); setSearchMinimized(false); setSearchNotif(false); }}
         suggestion={hovered ? SOAP_SUGGESTIONS[hovered] : null}
         onAcceptAll={onAcceptAll}
         soapLoading={soapLoading}
         soapPhase={soapPhase}
+        chatNotif={chatNotif}
+        searchNotif={searchNotif}
+        srchLoading={srchLoading}
       />
 
       {chatOpen && (
         <CompanionChat
           companion={companion}
-          onClose={() => setChatOpen(false)}
+          onClose={() => { setChatOpen(false); setChatMinimized(false); }}
+          onMinimize={() => setChatMinimized(true)}
+          minimized={chatMinimized}
+          onNotify={() => setChatNotif(true)}
           onOpenConfig={() => { setChatOpen(false); setConfigOpen(true); }}
           patientId={patientId}
           sessionId={sessionId}
@@ -955,7 +982,16 @@ function SoapWithCompanion({ companion, setCompanion, patientId }) {
       {searchOpen && (
         <CompanionSearch
           companion={companion}
-          onClose={() => setSearchOpen(false)}
+          onClose={() => { setSearchOpen(false); setSearchMinimized(false); }}
+          onMinimize={() => setSearchMinimized(true)}
+          minimized={searchMinimized}
+          query={srchQuery}
+          setQuery={setSrchQuery}
+          phase={srchPhase}
+          loading={srchLoading}
+          result={srchResult}
+          error={srchError}
+          doSearch={doSearch}
         />
       )}
       {configOpen && (

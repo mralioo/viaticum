@@ -319,10 +319,7 @@
 
 /* ── Chat panel ─────────────────────────────────────────────── */
 .compa-chat-shade {
-  position: fixed; inset: 0;
-  background: rgba(15,22,32,.32);
-  z-index: 95;
-  backdrop-filter: blur(3px);
+  display: none;
 }
 .compa-chat {
   position: fixed;
@@ -840,6 +837,34 @@
 .compa-web-btn:hover {
   background: var(--teal-soft, rgba(0,180,180,.18));
   border-color: var(--teal-2, #0d8a8a);
+}
+
+/* ─── Notification badges on dock buttons ────────────────────────────────── */
+.notif-badge {
+  position: absolute;
+  top: -6px; right: -6px;
+  min-width: 18px; height: 18px;
+  border-radius: 99px;
+  background: var(--teal-2, #0d8a8a);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 4px;
+  border: 2px solid var(--bg, #0f1620);
+  pointer-events: none;
+}
+.notif-badge.pulsing {
+  background: #b45309;
+  animation: badge-pulse 1.2s ease-in-out infinite;
+}
+.notif-badge.chat-notif {
+  top: -4px; right: -4px;
+  background: #7c3aed;
+}
+@keyframes badge-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.2); opacity: .8; }
 }
 
 /* ─── CompanionSearch panel ──────────────────────────────────────────────── */
