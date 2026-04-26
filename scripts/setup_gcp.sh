@@ -218,11 +218,15 @@ ok "Parakeet STT (Cloud Run L4): $STT_URL"
 
 # ── 8. Deploy backend to Cloud Run ────────────────────────────────────────────
 step "Deploying backend to Cloud Run"
+# Clear any existing secret bindings first — must be a separate call before deploy
+if gcloud run services describe kis-backend --region="$REGION" &>/dev/null 2>&1; then
+  gcloud run services update kis-backend --region="$REGION" --clear-secrets --quiet || true
+  ok "Cleared old secret bindings from kis-backend"
+fi
 gcloud run deploy kis-backend \
   --image="${REGISTRY}/kis-backend:latest" \
   --region="$REGION" \
   --platform=managed \
-  --clear-secrets \
   --allow-unauthenticated \
   --memory=2Gi \
   --cpu=2 \
